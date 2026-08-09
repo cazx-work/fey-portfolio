@@ -2491,14 +2491,6 @@ a {
   stroke-width: 1.5px;
 }
 
-.confidentiality {
-  border-left: 3px solid var(--accent);
-  background: var(--accent-soft);
-  color: var(--muted);
-  margin-top: 2rem;
-  padding: 1rem 1.25rem;
-}
-
 .detail-topbar {
   align-items: center;
   display: flex;
@@ -2929,10 +2921,6 @@ a {
 
 .deep-dive-body li::marker {
   color: var(--accent);
-}
-
-.deep-dive-confidentiality {
-  border-left-width: 4px;
 }
 
 @keyframes deepDiveReveal {

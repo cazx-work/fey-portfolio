@@ -113,7 +113,6 @@ export default async function Project({
       <TechnicalDeepDive
         className="mt-16 mx-auto max-w-[68rem]"
         blocks={p.technical}
-        confidentiality={p.confidentiality}
       />
       <section className="related-stories-section mt-20">
         <div className="related-stories__header flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">

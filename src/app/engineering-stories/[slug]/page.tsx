@@ -43,7 +43,6 @@ export default async function Story({
       <TechnicalDeepDive
         className="detail-page-deep-dive mt-14"
         blocks={s.technical}
-        confidentiality={s.confidentiality}
       />
     </div>
   );

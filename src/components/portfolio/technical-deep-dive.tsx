@@ -6,7 +6,6 @@ import { MarkdownContent } from '@/components/portfolio/MarkdownContent';
 
 type TechnicalDeepDiveProps = {
   blocks: MarkdownBlock[];
-  confidentiality?: string;
   id?: string;
   className?: string;
   contentClassName?: string;
@@ -53,7 +52,6 @@ function getSections(blocks: MarkdownBlock[]): DeepDiveSection[] {
 
 export function TechnicalDeepDive({
   blocks,
-  confidentiality,
   id,
   className = '',
   contentClassName,
@@ -153,11 +151,6 @@ export function TechnicalDeepDive({
             </nav>
           )}
           <MarkdownContent className={expandedContentClassName} blocks={blocks} />
-          {confidentiality && (
-            <aside className="confidentiality deep-dive-confidentiality">
-              <strong>Confidentiality note.</strong> {confidentiality}
-            </aside>
-          )}
         </div>
       )}
     </article>

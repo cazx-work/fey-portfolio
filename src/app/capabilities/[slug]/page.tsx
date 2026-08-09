@@ -59,7 +59,6 @@ export default async function Capability({
         className="detail-page-deep-dive mt-12 scroll-mt-8"
         contentClassName="text-left"
         blocks={item.technical}
-        confidentiality={item.confidentiality}
       />
       <section id="related-stories" className="mt-20 scroll-mt-8" aria-labelledby="related-stories-title">
         <div className="detail-section__label">

@@ -27,7 +27,6 @@ export type Dossier = {
   };
   executive: { overview: string; blocks: MarkdownBlock[] };
   technical: MarkdownBlock[];
-  confidentiality?: string;
 };
 export type Project = { slug: string; title: string; summary: string; category: string; tags: string[]; dossier: Dossier };
 export type ProjectSection = never;
@@ -134,12 +133,10 @@ function readDossier(directory: string, filename: string, dossier: Dossier['doss
   const executiveLines = source.slice(executiveStart + '## Executive Content'.length, technicalStart).split('\n');
   const technicalLines = source.slice(technicalStart + '## Technical Deep-Dive'.length).split('\n');
   const executiveBlocks = parseBlocks(executiveLines);
-  const confidentiality = executiveBlocks.length ? parseBlocks(technicalLines).find((block) => block.type === 'heading' && block.text.toLowerCase().includes('confidentiality')) : undefined;
   const overviewHeading = executiveBlocks.findIndex((block) => block.type === 'heading' && block.text.toLowerCase() === 'overview');
   const overviewBlock = overviewHeading >= 0 ? executiveBlocks[overviewHeading + 1] : undefined;
   const technical = removeSection(parseBlocks(technicalLines), 'Interview Discussion Topics');
   const confidentialityIndex = technical.findIndex((block) => block.type === 'heading' && block.text.toLowerCase().includes('confidentiality'));
-  const confidentialityText = confidentialityIndex >= 0 && technical[confidentialityIndex + 1]?.type === 'paragraph' ? (technical[confidentialityIndex + 1] as { type: 'paragraph'; text: string }).text : undefined;
   return {
     dossier, slug: frontmatter.slug ?? slugify(filename.replace(/\.md$/, '')), title, filename,
     metadata: {
@@ -155,7 +152,6 @@ function readDossier(directory: string, filename: string, dossier: Dossier['doss
     },
     executive: { overview: overviewBlock?.type === 'paragraph' ? overviewBlock.text : '', blocks: executiveBlocks },
     technical: confidentialityIndex >= 0 ? technical.slice(0, confidentialityIndex) : technical,
-    confidentiality: confidentialityText,
   };
 }
 
