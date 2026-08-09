@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import { MediaImage } from '@/components/portfolio/media-image';
+import { MediaVideo } from '@/components/portfolio/media-video';
 
 type MediaFrame = {
   src: string;
@@ -97,20 +98,20 @@ export function SepiaMediaStory() {
 
       <figure className="sepia-media-story__walkthrough">
         <div className="sepia-media-story__video-frame">
-          <video
+          <MediaVideo
             className="sepia-media-story__video"
             controls
             preload="metadata"
             playsInline
-            poster="/images/sepia/desktop-photo-1.png"
+            poster="/images/optimized/sepia/desktop-photo-1.jpg"
             aria-label="SEPIA responsive product walkthrough"
             aria-describedby="sepia-video-caption"
           >
-            <source src="/videos/sepia/mobile-video-1.mp4" media="(max-width: 639px)" type="video/mp4" />
-            <source src="/videos/sepia/ipad-video-1.mp4" media="(min-width: 640px) and (max-width: 1023px)" type="video/mp4" />
-            <source src="/videos/sepia/desktop-video-1.mp4" type="video/mp4" />
+            <source src="/videos/sepia/mobile-video-1.optimized.mp4" media="(max-width: 639px)" type="video/mp4" />
+            <source src="/videos/sepia/ipad-video-1.optimized.mp4" media="(min-width: 640px) and (max-width: 1023px)" type="video/mp4" />
+            <source src="/videos/sepia/desktop-video-1.optimized.mp4" type="video/mp4" />
             Your browser does not support the SEPIA walkthrough video. Use the still sequence below instead.
-          </video>
+          </MediaVideo>
         </div>
         <figcaption id="sepia-video-caption" className="sepia-media-story__video-caption">
           <span><strong>Walkthrough</strong> / responsive product recording</span>
@@ -141,7 +142,7 @@ function MediaChapter({ title, description, frames, featured = false }: { title:
         {frames.map((frame) => (
           <figure className="sepia-media-frame" key={frame.src}>
             <div className="sepia-media-frame__image">
-              <Image src={frame.src} alt={frame.alt} width={frame.width} height={frame.height} loading="lazy" sizes={frame.width < 1000 ? '(max-width: 639px) 45vw, 18rem' : '(max-width: 639px) 100vw, 52rem'} />
+              <MediaImage src={frame.src} alt={frame.alt} width={frame.width} height={frame.height} loading="lazy" sizes={frame.width < 1000 ? '(max-width: 639px) 45vw, 18rem' : '(max-width: 639px) 100vw, 52rem'} />
             </div>
             <figcaption>
               <span className="sepia-media-frame__label">{frame.label}</span>

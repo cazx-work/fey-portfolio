@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { MediaImage } from '@/components/portfolio/media-image';
 import { TeammateFeedback } from '@/components/teammate-feedback';
 import { BeyondCodeCarousel } from '@/components/beyond-code-carousel';
 import { GithubContributionHeatmap } from '@/components/portfolio/github-contribution-heatmap';
@@ -64,7 +64,7 @@ export default function Profile() {
           </div>
           <figure className="profile-portrait">
             <div className="profile-portrait__fallback" aria-hidden="true">Felix Edrian Ybañez / profile portrait</div>
-            <Image
+            <MediaImage
               src="/images/felix_edrian_ybanez.jpg"
               alt="Felix Edrian Ybañez seated at a café table, wearing a navy shirt and looking toward the camera"
               fill

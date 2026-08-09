@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import { MediaImage } from '@/components/portfolio/media-image';
 import type { Testimonial } from '@/data/testimonials';
 
 type TeammateFeedbackProps = {
@@ -63,7 +63,7 @@ export function TeammateFeedback({ testimonials, limit }: TeammateFeedbackProps)
             >
               <button type="button" className="testimonial-profile-button flex w-full items-center gap-3 text-left" onClick={() => openDialog(testimonial, 'profile')} aria-label={`View ${testimonial.author}'s profile`}>
                 {testimonial.avatar ? (
-                  <Image src={testimonial.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
+                  <MediaImage src={testimonial.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
                 ) : (
                   <span
                     className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-soft)] font-mono text-sm text-[var(--accent)]"
@@ -109,7 +109,7 @@ export function TeammateFeedback({ testimonials, limit }: TeammateFeedbackProps)
             <footer className="testimonial-dialog__footer">
               <div className="flex items-center gap-3">
                 {selectedTestimonial.avatar ? (
-                  <Image src={selectedTestimonial.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
+                  <MediaImage src={selectedTestimonial.avatar} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
                 ) : (
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent-soft)] font-mono text-sm text-[var(--accent)]" aria-hidden="true">
                     {selectedTestimonial.author.charAt(0)}
@@ -139,7 +139,7 @@ export function TeammateFeedback({ testimonials, limit }: TeammateFeedbackProps)
             </div>
             <div className="testimonial-profile-dialog__portrait">
               {selectedTestimonial.avatar ? (
-                <Image src={selectedTestimonial.avatar} alt={`${selectedTestimonial.author} profile`} width={320} height={320} />
+                <MediaImage src={selectedTestimonial.avatar} alt={`${selectedTestimonial.author} profile`} width={320} height={320} />
               ) : (
                 <span aria-hidden="true">{selectedTestimonial.author.charAt(0)}</span>
               )}

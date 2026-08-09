@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { MediaImage } from '@/components/portfolio/media-image';
 import { useState } from 'react';
 
 type BeyondCodeMoment = {
@@ -110,7 +110,7 @@ export function BeyondCodeCarousel() {
             aria-controls="beyond-code-active-image"
             key={`${moments[index].image}-${index}`}
           >
-            <Image src={moments[index].image} alt="" fill loading="lazy" sizes="(max-width: 48rem) 4rem, 7rem" />
+            <MediaImage src={moments[index].image} alt="" fill loading="lazy" sizes="(max-width: 48rem) 4rem, 7rem" />
           </button>
         ))}
       </nav>
@@ -118,7 +118,7 @@ export function BeyondCodeCarousel() {
       <div className="beyond-code-carousel__main">
         <div id="beyond-code-active-image" className="beyond-code-carousel__stage" role="group" aria-label={`Active photo: ${activeMoment.title}`}>
           <div className="beyond-code-carousel__image-wrap">
-            <Image
+            <MediaImage
               key={activeMoment.image}
               src={activeMoment.image}
               alt={activeMoment.alt}
