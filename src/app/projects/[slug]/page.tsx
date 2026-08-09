@@ -5,9 +5,11 @@ import { Card } from '@/components/card';
 import { BackButton } from '@/components/back-button';
 import { MarkdownContent } from '@/components/portfolio/MarkdownContent';
 import { TechnicalDeepDive } from '@/components/portfolio/technical-deep-dive';
-import { YouTubeEmbed } from '@/components/portfolio/media-placeholder';
+import { LocalVideo } from '@/components/portfolio/media-placeholder';
+import { ProjectSignalFlow } from '@/components/project-signal-flow';
 import { SepiaMediaStory } from '@/components/portfolio/sepia-media-story';
 import { GithubContributionHeatmap } from '@/components/portfolio/github-contribution-heatmap';
+import { ProjectTension } from '@/components/project-tension';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 export function generateStaticParams() {
@@ -51,14 +53,12 @@ export default async function Project({
             <div className="project-brief project-brief--tension rounded-2xl border border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] p-4 backdrop-blur sm:p-6">
               <p className="project-brief__label case-study-label">{presentation.tension.label}</p>
               <p className="project-brief__statement mt-2 text-base leading-7">{presentation.tension.statement}</p>
-              <div className="project-brief__stages mt-6 grid grid-cols-3 gap-2 text-center text-xs text-[var(--muted)]">
-                {presentation.tension.stages.map((stage, index) => <div key={stage.title} className={`project-brief__stage rounded-lg border p-2.5 ${stage.active ? 'project-brief__stage--active border-[var(--accent)]' : 'border-[var(--line)]'}`}><span className="project-brief__stage-number">0{index + 1}</span><strong className={`block ${stage.active ? 'text-[var(--accent)]' : 'text-[var(--ink)]'}`}>{stage.title}</strong><span>{stage.detail}</span></div>)}
-              </div>
+              <ProjectTension stages={presentation.tension.stages} />
             </div>
           </div>
         </div>
       </section>
-      {presentation.video && <div className="project-video-transition"><YouTubeEmbed {...presentation.video} /></div>}
+      {presentation.video && <div className="project-video-transition"><LocalVideo {...presentation.video} /></div>}
       {presentation.demo && (
         <section className="project-demo-callout" aria-labelledby="demo-heading">
           <div>
@@ -100,16 +100,7 @@ export default async function Project({
         <p className="case-study-label">Follow one signal</p>
         <h2 id="system-heading">From operator intent to analog hardware</h2>
         <p className="case-study-lead">The control path keeps operator intent legible as it moves through software and into physical circuitry. Each boundary has one job: represent intent, validate change, or perform the signal work.</p>
-        <div className="signal-flow" aria-label="Conceptual SEPIA control flow">
-          {presentation.signalFlow.map((stage, index) => <div className="signal-flow__item" key={stage.title}>
-            <div className={`signal-flow__card ${stage.active ? 'signal-flow__active' : ''}`}>
-              <span className="signal-flow__number">{String(index + 1).padStart(2, '0')}</span>
-              <strong>{stage.title}</strong>
-              <small>{stage.detail}</small>
-            </div>
-            {index < presentation.signalFlow.length - 1 && <i aria-hidden="true">→</i>}
-          </div>)}
-        </div>
+        <ProjectSignalFlow stages={presentation.signalFlow} />
       </section>
       {presentation.recovery && <section className="case-study-section mt-16" aria-labelledby="recovery-heading">
         <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr]">

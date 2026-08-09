@@ -1,3 +1,6 @@
+'use client';
+
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { MediaImage } from '@/components/portfolio/media-image';
 import { MediaVideo } from '@/components/portfolio/media-video';
 
@@ -84,8 +87,40 @@ const mobileFrames: MediaFrame[] = [
 ];
 
 export function SepiaMediaStory() {
+  const [focusedFrame, setFocusedFrame] = useState<MediaFrame | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (focusedFrame && dialogRef.current && !dialogRef.current.open) {
+      dialogRef.current?.showModal();
+    }
+  }, [focusedFrame]);
+
+  useEffect(() => () => {
+    if (dialogRef.current?.open) {
+      dialogRef.current.close();
+    }
+  }, []);
+
+  function openFrame(frame: MediaFrame) {
+    triggerRef.current = document.activeElement instanceof HTMLButtonElement ? document.activeElement : null;
+    setFocusedFrame(frame);
+  }
+
+  const restoreTriggerFocus = useCallback(() => {
+    requestAnimationFrame(() => triggerRef.current?.focus());
+  }, []);
+
+  const closeFrame = useCallback(() => {
+    dialogRef.current?.close();
+    setFocusedFrame(null);
+    restoreTriggerFocus();
+  }, [restoreTriggerFocus]);
+
   return (
-    <section className="sepia-media-story" aria-labelledby="media-story-heading">
+    <>
+      <section className="sepia-media-story" aria-labelledby="media-story-heading">
       <div className="sepia-media-story__intro">
         <div>
           <p className="case-study-label">Selected evidence</p>
@@ -107,9 +142,7 @@ export function SepiaMediaStory() {
             aria-label="SEPIA responsive product walkthrough"
             aria-describedby="sepia-video-caption"
           >
-            <source src="/videos/sepia/mobile-video-1.optimized.mp4" media="(max-width: 639px)" type="video/mp4" />
-            <source src="/videos/sepia/ipad-video-1.optimized.mp4" media="(min-width: 640px) and (max-width: 1023px)" type="video/mp4" />
-            <source src="/videos/sepia/desktop-video-1.optimized.mp4" type="video/mp4" />
+            <source src="/videos/sepia/desktop-video.mp4" type="video/mp4" />
             Your browser does not support the SEPIA walkthrough video. Use the still sequence below instead.
           </MediaVideo>
         </div>
@@ -120,15 +153,42 @@ export function SepiaMediaStory() {
       </figure>
 
       <div className="sepia-media-story__sequence">
-        <MediaChapter title="The wide view" description="Desktop screenshots establish the full composition: paths, modules, library, and the surrounding control context." frames={desktopFrames} featured />
-        <MediaChapter title="The working view" description="Tablet screenshots keep the visual model intact while changing the available space and interaction posture." frames={tabletFrames} />
-        <MediaChapter title="The focused view" description="Mobile screenshots show the same product language compressed into a navigable, focused surface." frames={mobileFrames} />
+        <MediaChapter title="The wide view" description="Desktop screenshots establish the full composition: paths, modules, library, and the surrounding control context." frames={desktopFrames} onFrameClick={openFrame} featured />
+        <MediaChapter title="The working view" description="Tablet screenshots keep the visual model intact while changing the available space and interaction posture." frames={tabletFrames} onFrameClick={openFrame} />
+        <MediaChapter title="The focused view" description="Mobile screenshots show the same product language compressed into a navigable, focused surface." frames={mobileFrames} onFrameClick={openFrame} />
       </div>
-    </section>
+      </section>
+      <dialog
+        ref={dialogRef}
+        className="sepia-media-dialog"
+        aria-labelledby="sepia-media-dialog-title"
+        aria-describedby="sepia-media-dialog-description"
+        onCancel={(event) => {
+          event.preventDefault();
+          closeFrame();
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) closeFrame();
+        }}
+      >
+        {focusedFrame && (
+          <figure className="sepia-media-dialog__content">
+            <div className="sepia-media-dialog__header">
+              <p id="sepia-media-dialog-title" className="case-study-label">{focusedFrame.label}</p>
+              <button type="button" className="sepia-media-dialog__close" onClick={closeFrame} aria-label="Close focused image">×</button>
+            </div>
+            <div className="sepia-media-dialog__image-scroll" aria-label="Scrollable focused image">
+              <MediaImage src={focusedFrame.src} alt={focusedFrame.alt} width={focusedFrame.width} height={focusedFrame.height} />
+            </div>
+            <figcaption id="sepia-media-dialog-description">{focusedFrame.detail}</figcaption>
+          </figure>
+        )}
+      </dialog>
+    </>
   );
 }
 
-function MediaChapter({ title, description, frames, featured = false }: { title: string; description: string; frames: MediaFrame[]; featured?: boolean }) {
+function MediaChapter({ title, description, frames, onFrameClick, featured = false }: { title: string; description: string; frames: MediaFrame[]; onFrameClick: (frame: MediaFrame) => void; featured?: boolean }) {
   return (
     <section className={`sepia-media-chapter ${featured ? 'sepia-media-chapter--featured' : ''}`} aria-labelledby={`${title.toLowerCase().replaceAll(' ', '-')}-heading`}>
       <div className="sepia-media-chapter__heading">
@@ -141,9 +201,11 @@ function MediaChapter({ title, description, frames, featured = false }: { title:
       <div className="sepia-media-chapter__frames">
         {frames.map((frame) => (
           <figure className="sepia-media-frame" key={frame.src}>
-            <div className="sepia-media-frame__image">
-              <MediaImage src={frame.src} alt={frame.alt} width={frame.width} height={frame.height} loading="lazy" sizes={frame.width < 1000 ? '(max-width: 639px) 45vw, 18rem' : '(max-width: 639px) 100vw, 52rem'} />
-            </div>
+            <button type="button" className="sepia-media-frame__button" onClick={() => onFrameClick(frame)} aria-label={`Focus image: ${frame.label}`}>
+              <div className="sepia-media-frame__image">
+                <MediaImage src={frame.src} alt={frame.alt} width={frame.width} height={frame.height} loading="lazy" sizes={frame.width < 1000 ? '(max-width: 639px) 45vw, 18rem' : '(max-width: 639px) 100vw, 52rem'} />
+              </div>
+            </button>
             <figcaption>
               <span className="sepia-media-frame__label">{frame.label}</span>
               <span>{frame.detail}</span>

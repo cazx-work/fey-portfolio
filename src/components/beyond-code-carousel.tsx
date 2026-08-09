@@ -1,7 +1,7 @@
 'use client';
 
 import { MediaImage } from '@/components/portfolio/media-image';
-import { useState } from 'react';
+import { useRef, useState, type PointerEvent } from 'react';
 
 type BeyondCodeMoment = {
   image: string;
@@ -79,6 +79,7 @@ const moments: BeyondCodeMoment[] = [
 
 export function BeyondCodeCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const swipeStart = useRef<{ x: number; y: number; pointerId: number } | null>(null);
   const activeMoment = moments[activeIndex];
 
   const showMoment = (index: number) => {
@@ -86,6 +87,32 @@ export function BeyondCodeCarousel() {
   };
 
   const railIndexes = [-3, -2, -1, 0, 1, 2, 3, 4].map((offset) => (activeIndex + offset + moments.length) % moments.length);
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse') return;
+
+    swipeStart.current = {
+      x: event.clientX,
+      y: event.clientY,
+      pointerId: event.pointerId,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerEnd = (event: PointerEvent<HTMLDivElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+
+    if (!start || start.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    const swipeThreshold = 48;
+
+    if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) <= Math.abs(deltaY)) return;
+
+    showMoment(activeIndex + (deltaX < 0 ? 1 : -1));
+  };
 
   return (
     <div
@@ -116,7 +143,17 @@ export function BeyondCodeCarousel() {
       </nav>
 
       <div className="beyond-code-carousel__main">
-        <div id="beyond-code-active-image" className="beyond-code-carousel__stage" role="group" aria-label={`Active photo: ${activeMoment.title}`}>
+        <div
+          id="beyond-code-active-image"
+          className="beyond-code-carousel__stage"
+          role="group"
+          aria-label={`Active photo: ${activeMoment.title}`}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerEnd}
+          onPointerCancel={() => {
+            swipeStart.current = null;
+          }}
+        >
           <div className="beyond-code-carousel__image-wrap">
             <MediaImage
               key={activeMoment.image}

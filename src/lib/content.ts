@@ -41,7 +41,7 @@ export type ProjectPresentation = {
   contribution: { title: string; description: string; themes: { title: string; description: string }[] };
   signalFlow: { title: string; detail: string; active?: boolean }[];
   recovery?: { label: string; title: string; steps: { label: string; description: string; tone: 'default' | 'warning' | 'success' }[] };
-  video?: { videoId: string; title: string; description: string };
+  video?: { src: string; title: string; description: string };
   demo?: { href: string; title: string; description: string };
 };
 
@@ -230,7 +230,7 @@ const projectPresentations: Record<string, ProjectPresentation> = {
       ],
     },
     video: {
-      videoId: 'ionaUivRNfc',
+      src: '/videos/sepia/desktop-video.mp4',
       title: 'SEPIA hardware and control overview',
       description: 'An overview of SEPIA’s hardware and software control relationship. The case study below explains the engineering boundaries that keep that relationship reliable.',
     },

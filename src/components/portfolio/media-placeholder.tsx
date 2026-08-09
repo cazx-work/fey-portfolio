@@ -5,13 +5,13 @@ type MediaPlaceholderProps = {
   className?: string;
 };
 
-export function YouTubeEmbed({
-  videoId,
+export function LocalVideo({
+  src,
   title,
   description,
   className = '',
 }: {
-  videoId: string;
+  src: string;
   title: string;
   description: string;
   className?: string;
@@ -19,13 +19,10 @@ export function YouTubeEmbed({
   return (
     <figure className={`youtube-embed ${className}`}>
       <div className="youtube-embed__frame">
-        <iframe
-          src={`https://www.youtube-nocookie.com/embed/${videoId}`}
-          title={title}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
+        <video controls preload="metadata" playsInline aria-label={title}>
+          <source src={src} type="video/mp4" />
+          Your browser does not support the video element.
+        </video>
       </div>
       <figcaption className="youtube-embed__caption">{description}</figcaption>
     </figure>
