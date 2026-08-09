@@ -226,7 +226,7 @@ const projectPresentations: Record<string, ProjectPresentation> = {
       ],
     },
     video: {
-      src: '/videos/sepia/desktop-video.mp4',
+      src: 'https://www.youtube-nocookie.com/embed/ionaUivRNfc',
       title: 'SEPIA hardware and control overview',
       description: 'An overview of SEPIA’s hardware and software control relationship. The case study below explains the engineering boundaries that keep that relationship reliable.',
     },

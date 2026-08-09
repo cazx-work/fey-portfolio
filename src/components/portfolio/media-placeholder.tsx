@@ -19,10 +19,13 @@ export function LocalVideo({
   return (
     <figure className={`youtube-embed ${className}`}>
       <div className="youtube-embed__frame">
-        <video controls preload="metadata" playsInline aria-label={title}>
-          <source src={src} type="video/mp4" />
-          Your browser does not support the video element.
-        </video>
+        <iframe
+          src={src}
+          title={title}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
       </div>
       <figcaption className="youtube-embed__caption">{description}</figcaption>
     </figure>
