@@ -3598,16 +3598,19 @@ a {
 }
 
 .contribution-calendar__weeks {
+  --contribution-cell-gap: clamp(.12rem, .35vw, .22rem);
+  container-type: inline-size;
   display: flex;
   flex: 1;
-  gap: clamp(.12rem, .35vw, .22rem);
+  gap: var(--contribution-cell-gap);
+  min-width: 0;
 }
 
 .contribution-calendar__week {
   display: grid;
-  flex: 1;
-  gap: clamp(.12rem, .35vw, .22rem);
-  grid-template-rows: repeat(7, .78rem);
+  flex: 0 0 calc((100cqw - (52 * var(--contribution-cell-gap))) / 53);
+  gap: var(--contribution-cell-gap);
+  grid-template-rows: repeat(7, calc((100cqw - (52 * var(--contribution-cell-gap))) / 53));
 }
 
 .contribution-calendar__day {
@@ -3615,8 +3618,9 @@ a {
   border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
   border-radius: .2rem;
   display: block;
-  min-height: .62rem;
+  height: 100%;
   min-width: 0;
+  width: 100%;
 }
 
 .contribution-calendar__day:focus-visible {
