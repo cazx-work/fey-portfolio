@@ -133,7 +133,7 @@ No specific examples of device discovery, recovery, routing conversion, packagin
 
 The content source is organized into:
 
-- `docs/contents/sepia-content-dossier.md`
+- `docs/contents/projects/sepia-content-dossier.md`
 - `docs/contents/capabilities-content-dossier.md`
 - `docs/contents/stories-content-dossier.md`
 

@@ -15,6 +15,30 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
+    slug: 'charlie-engleback',
+    quote: `I had the opportunity to work closely with Felix, where he designed and implemented a significant portion of our frontend software. Throughout the project, he consistently demonstrated strong technical ability and an impressive capacity to identify and solve problems quickly, often even when the information available to him was incomplete.
+
+One of Felix's strongest qualities was his willingness to take ownership. He never shied away from responsibility, and I always felt comfortable bringing him into difficult or unexpected problems. He was also honest and realistic when estimating the complexity of his work, while making sure to communicate clearly whenever he encountered obstacles or needed to adjust his approach. That level of transparency made him someone I could rely on when things became challenging.
+
+Felix also had a habit of being one step ahead. There were many occasions where he completed work before I had even asked for it, or identified something that needed to be addressed before I had realized it was necessary. That kind of initiative made a significant difference, particularly during the more chaotic periods of the project.
+
+Beyond his technical contribution, Felix was highly personable, friendly, and assertive. He was someone I genuinely looked forward to working with and having conversations with, and he brought a positive presence to the team.
+
+His reliability was particularly important to the success of the project. We faced a significant amount of uncertainty and challenges along the way, and I genuinely believe that without Felix's consistency and willingness to step up, we would have struggled to get through some of those situations.
+
+Felix is a talented engineer who combines strong technical problem-solving with ownership, reliability, initiative, and excellent collaboration. He is easy to work with, someone you can trust with difficult problems, and I would highly recommend him to any team.`,
+    summary: 'Felix combined strong frontend engineering with ownership, initiative, reliability, and clear communication throughout a challenging project.',
+    author: 'Charlie Engleback',
+    company: 'Karno Sound',
+    role: 'Head of Software',
+    relationship: 'Engineering manager',
+    project: 'SEPIA',
+    linkedin: 'https://www.linkedin.com/in/charles-engleback-95278a252/',
+    themes: ['Ownership', 'Initiative', 'Reliability'],
+    avatar: '/images/testimonials/charlie_engleback.jpg',
+    featured: true,
+  },
+  {
     slug: 'max-beadnell',
     quote: `What stood out most to me about Felix was his positive attitude and dependability. He was always willing to help, no matter the hour, and approached his work with dedication and a friendly attitude.
 
@@ -26,6 +50,7 @@ export const testimonials: Testimonial[] = [
     company: 'Karno Sound',
     role: 'Technical Specialist',
     relationship: 'Technical colleague',
+    project: 'SEPIA',
     linkedin: 'https://www.linkedin.com/in/max-beadnell-11a0b1244/',
     themes: ['Reliability', 'Problem solving'],
     avatar: '/images/testimonials/max_beadnell.jpeg',
@@ -38,7 +63,7 @@ export const testimonials: Testimonial[] = [
     author: 'Qiaoni Zhang',
     company: 'Karno Sound',
     role: 'UI/UX Designer',
-    relationship: 'Design and engineering collaborator',
+    relationship: 'Design colleague',
     project: 'SEPIA',
     linkedin: 'https://www.linkedin.com/in/qiaoni-zhang-graphicdesign/',
     themes: ['Design collaboration', 'Product quality'],
@@ -52,7 +77,8 @@ export const testimonials: Testimonial[] = [
     author: 'Sarah Jane Norman',
     company: 'Karno Sound',
     role: 'General Manager',
-    relationship: 'Organisational colleague',
+    relationship: 'Company leader',
+    project: 'SEPIA',
     linkedin: 'https://www.linkedin.com/in/sarah-jane-norman-856005130/',
     themes: ['Ownership', 'Reliability'],
     avatar: '/images/testimonials/sarah_jane_norman.jpeg',
@@ -65,7 +91,7 @@ export const testimonials: Testimonial[] = [
     author: 'Jerome Villaver',
     company: 'Bluebeans',
     role: 'Project Manager',
-    relationship: 'Long-term colleague',
+    relationship: 'Project manager',
     linkedin: 'https://www.linkedin.com/in/jeromevillaver/',
     themes: ['Career growth', 'Delivery'],
     avatar: '/images/testimonials/jerome_villaver.png',
@@ -77,7 +103,7 @@ export const testimonials: Testimonial[] = [
     author: 'Earl Fortuna',
     company: 'Kyocera',
     role: 'Software Engineer',
-    relationship: 'Former teammate',
+    relationship: 'Engineering colleague',
     linkedin: 'https://www.linkedin.com/in/earll-fortuna/',
     themes: ['Mentorship', 'Team support'],
     avatar: '/images/testimonials/earl_fortuna.jpg',
@@ -89,7 +115,7 @@ export const testimonials: Testimonial[] = [
     author: 'Jan Erwin King',
     company: 'Xurpas',
     role: 'Business Analyst',
-    relationship: 'Product collaborator',
+    relationship: 'Product colleague',
     project: 'MetaCare',
     linkedin: 'https://www.linkedin.com/in/jan-erwin-king-1932a4205/',
     themes: ['Ownership', 'Product quality'],
@@ -102,7 +128,7 @@ export const testimonials: Testimonial[] = [
     author: 'Rey Mark Engada',
     company: 'Bluebeans Systems & Experience Digital',
     role: 'Software Engineer',
-    relationship: 'Long-term technical collaborator',
+    relationship: 'Engineering colleague',
     linkedin: 'https://www.linkedin.com/in/rey-mark-engada-155122185/',
     themes: ['Problem solving', 'Technical breadth'],
     avatar: '/images/testimonials/rey_mark_engada.jpeg',

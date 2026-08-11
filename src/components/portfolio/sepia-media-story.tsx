@@ -15,7 +15,7 @@ type MediaFrame = {
 
 const desktopFrames: MediaFrame[] = [
   {
-    src: '/images/sepia/desktop-photo-1.png',
+    src: '/images/projects/sepia/desktop-photo-1.png',
     alt: 'SEPIA desktop creator interface showing multiple signal paths, modules, inputs, outputs, and a library of available modules.',
     label: '01 / Compose',
     detail: 'A wide control surface makes signal paths and module placement visible together.',
@@ -23,7 +23,7 @@ const desktopFrames: MediaFrame[] = [
     height: 1624,
   },
   {
-    src: '/images/sepia/desktop-photo-2.png',
+    src: '/images/projects/sepia/desktop-photo-2.png',
     alt: 'SEPIA desktop interface showing a different arrangement of signal paths and modules.',
     label: '02 / Reconfigure',
     detail: 'The same surface can hold changing arrangements without hiding the surrounding context.',
@@ -34,7 +34,7 @@ const desktopFrames: MediaFrame[] = [
 
 const tabletFrames: MediaFrame[] = [
   {
-    src: '/images/sepia/ipad-photo-1.png',
+    src: '/images/projects/sepia/ipad-photo-1.png',
     alt: 'SEPIA iPad interface showing a wide, touch-oriented view of signal paths and module groups.',
     label: '03 / Extend',
     detail: 'The tablet view preserves the composition model while giving the operator more room for touch.',
@@ -42,7 +42,7 @@ const tabletFrames: MediaFrame[] = [
     height: 1604,
   },
   {
-    src: '/images/sepia/ipad-photo-2.png',
+    src: '/images/projects/sepia/ipad-photo-2.png',
     alt: 'SEPIA iPad interface showing another signal-path arrangement with grouped modules.',
     label: '04 / Inspect',
     detail: 'A second tablet state shows how the surface remains legible as the arrangement changes.',
@@ -50,7 +50,7 @@ const tabletFrames: MediaFrame[] = [
     height: 1604,
   },
   {
-    src: '/images/sepia/ipad-photo-3.png',
+    src: '/images/projects/sepia/ipad-photo-3.png',
     alt: 'SEPIA iPad interface showing a detailed control and routing state.',
     label: '05 / Control',
     detail: 'The product keeps the operational surface close to the visual model.',
@@ -61,7 +61,7 @@ const tabletFrames: MediaFrame[] = [
 
 const mobileFrames: MediaFrame[] = [
   {
-    src: '/images/sepia/mobile-photo-1.png',
+    src: '/images/projects/sepia/mobile-photo-1.png',
     alt: 'SEPIA mobile interface showing signal paths, modules, and the bottom navigation.',
     label: '06 / Focus',
     detail: 'On a phone, the same product is reduced to a focused, vertically navigable surface.',
@@ -69,7 +69,7 @@ const mobileFrames: MediaFrame[] = [
     height: 1624,
   },
   {
-    src: '/images/sepia/mobile-photo-2.png',
+    src: '/images/projects/sepia/mobile-photo-2.png',
     alt: 'SEPIA mobile interface showing a focused module arrangement.',
     label: '07 / Navigate',
     detail: 'Navigation stays explicit instead of relying on a desktop-sized canvas.',
@@ -77,7 +77,7 @@ const mobileFrames: MediaFrame[] = [
     height: 1624,
   },
   {
-    src: '/images/sepia/mobile-photo-3.png',
+    src: '/images/projects/sepia/mobile-photo-3.png',
     alt: 'SEPIA mobile interface showing another signal-path state.',
     label: '08 / Adapt',
     detail: 'Different form factors present the same control story at different densities.',
@@ -136,9 +136,10 @@ export function SepiaMediaStory() {
           <MediaVideo
             className="sepia-media-story__video"
             controls
+            lazy
             preload="metadata"
             playsInline
-            poster="/images/optimized/sepia/desktop-photo-1.jpg"
+            poster="/images/optimized/projects/sepia/desktop-photo-1.jpg"
             aria-label="SEPIA responsive product walkthrough"
             aria-describedby="sepia-video-caption"
           >

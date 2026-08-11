@@ -14,7 +14,7 @@ The current public seed entries live in `src/lib/content.ts`. MDX/Zod can be int
 
 The editorial source is organized into three larger dossiers:
 
-- `docs/contents/sepia-content-dossier.md` — SEPIA mini-site and full case-study content.
+- `docs/contents/projects/sepia-content-dossier.md` — SEPIA mini-site and full case-study content.
 - `docs/contents/capabilities-content-dossier.md` — capability pages and visitor-value framing.
 - `docs/contents/stories-content-dossier.md` — long-form engineering stories derived from the journals.
 

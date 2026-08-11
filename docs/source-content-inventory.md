@@ -48,7 +48,7 @@ All 28 source files are Markdown and were readable. No PDFs, Word documents, ima
 
 The journal corpus is now organized into the following editorial source files:
 
-- `sepia-content-dossier.md` — SEPIA executive content, technical deep dive, and media slots.
+- `projects/sepia-content-dossier.md` — SEPIA executive content, technical deep dive, and media slots.
 - `capabilities-content-dossier.md` — expanded capability positioning and visitor-value framing.
 - `stories-content-dossier.md` — expanded engineering stories with executive and technical layers.
 

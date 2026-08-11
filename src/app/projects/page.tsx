@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card } from '@/components/card';
+import { ProjectAssetGallery } from '@/components/project-asset-gallery';
 import { repository } from '@/lib/portfolio-repository';
 
 export default function Projects() {
@@ -80,6 +81,7 @@ export default function Projects() {
           View capabilities <span aria-hidden="true">↗</span>
         </Link>
         </section>
+        <ProjectAssetGallery />
     </div>
   );
 }

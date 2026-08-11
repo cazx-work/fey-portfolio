@@ -8,8 +8,10 @@ import { TechnicalDeepDive } from '@/components/portfolio/technical-deep-dive';
 import { LocalVideo } from '@/components/portfolio/media-placeholder';
 import { ProjectSignalFlow } from '@/components/project-signal-flow';
 import { SepiaMediaStory } from '@/components/portfolio/sepia-media-story';
+import { SupportingProjectMedia } from '@/components/portfolio/supporting-project-media';
 import { GithubContributionHeatmap } from '@/components/portfolio/github-contribution-heatmap';
 import { ProjectTension } from '@/components/project-tension';
+import { MediaImage } from '@/components/portfolio/media-image';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 export function generateStaticParams() {
@@ -32,6 +34,11 @@ export default async function Project({
   const backLabel = 'Back to projects';
   if (!project || !p) notFound();
   const presentation = getProjectPresentation(slug);
+  const related = repository.relatedContent(project, 3);
+  const relatedItems = related.length > 0
+    ? related
+    : repository.listProjects().filter((candidate) => candidate.slug !== project.slug).slice(0, 3);
+  const showingRelatedContent = related.length > 0;
   return (
     <div className="project-case-study pb-10 sm:pb-16">
       <section className="project-hero overflow-hidden border-t border-[var(--line)]">
@@ -39,22 +46,48 @@ export default async function Project({
           <BackButton href={backHref} label={backLabel} />
         </div>
         <div className="project-hero__signal" aria-hidden="true"><span /><span /><span /><span /><span /><span /></div>
-        <div className="project-hero__content relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[1.15fr_.85fr] lg:gap-16 lg:px-14 lg:items-center">
+        <div className="project-hero__content relative z-10 grid gap-10 px-6 sm:px-10 lg:grid-cols-[1.22fr_.78fr] lg:gap-14 lg:px-14 lg:items-center">
           <div className="project-hero__intro">
             <p className="project-hero__eyebrow case-study-label"><span aria-hidden="true">◆</span>{presentation.eyebrow}</p>
             <h1 className="project-hero__title mt-5 max-w-3xl text-5xl font-semibold tracking-tight sm:text-7xl">{p.title}</h1>
-            <p className="project-hero__overview mt-5 max-w-3xl text-xl leading-9 text-[var(--muted)]">{presentation.heroOverview ?? p.executive.overview}</p>
+            <p className="project-hero__overview mt-5 max-w-4xl text-xl leading-9 text-[var(--muted)]">{presentation.heroOverview ?? p.executive.overview}</p>
             <div className="project-hero__claim mt-7 max-w-2xl">
               <span className="project-hero__claim-rule" aria-hidden="true" />
               <p className="text-sm font-medium uppercase tracking-[.16em] text-[var(--accent)]">{presentation.heroClaim}</p>
             </div>
           </div>
-          <div className="project-hero__aside lg:col-start-2 lg:flex lg:flex-col">
-            <div className="project-brief project-brief--tension rounded-2xl border border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] p-4 backdrop-blur sm:p-6">
-              <p className="project-brief__label case-study-label">{presentation.tension.label}</p>
-              <p className="project-brief__statement mt-2 text-base leading-7">{presentation.tension.statement}</p>
-              <ProjectTension stages={presentation.tension.stages} />
-            </div>
+          <div className="project-hero__aside project-hero__aside--visual lg:col-start-2 lg:flex lg:flex-col">
+            {slug === 'sepia-client' ? (
+              <div className="project-hero__visual project-hero__visual--sepia-rack">
+                <MediaImage
+                  src="/images/optimized/projects/sepia/sepia-rack.png"
+                  alt="SEPIA rack filled with digitally controlled analog audio modules."
+                  width={2048}
+                  height={1798}
+                  priority
+                  sizes="(max-width: 64rem) 100vw, 42vw"
+                  className="project-hero__visual-image"
+                />
+              </div>
+            ) : slug === 'availbld' ? (
+              <div className="project-hero__visual project-hero__visual--availbld">
+                <MediaImage
+                  src="/images/optimized/projects/availbld/availbld-1.jpg"
+                  alt="Availbld live event feed showing active event conversations and instant join actions."
+                  width={1024}
+                  height={1024}
+                  priority
+                  sizes="(max-width: 64rem) 100vw, 42vw"
+                  className="project-hero__visual-image"
+                />
+              </div>
+            ) : (
+              <div className="project-brief project-brief--tension rounded-2xl border border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] p-4 backdrop-blur sm:p-6">
+                <p className="project-brief__label case-study-label">{presentation.tension.label}</p>
+                <p className="project-brief__statement mt-2 text-base leading-7">{presentation.tension.statement}</p>
+                <ProjectTension stages={presentation.tension.stages} />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -82,6 +115,32 @@ export default async function Project({
           {presentation.profile.map((item, index) => <div className="project-profile__item" key={item.label}><span className="project-profile__number">0{index + 1}</span><p className="case-study-label">{item.label}</p><p className="case-study-value">{item.value}</p></div>)}
         </div>
       </section>
+      {slug === 'sepia-client' && (
+        <section className="case-study-section sepia-hardware-section mt-16" aria-labelledby="hardware-heading">
+          <div className="sepia-hardware-section__copy">
+            <p className="case-study-label">Hardware context</p>
+            <h2 id="hardware-heading">The module is physical. The control surface is not.</h2>
+            <p className="case-study-lead">SEPIA keeps the analog processing in compact hardware modules while the application manages control, routing, recall, and live state around it.</p>
+          </div>
+          <figure className="sepia-hardware-section__figure">
+            <MediaImage
+              src="/images/optimized/projects/sepia/sepia-module.png"
+              alt="Close view of a SEPIA analog audio module with its enclosure opened to reveal the circuitry."
+              width={2042}
+              height={2048}
+              loading="lazy"
+              sizes="(max-width: 64rem) 100vw, 50vw"
+            />
+            <figcaption>One physical module: analog circuitry remains close to the signal while software coordinates its behavior.</figcaption>
+          </figure>
+        </section>
+      )}
+      {slug === 'availbld' && <section className="case-study-section project-tension-section mx-4 mt-6 rounded-2xl border border-[var(--line)] bg-[color-mix(in_srgb,var(--surface)_72%,transparent)] px-6 py-6 backdrop-blur sm:mx-0 sm:p-7" aria-labelledby="tension-heading">
+        <p id="tension-heading" className="case-study-label">{presentation.tension.label}</p>
+        <p className="project-brief__statement mt-2 text-base leading-7">{presentation.tension.statement}</p>
+        <ProjectTension stages={presentation.tension.stages} />
+      </section>}
+      {slug === 'sepia-client' ? <SepiaMediaStory /> : <SupportingProjectMedia slug={slug} />}
       <section className="case-study-section mt-16" aria-labelledby="contribution-heading">
         <p className="case-study-label">Engineering contribution</p>
         <h2 id="contribution-heading">{presentation.contribution.title}</h2>
@@ -98,8 +157,8 @@ export default async function Project({
       </section>
       <section className="case-study-section mt-16" aria-labelledby="system-heading">
         <p className="case-study-label">Follow one signal</p>
-        <h2 id="system-heading">From operator intent to analog hardware</h2>
-        <p className="case-study-lead">The control path keeps operator intent legible as it moves through software and into physical circuitry. Each boundary has one job: represent intent, validate change, or perform the signal work.</p>
+        <h2 id="system-heading">{slug === 'sepia-client' ? 'From operator intent to analog hardware' : slug === 'fast' ? 'From scanned source to governed retrieval' : slug === 'qpro' ? 'From customer intent to branch guidance' : 'From user intent to durable system state'}</h2>
+        <p className="case-study-lead">{slug === 'sepia-client' ? 'The control path keeps operator intent legible as it moves through software and into physical circuitry. Each boundary has one job: represent intent, validate change, or perform the signal work.' : slug === 'fast' ? 'The retrieval path keeps a document match grounded in the source record while OCR, indexing, access checks, and preview behavior remain explicit.' : slug === 'qpro' ? 'The queue path keeps a customer request understandable as it becomes a ticket transition, teller action, and public counter call.' : 'Each boundary keeps user intent, domain rules, external behavior, and recovery context understandable.'}</p>
         <ProjectSignalFlow stages={presentation.signalFlow} />
       </section>
       {presentation.recovery && <section className="case-study-section mt-16" aria-labelledby="recovery-heading">
@@ -109,7 +168,6 @@ export default async function Project({
         </div>
       </section>}
       {slug === 'sepia-client' && <GithubContributionHeatmap />}
-      {slug === 'sepia-client' && <SepiaMediaStory />}
       <TechnicalDeepDive
         className="mt-16 mx-auto max-w-[68rem]"
         blocks={p.technical}
@@ -119,23 +177,27 @@ export default async function Project({
           <div>
             <div className="flex items-center gap-3">
               <span className="related-stories__index">04</span>
-              <p className="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">Related stories</p>
+              <p className="font-mono text-xs uppercase tracking-widest text-[var(--muted)]">
+                {showingRelatedContent ? 'Related work' : 'Other projects'}
+              </p>
             </div>
             <h2 className="mt-3 max-w-xl text-3xl font-semibold tracking-tight sm:text-4xl">
               Keep exploring the system
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-7 text-[var(--muted)]">
-            See the work from the project, capability, and engineering-story perspectives.
+            {showingRelatedContent
+              ? 'See this work from a related capability or engineering-story perspective.'
+              : 'Explore other projects when this case study has no related stories or capabilities yet.'}
           </p>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {repository.listStories().slice(0, 3).map((s, index) => (
+          {relatedItems.map((s, index) => (
             <Card
               key={s.slug}
-              href={`/engineering-stories/${s.slug}`}
+              href={s.metadata.type === 'story' ? `/engineering-stories/${s.slug}` : s.metadata.type === 'capability' ? `/capabilities/${s.slug}` : `/projects/${s.slug}`}
               className="related-story-card"
-              eyebrow={`${String(index + 1).padStart(2, '0')} / SEPIA`}
+              eyebrow={`${String(index + 1).padStart(2, '0')} / ${s.category}`}
               title={s.title}
               summary={s.summary}
               tags={s.tags}

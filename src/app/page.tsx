@@ -1,206 +1,47 @@
 import Link from 'next/link';
 import { Card } from '@/components/card';
+import { MediaImage } from '@/components/portfolio/media-image';
+import { ProjectCarousel } from '@/components/project-carousel';
 import { SectionHeading } from '@/components/section-heading';
 import { repository } from '@/lib/portfolio-repository';
 import { TeammateFeedback } from '@/components/teammate-feedback';
 import { testimonials } from '@/data/testimonials';
 
+const projectVisuals = {
+  'sepia-client': { src: '/images/optimized/projects/sepia/sepia-overview.jpg', alt: 'SEPIA desktop creator interface, rack, and hardware module arranged as one centered visual group', label: 'SEPIA software-to-hardware platform' },
+  'qpro': { src: '/images/optimized/projects/QPRO/qpro-overview.jpg', alt: 'QPRO queue management overview with a large teller dashboard on the left and an overlapping mobile service-lane flow on the right', label: 'QPRO queue management system' },
+  'fast': { src: '/images/optimized/projects/FAST/fast-overview.jpg', alt: 'FAST document intelligence overview with a large desktop OCR search interface and an overlapping mobile document vault', label: 'FAST document intelligence platform' },
+  'availbld': { src: '/images/optimized/projects/availbld/availbld-overview.jpg', alt: 'Four Availbld mobile screens showing live event feeds, instant groups, event chat, and event discovery', label: 'Availbld event coordination' },
+  'metacare': { src: '/images/optimized/projects/Metacare/metacare-overview.jpg', alt: 'Four MetaCare mobile screens showing the health marketplace home, member benefits, product discovery, and order summary', label: 'MetaCare health and wellness marketplace' },
+  'awh-app': { src: '/images/optimized/projects/AWH/awh-overview.jpg', alt: 'AWH warehouse operations overview showing inventory, dispatch, scanner, field operator, zone density, and system synchronization panels', label: 'AWH warehouse operations platform' },
+};
+
 export default function Home() {
   const capabilities = repository.listCapabilities();
-  const projects = repository.listProjects();
-  const flagship = projects.find((project) => project.slug === 'sepia-client');
+  const projects = repository.listProjects().slice(0, 4);
   const stories = repository.listStories();
   const featuredStories = ['device-lifecycle-management', 'configuration-recovery', 'hardware-communication-platform']
     .map((slug) => stories.find((story) => story.slug === slug))
     .filter((story): story is (typeof stories)[number] => Boolean(story));
-  const featuredCapabilities = ['cross-platform-architecture', 'native-and-hardware-integration', 'state-recovery-and-resilience', 'testing-and-developer-enablement']
-    .map((slug) => capabilities.find((capability) => capability.slug === slug))
-    .filter((capability): capability is (typeof capabilities)[number] => Boolean(capability));
+
   return (
     <>
       <section className="home-hero" aria-labelledby="hero-heading">
-        <div className="hero-grid mx-auto grid max-w-6xl grid-cols-1 items-start gap-6 px-5 pb-24 pt-12 lg:grid-cols-12 md:gap-8 md:pb-28 md:pt-16">
-          <header className="lg:col-span-7">
-            <div className="hero-status mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-[var(--surface)]/70 px-3 py-1.5 font-mono text-[.68rem] uppercase tracking-[.18em] text-[var(--accent)]">
-              <span className="hero-status-dot" aria-hidden="true" />
-              Systems-oriented software engineer
-            </div>
-            <h1 id="hero-heading" className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-.04em] md:text-6xl">
-              Software at the boundary between product interfaces, native systems, and connected devices.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--muted)] md:mt-6 md:text-lg md:leading-8">
-              I build cross-platform products at the boundary between Flutter interfaces, C++ and native integrations, performance-sensitive workflows, and solid software architecture. My focus is maintainable software that stays understandable when external systems are asynchronous or unreliable.
-            </p>
-            <div className="hero-actions mt-8 flex flex-wrap items-center gap-3 md:mt-9">
-              <Link
-                href="/capabilities"
-                className="hero-primary-cta group inline-flex min-h-12 items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[#082522] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-              >
-                <span>Explore capabilities</span>
-                <span className="hero-cta-arrow transition-transform group-hover:translate-x-0.5 group-focus-visible:translate-x-0.5" aria-hidden="true">↗</span>
-              </Link>
-              <Link href="/projects" className="hero-secondary-link group inline-flex min-h-12 items-center gap-2 rounded-full border border-[var(--line)] px-5 py-3 text-sm font-medium text-[var(--muted)] transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent-soft)]/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">
-                <span>View selected work</span>
-                <span className="hero-cta-arrow transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-focus-visible:translate-x-0.5 group-focus-visible:-translate-y-0.5" aria-hidden="true">↗</span>
-              </Link>
-            </div>
-          </header>
-          <figure className="hero-boundary-card rounded-2xl border border-[var(--line)] bg-[var(--surface)]/90 p-4 text-sm lg:col-span-5 lg:mt-10 md:p-6">
-            <div className="hero-boundary-heading">
-              <p className="font-mono text-[.68rem] uppercase tracking-[.18em] text-[var(--accent)]">/ how I work</p>
-              <p className="mt-2 text-base font-medium text-[var(--ink)]">A conceptual system boundary</p>
-            </div>
-            <ol className="diagram-flow mt-5" aria-label="System layers">
-              <li className="diagram-step">
-                <span className="diagram-step-index">01</span>
-                <span className="diagram-node">Flutter UI + feature state</span>
-              </li>
-              <li className="diagram-step">
-                <span className="diagram-step-index">02</span>
-                <span className="diagram-node">Domain rules + durable state</span>
-              </li>
-              <li className="diagram-step">
-                <span className="diagram-step-index">03</span>
-                <span className="diagram-node">Native integration + device communication</span>
-              </li>
-              <li className="diagram-step">
-                <span className="diagram-step-index">04</span>
-                <span className="diagram-node">Professional audio + hardware systems</span>
-              </li>
-            </ol>
-            <figcaption className="hero-boundary-caption mt-5 pt-4 text-xs leading-5 text-[var(--muted)]">The work is in making each boundary explicit, observable, and dependable.</figcaption>
-          </figure>
+        <div className="hero-grid mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 px-5 pb-24 pt-12 lg:grid-cols-12 md:pb-28 md:pt-16">
+          <div className="lg:col-span-7">
+            <p className="mb-5 font-mono text-xs uppercase tracking-[.18em] text-[var(--accent)]">Senior cross-platform systems engineer</p>
+            <h1 id="hero-heading" className="max-w-3xl text-4xl font-semibold leading-[1.05] tracking-[-.04em] md:text-6xl">I build dependable products across software, native systems, and connected devices.</h1>
+            <div className="hero-actions mt-8 flex flex-wrap items-center gap-3"><Link href="#projects" className="hero-primary-cta inline-flex min-h-12 items-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[#082522] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">View selected projects <span aria-hidden="true" className="ml-2">↘</span></Link><Link href="/profile" className="hero-secondary-link inline-flex min-h-12 items-center rounded-full border border-[var(--line)] px-5 py-3 text-sm font-medium text-[var(--muted)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">Open my profile <span aria-hidden="true" className="ml-2">↗</span></Link></div>
+          </div>
+          <figure className="hero-boundary-card rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5 lg:col-span-5 lg:mt-8 md:p-7"><p className="font-mono text-xs uppercase tracking-[.18em] text-[var(--accent)]">/ system boundary</p><p className="mt-2 text-lg font-medium">Make the handoffs visible.</p><ol className="diagram-flow mt-6" aria-label="A conceptual path from user intent to connected hardware"><li className="diagram-step"><span className="diagram-step-index">01</span><span className="diagram-node">User intent + interface</span></li><li className="diagram-step"><span className="diagram-step-index">02</span><span className="diagram-node">Domain rules + durable state</span></li><li className="diagram-step"><span className="diagram-step-index">03</span><span className="diagram-node">Typed integration boundary</span></li><li className="diagram-step"><span className="diagram-step-index">04</span><span className="diagram-node">Connected device behavior</span></li></ol><figcaption className="hero-boundary-caption mt-5 pt-4 text-sm leading-6 text-[var(--muted)]">Clear ownership helps software stay understandable when systems change.</figcaption></figure>
         </div>
       </section>
-      <section className="home-section home-section--proof mx-auto max-w-6xl px-5 py-20">
-        <SectionHeading
-          kicker="02 / proof points"
-          title="Making complex boundaries dependable"
-        >
-          Three examples of the engineering problems I work on: preserving
-          intent, owning asynchronous state, and making specialized systems
-          safer to extend.
-        </SectionHeading>
-        <div className="grid gap-5 md:grid-cols-3">
-          {featuredStories.map((s) => {
-            return (
-            <Card
-              key={s.slug}
-              href={`/engineering-stories/${s.slug}`}
-              eyebrow="SEPIA"
-              title={s.metadata.homepageTitle ?? s.title}
-              summary={s.metadata.homepageSummary ?? s.summary}
-              tags={s.tags}
-            />
-            );
-          })}
-        </div>
-        <div className="mt-8">
-          <Link href="/engineering-stories" className="group inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">
-            Explore all engineering stories <span aria-hidden="true" className="transition group-hover:translate-x-1">↗</span>
-          </Link>
-        </div>
-      </section>
-      <section className="home-section home-section--flagship border-y border-[var(--line)] bg-[var(--surface)]">
-        <div className="mx-auto max-w-6xl px-5 py-20">
-          <SectionHeading kicker="03 / flagship project" title="What makes SEPIA dependable in real time">
-            The case study looks past the product surface to the boundaries that keep a changing hardware system understandable: preserving operator intent, owning device lifecycles, and validating state before it is restored.
-          </SectionHeading>
-          {flagship && (
-            <Link
-              href={`/projects/${flagship.slug}?from=home`}
-              className="group block rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 transition duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_18px_45px_-28px_rgba(56,189,248,0.7)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)] md:p-8"
-            >
-              <div className="flex items-start justify-between gap-6">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[.18em] text-[var(--accent)]">Inside the case study</p>
-                  <h3 className="mt-4 max-w-2xl text-2xl font-semibold tracking-tight transition-colors group-hover:text-[var(--accent)] md:text-3xl">
-                    Turning live hardware changes into safe, recoverable software behavior
-                  </h3>
-                </div>
-                <span aria-hidden="true" className="text-xl text-[var(--accent)] transition group-hover:translate-x-1">↗</span>
-              </div>
-              <div className="mt-8 grid gap-4 border-t border-[var(--line)] pt-6 md:grid-cols-3">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[.16em] text-[var(--accent)]">01</p>
-                  <p className="mt-2 font-medium text-[var(--ink)]">Preserve intent</p>
-                  <p className="mt-1 text-sm leading-6 text-[var(--muted)]">Saved decisions stay distinct from transient device state.</p>
-                </div>
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[.16em] text-[var(--accent)]">02</p>
-                  <p className="mt-2 font-medium text-[var(--ink)]">Own the lifecycle</p>
-                  <p className="mt-1 text-sm leading-6 text-[var(--muted)]">Discovery, reconnect, and disposal have clear ownership.</p>
-                </div>
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[.16em] text-[var(--accent)]">03</p>
-                  <p className="mt-2 font-medium text-[var(--ink)]">Validate before restore</p>
-                  <p className="mt-1 text-sm leading-6 text-[var(--muted)]">Topology and compatibility are checked before state is applied.</p>
-                </div>
-              </div>
-              <p className="mt-8 text-sm font-semibold text-[var(--accent)]">Read the SEPIA case study <span aria-hidden="true" className="ml-1 transition group-hover:translate-x-1">↗</span></p>
-            </Link>
-          )}
-        </div>
-      </section>
-      <section className="home-section mx-auto max-w-6xl px-5 pb-12 pt-20">
-        <SectionHeading
-          kicker="04 / capability map"
-          title="The capabilities behind the work"
-        >
-          A focused view of the practices that support the project. The full
-          capability map includes the supporting disciplines and deeper evidence.
-        </SectionHeading>
-        <div className="grid gap-5 md:grid-cols-2">
-          {featuredCapabilities.map((c) => {
-            return (
-            <Card
-              key={c.slug}
-              href={`/capabilities/${c.slug}`}
-              eyebrow="SEPIA"
-              title={c.metadata.homepageTitle ?? c.title}
-              summary={c.metadata.homepageSummary ?? c.summary}
-              tags={c.tags}
-            />
-            );
-          })}
-        </div>
-        <div className="mt-8">
-          <Link href="/capabilities" className="group inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">
-            View the full capability map <span aria-hidden="true" className="transition group-hover:translate-x-1">↗</span>
-          </Link>
-        </div>
-      </section>
-      <section className="mx-auto max-w-6xl px-5 pb-20 pt-8 md:pt-10">
-        <SectionHeading
-          kicker="05 / teammate feedback"
-          title="A collaborative approach to complex systems"
-        >
-          A small selection of feedback from teammates and collaborators. More context and the full set of quotes live on the testimonials page.
-        </SectionHeading>
-        <TeammateFeedback testimonials={[testimonials[0], testimonials[1]]} />
-        <Link href="/testimonials" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">
-          Read all testimonials <span aria-hidden="true">↗</span>
-        </Link>
-      </section>
-      <section className="mx-auto max-w-6xl px-5 pb-24">
-        <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-8 md:p-12">
-          <p className="font-mono text-xs uppercase tracking-[.2em] text-[var(--accent)]">
-            06 / hiring
-          </p>
-          <h2 className="mt-5 max-w-2xl text-3xl font-semibold leading-tight md:text-4xl">
-            I am looking for my next software engineering role.
-          </h2>
-          <p className="mt-5 max-w-2xl leading-7 text-[var(--muted)]">
-            If you are hiring for senior Flutter, cross-platform, or systems-oriented engineering work, I would be glad to discuss the role and the problems the team is solving.
-          </p>
-          <Link
-            href="/contact"
-            className="mt-8 inline-flex min-h-12 items-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[#082522] transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-          >
-            Discuss an open role <span aria-hidden="true" className="ml-2">↗</span>
-          </Link>
-        </div>
-      </section>
+      <section id="projects" className="home-section home-section--projects mx-auto max-w-6xl px-5 py-20" aria-labelledby="projects-heading"><SectionHeading kicker="01 / selected projects" title="Products shaped by real system constraints" id="projects-heading">A focused look at the product context and engineering boundaries behind the work.</SectionHeading><ProjectCarousel projects={projects} visuals={projectVisuals} /></section>
+      <section id="about" className="home-section border-y border-[var(--line)] bg-[var(--surface)]" aria-labelledby="about-heading"><div className="mx-auto grid max-w-6xl gap-8 px-5 py-20 lg:grid-cols-[.72fr_1.28fr] lg:items-center"><figure className="profile-portrait mx-0 max-w-sm" aria-label="Portrait of Felix Edrian Ybañez"><MediaImage src="/images/felix_edrian_ybanez.jpg" alt="Felix Edrian Ybañez" fill sizes="(max-width: 64rem) 100vw, 28rem" /></figure><div><SectionHeading id="about-heading" kicker="02 / about me" title="Calm, explicit, and collaborative">I make complex software easier to change, especially when state, hardware, and people all need to stay aligned.</SectionHeading><ol className="about-lens-list mt-7 grid gap-3 sm:grid-cols-2" aria-label="Engineering principles"><li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm"><strong className="block text-[var(--accent)]">01 / Make ownership explicit</strong><span className="mt-2 block text-[var(--muted)]">Every important state transition should have a clear owner, lifecycle, and cleanup path.</span></li><li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm"><strong className="block text-[var(--accent)]">02 / Preserve user intent</strong><span className="mt-2 block text-[var(--muted)]">Durable decisions should remain distinct from transient runtime state and external feedback.</span></li><li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm"><strong className="block text-[var(--accent)]">03 / Design for the unhappy path</strong><span className="mt-2 block text-[var(--muted)]">Reconnects, partial failures, and asynchronous events are part of the product—not edge cases.</span></li><li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm"><strong className="block text-[var(--accent)]">04 / Keep complexity changeable</strong><span className="mt-2 block text-[var(--muted)]">Typed seams, layered tests, and understandable boundaries make difficult systems safer to evolve.</span></li></ol><Link href="/profile" className="about-profile-link mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">Read the full engineering profile <span aria-hidden="true">↗</span></Link></div></div></section>
+      <section id="testimonials" className="home-section mx-auto max-w-6xl px-5 py-20" aria-labelledby="testimonials-heading"><SectionHeading kicker="03 / recommendations" title="Trusted in the difficult parts of delivery" id="testimonials-heading">A small proof strip from published feedback by people who worked with Felix.</SectionHeading><TeammateFeedback testimonials={testimonials.slice(0, 4)} /><Link href="/testimonials" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">Read all testimonials <span aria-hidden="true">↗</span></Link></section>
+      <section id="capabilities" className="home-section border-t border-[var(--line)] mx-auto max-w-6xl px-5 py-20" aria-labelledby="capabilities-heading"><SectionHeading kicker="04 / capability map" title="The engineering shape of the work" id="capabilities-heading">High-level areas connected to published project evidence, not a wall of tools.</SectionHeading><div className="grid gap-4 md:grid-cols-2">{capabilities.slice(0, 4).map((capability, index) => <Card key={capability.slug} href={`/capabilities/${capability.slug}`} eyebrow={`0${index + 1} / ${capability.category}`} title={capability.metadata.homepageTitle ?? capability.title} summary={capability.metadata.homepageSummary ?? capability.summary} tags={capability.tags.slice(0, 3)} />)}</div><Link href="/capabilities" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">View the full capability map <span aria-hidden="true">↗</span></Link></section>
+      <section id="stories" className="home-section mx-auto max-w-6xl px-5 py-20" aria-labelledby="stories-heading"><SectionHeading kicker="05 / engineering stories" title="The deeper questions, in compact form" id="stories-heading">Architecture, reliability, recovery, and testing stories from the published material.</SectionHeading><div className="grid gap-4 md:grid-cols-3">{featuredStories.map((story, index) => <Card key={story.slug} href={`/engineering-stories/${story.slug}`} eyebrow={`0${index + 1} / story`} title={story.metadata.homepageTitle ?? story.title} summary={story.metadata.homepageSummary ?? story.summary} tags={story.tags.slice(0, 3)} />)}</div><Link href="/engineering-stories" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">Explore all engineering stories <span aria-hidden="true">↗</span></Link></section>
+      <section className="mx-auto max-w-6xl px-5 pb-24" aria-labelledby="hire-heading"><div className="home-hire-card rounded-2xl border border-[var(--accent)] bg-[var(--accent-soft)] p-8 md:p-12"><p className="font-mono text-xs uppercase tracking-[.2em] text-[var(--accent)]">06 / hiring</p><h2 id="hire-heading" className="mt-5 max-w-2xl text-3xl font-semibold leading-tight md:text-4xl">Hiring for senior Flutter, cross-platform, or systems-oriented engineering work?</h2><p className="mt-4 max-w-2xl leading-7 text-[var(--muted)]">Let’s discuss the role, the product, and the engineering problems the team is solving.</p><Link href="/contact" className="mt-8 inline-flex min-h-12 items-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[#082522] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]">Discuss a role <span aria-hidden="true" className="ml-2">↗</span></Link></div></section>
     </>
   );
 }

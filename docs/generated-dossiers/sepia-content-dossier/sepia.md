@@ -7,6 +7,7 @@ visibility: public
 status: published
 featured: true
 tags: Flutter, Dart, Native integration, Testing
+homepageSummary: SEPIA pairs authentic analog circuitry with a digital control plane for routing, automation, and reliable recall as hardware changes in real time.
 ---
 
 # SEPIA

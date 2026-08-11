@@ -6,6 +6,7 @@ import {
   getStory,
   projects,
   sepiaDossier,
+  professionalProjectDossiers,
   stories,
   storyDossiers,
   personalProjectDossiers,
@@ -54,7 +55,7 @@ const storyMetadata: PortfolioMetadata = { type: 'story', project: 'SEPIA', visi
 const capabilityMetadata: PortfolioMetadata = { type: 'capability', project: 'SEPIA', visibility: 'public', status: 'published', featured: false, tags: [] };
 
 export const portfolioProjects: PortfolioItem[] = projects.map((item) => ({
-  slug: item.slug, title: item.title, summary: item.summary, metadata: metadataFor(item.dossier, professionalProjectMetadata), dossier: item.dossier, tags: item.tags, category: item.category,
+  slug: item.slug, title: item.title, summary: item.summary, metadata: metadataFor(item.dossier, item.slug === 'sepia-client' ? professionalProjectMetadata : { type: 'professional-project', project: item.dossier.metadata.project ?? 'Experience Digital', visibility: item.dossier.metadata.visibility, status: item.dossier.metadata.status, featured: item.dossier.metadata.featured, tags: item.tags }), dossier: item.dossier, tags: item.tags, category: item.category,
 }));
 export const portfolioPersonalProjects: PortfolioItem[] = personalProjectDossiers.map((item) => ({
   slug: item.slug, title: item.title, summary: item.executive.overview, metadata: metadataFor(item, { type: 'personal-project', project: item.metadata.project ?? 'Personal', visibility: 'public', status: 'published', featured: false, tags: [] }), dossier: item, tags: item.metadata.tags, category: 'Personal project',
@@ -98,6 +99,7 @@ export const repository = {
   getStory: (slug: string) => publicItem(portfolioStories.find((item) => item.slug === slug)),
   listCapabilities: () => published(portfolioCapabilities),
   getCapability: (slug: string) => publicItem(portfolioCapabilities.find((item) => item.slug === slug)),
+  relatedContent,
   listFeatured: () => featured(portfolioItems),
 };
 

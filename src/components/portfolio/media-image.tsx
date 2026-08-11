@@ -9,7 +9,7 @@ type MediaImageProps = ImageProps & {
 
 export function MediaImage({ loadingLabel = 'Loading image', onLoad, onError, ...props }: MediaImageProps) {
   const [state, setState] = useState<'loading' | 'loaded' | 'error'>('loading');
-  const optimizedSrc = typeof props.src === 'string' && props.src.startsWith('/images/')
+  const optimizedSrc = typeof props.src === 'string' && props.src.startsWith('/images/') && !props.src.startsWith('/images/optimized/')
     ? props.src.replace(/^\/images\//, '/images/optimized/').replace(/\.(png|jpe?g)$/i, '.jpg')
     : props.src;
 

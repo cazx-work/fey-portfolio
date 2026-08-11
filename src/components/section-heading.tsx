@@ -1,10 +1,12 @@
 export function SectionHeading({
   kicker,
   title,
+  id,
   children,
 }: {
   kicker: string;
   title: string;
+  id?: string;
   children?: React.ReactNode;
 }) {
   return (
@@ -12,7 +14,7 @@ export function SectionHeading({
       <p className="mb-3 font-mono text-xs uppercase tracking-[.2em] text-[var(--accent)]">
         {kicker}
       </p>
-      <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+      <h2 id={id} className="text-3xl font-semibold tracking-tight md:text-4xl">
         {title}
       </h2>
       {children && (
