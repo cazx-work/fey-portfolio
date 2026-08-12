@@ -43,8 +43,16 @@ const workingAreas = [
     label: 'AI-assisted quality and delivery',
     title: 'Shorten the path into unfamiliar systems',
     summary:
-      'AI-assisted codebase exploration reduces switching time, while BLoC, Provider, Riverpod, layered tests, CI/CD, and deterministic seams keep delivery human-led.',
-    tags: ['BLoC', 'Riverpod', 'Testing', 'CI/CD'],
+      'AI-assisted codebase exploration reduces switching time, while BLoC, Provider, Riverpod, and CI/CD help keep delivery structured and human-led.',
+    tags: ['BLoC', 'Riverpod', 'CI/CD'],
+  },
+  {
+    number: '05',
+    label: 'Testing and validation',
+    title: 'Verify behavior where systems meet',
+    summary:
+      'Layered unit, widget, application, and integration tests, including BDD/Gherkin integration workflows, validate behavior at clear architectural boundaries. Deterministic fakes and controlled streams make stateful and asynchronous paths repeatable, while human review validates AI-assisted work.',
+    tags: ['Unit tests', 'Integration tests', 'BDD/Gherkin', 'Test doubles'],
   },
 ];
 
@@ -67,7 +75,7 @@ const principles = [
   [
     '04',
     'Keep complexity changeable',
-    'Typed seams, layered tests, and understandable boundaries make difficult systems safer to evolve.',
+    'Typed seams and understandable boundaries make difficult systems safer to evolve.',
   ],
 ];
 
