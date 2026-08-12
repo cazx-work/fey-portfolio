@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import Link from 'next/link';
 import { MediaImage } from '@/components/portfolio/media-image';
 import { InlineIcon } from '@/components/inline-icon';
@@ -15,6 +15,10 @@ type ProjectCarouselProps = {
 
 export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const activeDotRef = useRef<HTMLButtonElement | null>(null);
+  const swipeStart = useRef<{ x: number; y: number; pointerId: number } | null>(
+    null,
+  );
   const project = projects[activeIndex];
 
   if (!project) return null;
@@ -25,6 +29,45 @@ export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
     setActiveIndex(
       (current) => (current + direction + projects.length) % projects.length,
     );
+  };
+
+  useEffect(() => {
+    activeDotRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }, [activeIndex]);
+
+  const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
+    if (event.pointerType === 'mouse') return;
+
+    swipeStart.current = {
+      x: event.clientX,
+      y: event.clientY,
+      pointerId: event.pointerId,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerEnd = (event: PointerEvent<HTMLElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+
+    if (!start || start.pointerId !== event.pointerId) return;
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    const swipeThreshold = 48;
+
+    if (
+      Math.abs(deltaX) < swipeThreshold ||
+      Math.abs(deltaX) <= Math.abs(deltaY)
+    ) {
+      return;
+    }
+
+    move(deltaX < 0 ? 1 : -1);
   };
 
   return (
@@ -66,6 +109,7 @@ export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
                 <button
                   key={item.slug}
                   type="button"
+                  ref={index === activeIndex ? activeDotRef : undefined}
                   className={index === activeIndex ? 'is-active' : ''}
                   onClick={() => setActiveIndex(index)}
                   aria-label={`Show project ${index + 1}: ${item.title}`}
@@ -89,6 +133,11 @@ export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
         <figure
           className="project-carousel__visual"
           aria-label={visual?.label ?? `${project.title} project visual`}
+          onPointerDown={handlePointerDown}
+          onPointerUp={handlePointerEnd}
+          onPointerCancel={() => {
+            swipeStart.current = null;
+          }}
         >
           {visual ? (
             <MediaImage

@@ -2333,6 +2333,7 @@ a {
   min-width: 0;
   overflow: hidden;
   position: relative;
+  touch-action: pan-y;
 }
 
 .project-carousel__visual::after {
@@ -2509,10 +2510,16 @@ a {
     min-width: 0;
     overflow-x: auto;
     padding-bottom: 0.25rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     width: 100%;
+  }
+  .project-carousel__dots::-webkit-scrollbar {
+    display: none;
   }
   .project-carousel__dots button {
     flex: 0 0 7.5rem;
+    scroll-snap-align: center;
   }
   .project-carousel__slide {
     display: block;
