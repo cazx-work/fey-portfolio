@@ -21,6 +21,14 @@ export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
   );
   const project = projects[activeIndex];
 
+  useEffect(() => {
+    activeDotRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }, [activeIndex]);
+
   if (!project) return null;
 
   const visual = visuals[project.slug];
@@ -30,14 +38,6 @@ export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
       (current) => (current + direction + projects.length) % projects.length,
     );
   };
-
-  useEffect(() => {
-    activeDotRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'center',
-    });
-  }, [activeIndex]);
 
   const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
     if (event.pointerType === 'mouse') return;
