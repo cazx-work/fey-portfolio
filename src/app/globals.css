@@ -2322,6 +2322,7 @@ a {
   height: 30rem;
   min-width: 0;
   min-height: 0;
+  touch-action: pan-y;
 }
 
 .project-carousel__visual {
@@ -2333,7 +2334,6 @@ a {
   min-width: 0;
   overflow: hidden;
   position: relative;
-  touch-action: pan-y;
 }
 
 .project-carousel__visual::after {

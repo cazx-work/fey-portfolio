@@ -129,15 +129,15 @@ export function ProjectCarousel({ projects, visuals }: ProjectCarouselProps) {
         className={`project-carousel__slide project-carousel__slide--${project.slug}`}
         aria-labelledby="active-project-title"
         aria-live="polite"
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={() => {
+          swipeStart.current = null;
+        }}
       >
         <figure
           className="project-carousel__visual"
           aria-label={visual?.label ?? `${project.title} project visual`}
-          onPointerDown={handlePointerDown}
-          onPointerUp={handlePointerEnd}
-          onPointerCancel={() => {
-            swipeStart.current = null;
-          }}
         >
           {visual ? (
             <MediaImage
