@@ -63,30 +63,54 @@ const __dirname = path.dirname(__filename);
 export const ENVELOPE_PREFIX = '[impeccable@1]';
 
 export const ALLOWED_EXTS = new Set([
-  '.tsx', '.jsx', '.html', '.htm', '.vue', '.svelte', '.astro',
-  '.css', '.scss', '.sass', '.less', '.ts', '.js',
+  '.tsx',
+  '.jsx',
+  '.html',
+  '.htm',
+  '.vue',
+  '.svelte',
+  '.astro',
+  '.css',
+  '.scss',
+  '.sass',
+  '.less',
+  '.ts',
+  '.js',
 ]);
 
 export const ACK_EXTS = new Set([
-  '.tsx', '.jsx', '.html', '.htm', '.vue', '.svelte', '.astro',
-  '.css', '.scss', '.sass', '.less',
+  '.tsx',
+  '.jsx',
+  '.html',
+  '.htm',
+  '.vue',
+  '.svelte',
+  '.astro',
+  '.css',
+  '.scss',
+  '.sass',
+  '.less',
 ]);
 
 // Hard-skip regex for sensitive files. Cannot be turned off via config.
 // Match tokenized secret/credential filenames, not UI names such as
 // CredentialForm.tsx, SecretPage.jsx, or secretary-dashboard.vue.
-export const SENSITIVE_PATH = new RegExp([
-  String.raw`(?:^|[/\\])\.env(?:\.|$)`,
-  String.raw`(?:^|[/\\])\.git(?:[/\\]|$)`,
-  String.raw`(?:^|[/\\])id_rsa(?:$|[._-])[^/\\]*$`,
-  String.raw`(?:^|[/\\])[^/\\]*\.pem$`,
-  String.raw`(?:^|[/\\])(?:[^/\\]*[._-])?(?:secret|secrets|credential|credentials)(?=[._-])[^/\\]*\.(?:json|ya?ml|toml|ini|conf|config|env|txt|key|cert|crt|pem|js|ts)$`,
-].join('|'), 'i');
+export const SENSITIVE_PATH = new RegExp(
+  [
+    String.raw`(?:^|[/\\])\.env(?:\.|$)`,
+    String.raw`(?:^|[/\\])\.git(?:[/\\]|$)`,
+    String.raw`(?:^|[/\\])id_rsa(?:$|[._-])[^/\\]*$`,
+    String.raw`(?:^|[/\\])[^/\\]*\.pem$`,
+    String.raw`(?:^|[/\\])(?:[^/\\]*[._-])?(?:secret|secrets|credential|credentials)(?=[._-])[^/\\]*\.(?:json|ya?ml|toml|ini|conf|config|env|txt|key|cert|crt|pem|js|ts)$`,
+  ].join('|'),
+  'i',
+);
 
 // Hard-skip regex for generated, lock, minified, and build-output paths.
 // `generated` is matched as a whole path segment so authored names such as
 // `generated-utils.ts` or `CodeGenerator.tsx` still get scanned.
-export const GENERATED_PATH = /(?:\.generated\.[a-z]+$|\.d\.ts$|\.min\.[a-z]+$|[/\\]node_modules[/\\]|[/\\]generated[/\\]|[/\\](?:dist|build|out|\.next|\.cache|coverage)[/\\]|[/\\]?[^/\\]+\.lock(?:\.json)?$)/i;
+export const GENERATED_PATH =
+  /(?:\.generated\.[a-z]+$|\.d\.ts$|\.min\.[a-z]+$|[/\\]node_modules[/\\]|[/\\]generated[/\\]|[/\\](?:dist|build|out|\.next|\.cache|coverage)[/\\]|[/\\]?[^/\\]+\.lock(?:\.json)?$)/i;
 
 export const TRUTHY = /^(1|true|yes|on)$/i;
 
@@ -138,9 +162,7 @@ export const IMMEDIATE_TIER_RULES = new Set([
 // mirroring how IMMEDIATE_TIER_RULES lists rule ids inline so the hook stays
 // self-contained and testable without loading the detector. Keep it in sync
 // with the registry (cli/engine/registry/antipatterns.mjs).
-export const ADVISORY_RULES = new Set([
-  'em-dash-overuse',
-]);
+export const ADVISORY_RULES = new Set(['em-dash-overuse']);
 
 export function isAdvisoryFinding(finding) {
   const id = finding && normalizeIgnoreRule(finding.antipattern);
@@ -216,15 +238,21 @@ export function getPendingPath(cwd) {
 }
 
 export function resolveProjectCwd(event, fallback = process.cwd()) {
-  return event?.cwd
-    || (Array.isArray(event?.workspace_roots) && event.workspace_roots[0])
-    || envProjectDir(fallback)
-    || fallback;
+  return (
+    event?.cwd ||
+    (Array.isArray(event?.workspace_roots) && event.workspace_roots[0]) ||
+    envProjectDir(fallback) ||
+    fallback
+  );
 }
 
 function looksLikeProjectRoot(dir) {
   return ['.git', 'package.json', '.impeccable'].some((marker) => {
-    try { return fs.existsSync(path.join(dir, marker)); } catch { return false; }
+    try {
+      return fs.existsSync(path.join(dir, marker));
+    } catch {
+      return false;
+    }
   });
 }
 
@@ -237,7 +265,12 @@ function looksLikeProjectRoot(dir) {
 // cwd when no marker is found.
 export function resolveCacheCwd(primaryFile, sessionCwd) {
   const base = path.resolve(sessionCwd || process.cwd());
-  if (!primaryFile || typeof primaryFile !== 'string' || hasPathTraversal(primaryFile)) return base;
+  if (
+    !primaryFile ||
+    typeof primaryFile !== 'string' ||
+    hasPathTraversal(primaryFile)
+  )
+    return base;
   if (looksLikeProjectRoot(base)) return base;
   let dir;
   try {
@@ -272,7 +305,9 @@ export function resolveProjectPlatform(cwd) {
 }
 
 export function isNativePlatform(platform) {
-  return platform === 'ios' || platform === 'android' || platform === 'adaptive';
+  return (
+    platform === 'ios' || platform === 'android' || platform === 'adaptive'
+  );
 }
 
 export function readConfig(cwd) {
@@ -291,12 +326,18 @@ export function readConfig(cwd) {
 // The hook settings subtree of a unified config.json / config.local.json.
 function hookSection(raw) {
   if (!raw || typeof raw !== 'object') return null;
-  return raw.hook && typeof raw.hook === 'object' && !Array.isArray(raw.hook) ? raw.hook : null;
+  return raw.hook && typeof raw.hook === 'object' && !Array.isArray(raw.hook)
+    ? raw.hook
+    : null;
 }
 
 function detectorSection(raw) {
   if (!raw || typeof raw !== 'object') return null;
-  return raw.detector && typeof raw.detector === 'object' && !Array.isArray(raw.detector) ? raw.detector : null;
+  return raw.detector &&
+    typeof raw.detector === 'object' &&
+    !Array.isArray(raw.detector)
+    ? raw.detector
+    : null;
 }
 
 function numberOr(value, fallback) {
@@ -322,20 +363,33 @@ function applyDetectorConfigSource(config, raw) {
   if (raw.advisoryRules === 'include' || raw.advisoryRules === 'exclude') {
     config.advisoryRules = raw.advisoryRules;
   }
-  if (raw.designSystem && typeof raw.designSystem === 'object' && !Array.isArray(raw.designSystem)) {
+  if (
+    raw.designSystem &&
+    typeof raw.designSystem === 'object' &&
+    !Array.isArray(raw.designSystem)
+  ) {
     config.designSystem = {
       ...config.designSystem,
       enabled: raw.designSystem.enabled === false ? false : true,
     };
   }
   if (Array.isArray(raw.ignoreRules)) {
-    config.ignoreRules = uniqueStrings([...config.ignoreRules, ...raw.ignoreRules]);
+    config.ignoreRules = uniqueStrings([
+      ...config.ignoreRules,
+      ...raw.ignoreRules,
+    ]);
   }
   if (Array.isArray(raw.ignoreFiles)) {
-    config.ignoreFiles = uniqueStrings([...config.ignoreFiles, ...raw.ignoreFiles]);
+    config.ignoreFiles = uniqueStrings([
+      ...config.ignoreFiles,
+      ...raw.ignoreFiles,
+    ]);
   }
   if (Array.isArray(raw.ignoreValues)) {
-    config.ignoreValues = mergeIgnoreValues(config.ignoreValues, raw.ignoreValues);
+    config.ignoreValues = mergeIgnoreValues(
+      config.ignoreValues,
+      raw.ignoreValues,
+    );
   }
   if (Array.isArray(raw.extensions)) {
     config.extensions = mergeExtensions(config.extensions, raw.extensions);
@@ -362,7 +416,10 @@ function applyConfigSource(config, raw) {
     config.limits = {
       maxFindings: numberOr(raw.limits.maxFindings, config.limits.maxFindings),
       maxChars: numberOr(raw.limits.maxChars, config.limits.maxChars),
-      maxFileBytes: numberOr(raw.limits.maxFileBytes, config.limits.maxFileBytes),
+      maxFileBytes: numberOr(
+        raw.limits.maxFileBytes,
+        config.limits.maxFileBytes,
+      ),
     };
   }
   return config;
@@ -382,7 +439,9 @@ export function normalizeIgnoreValue(value) {
 }
 
 function normalizeIgnoreRule(rule) {
-  return String(rule || '').trim().toLowerCase();
+  return String(rule || '')
+    .trim()
+    .toLowerCase();
 }
 
 function colorIgnoreKey(value) {
@@ -392,7 +451,9 @@ function colorIgnoreKey(value) {
 }
 
 function parseIgnoreColor(value) {
-  const text = String(value || '').trim().toLowerCase();
+  const text = String(value || '')
+    .trim()
+    .toLowerCase();
   if (!text) return null;
 
   const hex = text.match(/^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i);
@@ -444,15 +505,24 @@ function splitColorArgs(body) {
   const text = String(body || '').trim();
   if (!text) return [];
   if (text.includes(',')) {
-    const parts = text.split(',').map((part) => part.trim()).filter(Boolean);
+    const parts = text
+      .split(',')
+      .map((part) => part.trim())
+      .filter(Boolean);
     const last = parts[parts.length - 1];
     if (last && last.includes('/')) {
-      const split = last.split('/').map((part) => part.trim()).filter(Boolean);
+      const split = last
+        .split('/')
+        .map((part) => part.trim())
+        .filter(Boolean);
       return [...parts.slice(0, -1), ...split];
     }
     return parts;
   }
-  return text.replace(/\s*\/\s*/g, ' / ').split(/\s+/).filter((part) => part && part !== '/');
+  return text
+    .replace(/\s*\/\s*/g, ' / ')
+    .split(/\s+/)
+    .filter((part) => part && part !== '/');
 }
 
 function parseRgbChannel(raw) {
@@ -504,9 +574,10 @@ function hslToRgb(hue, saturation, lightness, alpha) {
     const gray = clampByte(Math.round(lightness * 255));
     return { r: gray, g: gray, b: gray, a: alpha };
   }
-  const q = lightness < 0.5
-    ? lightness * (1 + saturation)
-    : lightness + saturation - lightness * saturation;
+  const q =
+    lightness < 0.5
+      ? lightness * (1 + saturation)
+      : lightness + saturation - lightness * saturation;
   const p = 2 * lightness - q;
   const toRgb = (t) => {
     let channel = t;
@@ -546,8 +617,14 @@ export function normalizeIgnoreValueEntries(entries) {
     if (!rule || !value) continue;
     const normalized = { rule, value };
     const files = uniqueStrings([
-      ...(typeof entry.file === 'string' && entry.file.trim() ? [entry.file.trim()] : []),
-      ...(Array.isArray(entry.files) ? entry.files.filter(v => typeof v === 'string' && v.trim()).map(v => v.trim()) : []),
+      ...(typeof entry.file === 'string' && entry.file.trim()
+        ? [entry.file.trim()]
+        : []),
+      ...(Array.isArray(entry.files)
+        ? entry.files
+            .filter((v) => typeof v === 'string' && v.trim())
+            .map((v) => v.trim())
+        : []),
     ]);
     if (files.length > 0) normalized.files = files;
     // Key order is rule, value, files, createdAt, reason and must stay that way:
@@ -567,10 +644,16 @@ export function normalizeIgnoreValueEntries(entries) {
 function mergeIgnoreValues(existing, incoming) {
   const map = new Map();
   for (const entry of normalizeIgnoreValueEntries(existing)) {
-    map.set(`${entry.rule}\0${entry.value}\0${ignoreValueFilesKey(entry.files)}`, entry);
+    map.set(
+      `${entry.rule}\0${entry.value}\0${ignoreValueFilesKey(entry.files)}`,
+      entry,
+    );
   }
   for (const entry of normalizeIgnoreValueEntries(incoming)) {
-    map.set(`${entry.rule}\0${entry.value}\0${ignoreValueFilesKey(entry.files)}`, entry);
+    map.set(
+      `${entry.rule}\0${entry.value}\0${ignoreValueFilesKey(entry.files)}`,
+      entry,
+    );
   }
   return Array.from(map.values());
 }
@@ -578,7 +661,9 @@ function mergeIgnoreValues(existing, incoming) {
 function ignoreValueFilesKey(files) {
   // Sort before joining: a scope is a set, so an entry already on disk in another
   // order must compare equal rather than dedup as two distinct entries.
-  return Array.isArray(files) && files.length > 0 ? [...files].sort().join('\x1f') : '';
+  return Array.isArray(files) && files.length > 0
+    ? [...files].sort().join('\x1f')
+    : '';
 }
 
 export function readCache(cwd) {
@@ -588,7 +673,8 @@ export function readCache(cwd) {
   }
   return {
     version: 1,
-    sessions: raw.sessions && typeof raw.sessions === 'object' ? raw.sessions : {},
+    sessions:
+      raw.sessions && typeof raw.sessions === 'object' ? raw.sessions : {},
   };
 }
 
@@ -620,24 +706,39 @@ export function ensureHookGitExcludes(cwd = process.cwd()) {
   try {
     const target = resolveHookGitExcludeTarget(cwd);
     if (!target) {
-      return { mode: 'none', changed: false, patterns: [...HOOK_LOCAL_IGNORE_PATTERNS] };
+      return {
+        mode: 'none',
+        changed: false,
+        patterns: [...HOOK_LOCAL_IGNORE_PATTERNS],
+      };
     }
 
     const patterns = target.patternPrefix
-      ? HOOK_LOCAL_IGNORE_PATTERNS.map((pattern) => `${target.patternPrefix}/${pattern}`)
+      ? HOOK_LOCAL_IGNORE_PATTERNS.map(
+          (pattern) => `${target.patternPrefix}/${pattern}`,
+        )
       : [...HOOK_LOCAL_IGNORE_PATTERNS];
     const markerSuffix = target.patternPrefix || '.';
     const markerOpen = `${HOOK_IGNORE_MARKER_OPEN} ${markerSuffix}`;
     const markerClose = `${HOOK_IGNORE_MARKER_CLOSE} ${markerSuffix}`;
-    const existing = fs.existsSync(target.path) ? fs.readFileSync(target.path, 'utf-8') : '';
+    const existing = fs.existsSync(target.path)
+      ? fs.readFileSync(target.path, 'utf-8')
+      : '';
     const block = [markerOpen, ...patterns, markerClose].join('\n');
-    const markerRe = new RegExp(`${escapeRegExp(markerOpen)}[\\s\\S]*?${escapeRegExp(markerClose)}`);
+    const markerRe = new RegExp(
+      `${escapeRegExp(markerOpen)}[\\s\\S]*?${escapeRegExp(markerClose)}`,
+    );
 
     let updated;
     if (markerRe.test(existing)) {
       updated = existing.replace(markerRe, block);
     } else {
-      const prefix = existing.length === 0 ? '' : existing.endsWith('\n') ? existing : `${existing}\n`;
+      const prefix =
+        existing.length === 0
+          ? ''
+          : existing.endsWith('\n')
+            ? existing
+            : `${existing}\n`;
       updated = `${prefix}${prefix.endsWith('\n\n') || prefix === '' ? '' : '\n'}${block}\n`;
     }
 
@@ -648,12 +749,19 @@ export function ensureHookGitExcludes(cwd = process.cwd()) {
 
     return {
       mode: 'git-info-exclude',
-      file: path.relative(path.resolve(cwd), target.path).split(path.sep).join('/'),
+      file: path
+        .relative(path.resolve(cwd), target.path)
+        .split(path.sep)
+        .join('/'),
       changed: updated !== existing,
       patterns,
     };
   } catch {
-    return { mode: 'error', changed: false, patterns: [...HOOK_LOCAL_IGNORE_PATTERNS] };
+    return {
+      mode: 'error',
+      changed: false,
+      patterns: [...HOOK_LOCAL_IGNORE_PATTERNS],
+    };
   }
 }
 
@@ -685,7 +793,9 @@ function resolveGitDir(dotGit, worktreeDir) {
   const body = fs.readFileSync(dotGit, 'utf-8').trim();
   const match = body.match(/^gitdir:\s*(.+)$/i);
   if (!match) return null;
-  return path.isAbsolute(match[1]) ? match[1] : path.resolve(worktreeDir, match[1]);
+  return path.isAbsolute(match[1])
+    ? match[1]
+    : path.resolve(worktreeDir, match[1]);
 }
 
 function escapeRegExp(value) {
@@ -746,8 +856,15 @@ function globToRegex(glob) {
       i += 1;
     } else if (c === '{') {
       const end = glob.indexOf('}', i);
-      if (end === -1) { re += '\\{'; i += 1; continue; }
-      const parts = glob.slice(i + 1, end).split(',').map((p) => p.replace(/[.+^$()|[\]\\]/g, '\\$&'));
+      if (end === -1) {
+        re += '\\{';
+        i += 1;
+        continue;
+      }
+      const parts = glob
+        .slice(i + 1, end)
+        .split(',')
+        .map((p) => p.replace(/[.+^$()|[\]\\]/g, '\\$&'));
       re += `(?:${parts.join('|')})`;
       i = end + 1;
     } else if (/[.+^$()|[\]\\]/.test(c)) {
@@ -782,11 +899,14 @@ export function matchesAnyGlob(filePath, globs) {
 
 export function filterFindings(findings, _content, _ext, config) {
   if (!Array.isArray(findings) || findings.length === 0) return [];
-  const ignoreRules = new Set((config.ignoreRules || []).map((rule) => normalizeIgnoreRule(rule)));
+  const ignoreRules = new Set(
+    (config.ignoreRules || []).map((rule) => normalizeIgnoreRule(rule)),
+  );
   const ignoreValues = normalizeIgnoreValueEntries(config.ignoreValues || []);
   // Advisory rules are skipped by default so the hook never nags about them;
   // a project opts in with detector.advisoryRules: "include".
-  const includeAdvisory = (config?.advisoryRules || DEFAULT_CONFIG.advisoryRules) === 'include';
+  const includeAdvisory =
+    (config?.advisoryRules || DEFAULT_CONFIG.advisoryRules) === 'include';
   return findings.filter((f) => {
     if (!f || typeof f !== 'object') return false;
     if (!includeAdvisory && isAdvisoryFinding(f)) return false;
@@ -830,8 +950,13 @@ function isIgnoredFindingValue(finding, ignoreValues) {
   return ignoreValues.some((entry) => {
     if (entry.rule !== rule) return false;
     const wildcardValue = entry.value === '*';
-    if (!wildcardValue && (!value || !ignoreValueMatches(rule, entry.value, value))) return false;
-    if (!Array.isArray(entry.files) || entry.files.length === 0) return !wildcardValue;
+    if (
+      !wildcardValue &&
+      (!value || !ignoreValueMatches(rule, entry.value, value))
+    )
+      return false;
+    if (!Array.isArray(entry.files) || entry.files.length === 0)
+      return !wildcardValue;
     return findingMatchesScopedIgnoreFile(finding, entry.files);
   });
 }
@@ -865,11 +990,18 @@ export function extractFindingIgnoreValue(finding) {
   return normalizeIgnoreValue(extractFindingIgnoreValueRaw(finding, rule));
 }
 
-function extractFindingIgnoreValueRaw(finding, rule = normalizeIgnoreRule(finding?.antipattern)) {
-  const direct = cleanIgnoreValueDisplay(finding.ignoreValue || finding.value || '');
+function extractFindingIgnoreValueRaw(
+  finding,
+  rule = normalizeIgnoreRule(finding?.antipattern),
+) {
+  const direct = cleanIgnoreValueDisplay(
+    finding.ignoreValue || finding.value || '',
+  );
   if (direct) return direct;
 
-  const candidates = [finding.detail, finding.snippet].filter((v) => typeof v === 'string' && v);
+  const candidates = [finding.detail, finding.snippet].filter(
+    (v) => typeof v === 'string' && v,
+  );
   for (const text of candidates) {
     if (rule === 'bounce-easing') {
       const motion = extractMotionIgnoreValue(text);
@@ -951,7 +1083,7 @@ export function dedupeAgainstCache(findings, cache, sessionId, filePath) {
 // Callers must pass the complete current finding set, not just the fresh ones.
 export function rememberFindings(cache, sessionId, filePath, findings) {
   const fileEntry = ensureFile(cache, sessionId, filePath);
-  const keys = new Set((findings || []).map(f => findingCacheKey(f)));
+  const keys = new Set((findings || []).map((f) => findingCacheKey(f)));
   fileEntry.findings = Array.from(keys);
   ensureSession(cache, sessionId).updatedAt = Date.now();
 }
@@ -962,15 +1094,25 @@ function findingCacheKey(finding) {
   if (line > 0 && value) return `${finding.antipattern}:${line}:${value}`;
   if (line > 0) return `${finding.antipattern}:${line}`;
   if (value) return `${finding.antipattern}:0:${value}`;
-  const snippet = String(finding?.snippet || '').trim().slice(0, 80);
-  return snippet ? `${finding.antipattern}:0:${snippet}` : `${finding.antipattern}:0`;
+  const snippet = String(finding?.snippet || '')
+    .trim()
+    .slice(0, 80);
+  return snippet
+    ? `${finding.antipattern}:0:${snippet}`
+    : `${finding.antipattern}:0`;
 }
 
 export function renderTemplate(findings, filePath, config, opts = {}) {
   if (!Array.isArray(findings) || findings.length === 0) return '';
   const limits = config?.limits || DEFAULT_CONFIG.limits;
-  const cap = Math.max(1, limits.maxFindings || DEFAULT_CONFIG.limits.maxFindings);
-  const maxChars = Math.max(500, limits.maxChars || DEFAULT_CONFIG.limits.maxChars);
+  const cap = Math.max(
+    1,
+    limits.maxFindings || DEFAULT_CONFIG.limits.maxFindings,
+  );
+  const maxChars = Math.max(
+    500,
+    limits.maxChars || DEFAULT_CONFIG.limits.maxChars,
+  );
 
   const cwd = opts.cwd || process.cwd();
   const display = relativize(filePath, cwd);
@@ -980,9 +1122,10 @@ export function renderTemplate(findings, filePath, config, opts = {}) {
 
   const header = `${ENVELOPE_PREFIX} Design hook findings requiring review in ${display} (${total} issue(s)):`;
   const lines = shown.map((f) => formatFindingLine(f));
-  const more = remaining > 0
-    ? `... and ${remaining} more (see ${IMPECCABLE_COMMAND} audit).`
-    : null;
+  const more =
+    remaining > 0
+      ? `... and ${remaining} more (see ${IMPECCABLE_COMMAND} audit).`
+      : null;
   const footer = directiveFooter(display);
 
   const blocks = [header, ...lines];
@@ -998,7 +1141,9 @@ export function renderTemplate(findings, filePath, config, opts = {}) {
 }
 
 function renderGroupedTemplate(groups, config, opts = {}) {
-  const realGroups = groups.filter((group) => Array.isArray(group.findings) && group.findings.length > 0);
+  const realGroups = groups.filter(
+    (group) => Array.isArray(group.findings) && group.findings.length > 0,
+  );
   if (realGroups.length === 0) return '';
   if (realGroups.length === 1) {
     const [group] = realGroups;
@@ -1006,10 +1151,19 @@ function renderGroupedTemplate(groups, config, opts = {}) {
   }
 
   const limits = config?.limits || DEFAULT_CONFIG.limits;
-  const cap = Math.max(1, limits.maxFindings || DEFAULT_CONFIG.limits.maxFindings);
-  const maxChars = Math.max(500, limits.maxChars || DEFAULT_CONFIG.limits.maxChars);
+  const cap = Math.max(
+    1,
+    limits.maxFindings || DEFAULT_CONFIG.limits.maxFindings,
+  );
+  const maxChars = Math.max(
+    500,
+    limits.maxChars || DEFAULT_CONFIG.limits.maxChars,
+  );
   const cwd = opts.cwd || process.cwd();
-  const total = realGroups.reduce((sum, group) => sum + group.findings.length, 0);
+  const total = realGroups.reduce(
+    (sum, group) => sum + group.findings.length,
+    0,
+  );
   const header = `${ENVELOPE_PREFIX} Design hook findings requiring review across ${realGroups.length} files (${total} issue(s)):`;
   const lines = [];
   let shownCount = 0;
@@ -1025,7 +1179,9 @@ function renderGroupedTemplate(groups, config, opts = {}) {
     shownCount += shown.length;
     const hidden = group.findings.length - shown.length;
     if (hidden > 0) {
-      lines.push(`- ... ${hidden} more in ${display} (see ${IMPECCABLE_COMMAND} audit).`);
+      lines.push(
+        `- ... ${hidden} more in ${display} (see ${IMPECCABLE_COMMAND} audit).`,
+      );
     }
   }
 
@@ -1038,13 +1194,14 @@ function renderGroupedTemplate(groups, config, opts = {}) {
 }
 
 function clampGroupedToBudget(header, lines, footer, maxChars) {
-  const assemble = (linesArr, omitted) => [
-    header,
-    ...linesArr,
-    ...(omitted ? [`... and more (see ${IMPECCABLE_COMMAND} audit).`] : []),
-    '',
-    footer,
-  ].join('\n');
+  const assemble = (linesArr, omitted) =>
+    [
+      header,
+      ...linesArr,
+      ...(omitted ? [`... and more (see ${IMPECCABLE_COMMAND} audit).`] : []),
+      '',
+      footer,
+    ].join('\n');
 
   let working = lines.slice();
   let omitted = false;
@@ -1094,7 +1251,9 @@ function formatFindingLine(f) {
   const ignoreSegment = ignoreCommand
     ? ` If the user explicitly confirms this value is intentional: \`${ignoreCommand}\`.`
     : '';
-  return `${prefix} [${f.antipattern}] ${nameSegment} ${desc}${ignoreSegment}`.replace(/\s+/g, ' ').trim();
+  return `${prefix} [${f.antipattern}] ${nameSegment} ${desc}${ignoreSegment}`
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function formatFindingIgnoreCommand(finding) {
@@ -1151,8 +1310,13 @@ export function resolveTargetFiles(event, projectCwd) {
     if (!out.includes(filePath)) out.push(filePath);
   };
 
-  if (event?.tool_name === 'apply_patch' && ti && typeof ti.command === 'string') {
-    for (const filePath of parseApplyPatchPaths(ti.command, projectCwd)) add(filePath);
+  if (
+    event?.tool_name === 'apply_patch' &&
+    ti &&
+    typeof ti.command === 'string'
+  ) {
+    for (const filePath of parseApplyPatchPaths(ti.command, projectCwd))
+      add(filePath);
   }
   if (ti && typeof ti.file_path === 'string' && ti.file_path) {
     add(ti.file_path);
@@ -1174,12 +1338,17 @@ export function resolveHarness(env = {}, event = null) {
   if (explicit === 'claude' || explicit === 'codex') return 'claude';
   // GitHub Copilot's postToolUse event uses camelCase `toolName`/`toolArgs` and
   // has no `tool_name`/`tool_input`. That shape is the discriminator.
-  if (event && typeof event === 'object'
-    && (typeof event.toolName === 'string' || event.toolArgs !== undefined)
-    && event.tool_name === undefined && event.tool_input === undefined) {
+  if (
+    event &&
+    typeof event === 'object' &&
+    (typeof event.toolName === 'string' || event.toolArgs !== undefined) &&
+    event.tool_name === undefined &&
+    event.tool_input === undefined
+  ) {
     return 'github';
   }
-  if (typeof event?.conversation_id === 'string' && event.conversation_id) return 'cursor';
+  if (typeof event?.conversation_id === 'string' && event.conversation_id)
+    return 'cursor';
   return 'claude';
 }
 
@@ -1193,11 +1362,14 @@ export function resolveHarness(env = {}, event = null) {
 // normalizeGitHubEvent). The detector reads the file from disk after the tool
 // ran, so only the path (not the proposed content) is needed here.
 export function parseGitHubToolArgs(toolArgs) {
-  if (toolArgs && typeof toolArgs === 'object' && !Array.isArray(toolArgs)) return toolArgs;
+  if (toolArgs && typeof toolArgs === 'object' && !Array.isArray(toolArgs))
+    return toolArgs;
   if (typeof toolArgs === 'string' && toolArgs.trim()) {
     try {
       const parsed = JSON.parse(toolArgs);
-      return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
+      return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+        ? parsed
+        : {};
     } catch {
       return {};
     }
@@ -1213,10 +1385,12 @@ export function parseGitHubToolArgs(toolArgs) {
 //   *** End Patch
 // The `view`/`edit`/`create` tools (seen in `copilot -p` runs) instead send a
 // JSON string with the path under `path`. Both must map onto the internal shape.
-const APPLY_PATCH_MARKER = /\*\*\* (?:Begin Patch|Add File:|Update File:|Delete File:)/;
+const APPLY_PATCH_MARKER =
+  /\*\*\* (?:Begin Patch|Add File:|Update File:|Delete File:)/;
 
 function looksLikeApplyPatch(rawArgs) {
-  if (typeof rawArgs !== 'string' || !APPLY_PATCH_MARKER.test(rawArgs)) return false;
+  if (typeof rawArgs !== 'string' || !APPLY_PATCH_MARKER.test(rawArgs))
+    return false;
   // Guard against an edit/create payload whose edited *content* happens to
   // contain patch markers: that payload is a JSON object string, whereas a real
   // apply_patch payload is a raw patch string that does not parse as JSON. Only
@@ -1225,7 +1399,9 @@ function looksLikeApplyPatch(rawArgs) {
   try {
     const parsed = JSON.parse(rawArgs);
     if (parsed && typeof parsed === 'object') return false;
-  } catch { /* not JSON → genuine raw patch */ }
+  } catch {
+    /* not JSON → genuine raw patch */
+  }
   return true;
 }
 
@@ -1246,7 +1422,10 @@ function normalizeGitHubEvent(event, projectCwd) {
   const cwd = event.cwd || envProjectDir(projectCwd) || projectCwd;
   const sessionId = event.sessionId || event.session_id || 'unknown';
   const toolName = event.toolName || event.tool_name || null;
-  const toolInput = event.tool_input && typeof event.tool_input === 'object' ? { ...event.tool_input } : {};
+  const toolInput =
+    event.tool_input && typeof event.tool_input === 'object'
+      ? { ...event.tool_input }
+      : {};
   const rawArgs = event.toolArgs;
 
   let normalizedToolName = toolName;
@@ -1261,8 +1440,10 @@ function normalizeGitHubEvent(event, projectCwd) {
     }
   } else {
     const args = parseGitHubToolArgs(rawArgs);
-    const filePath = args.path || args.file_path || args.filePath || args.target_file;
-    if (typeof filePath === 'string' && filePath) toolInput.file_path = filePath;
+    const filePath =
+      args.path || args.file_path || args.filePath || args.target_file;
+    if (typeof filePath === 'string' && filePath)
+      toolInput.file_path = filePath;
   }
 
   return {
@@ -1279,13 +1460,17 @@ export function normalizeHookEvent(event, projectCwd, harness = 'claude') {
   if (harness === 'github') return normalizeGitHubEvent(event, projectCwd);
   if (harness !== 'cursor') return event;
 
-  const cwd = event.cwd
-    || (Array.isArray(event.workspace_roots) && event.workspace_roots[0])
-    || envProjectDir(projectCwd)
-    || projectCwd;
+  const cwd =
+    event.cwd ||
+    (Array.isArray(event.workspace_roots) && event.workspace_roots[0]) ||
+    envProjectDir(projectCwd) ||
+    projectCwd;
   const sessionId = event.session_id || event.conversation_id || 'unknown';
 
-  const ti = event.tool_input && typeof event.tool_input === 'object' ? event.tool_input : {};
+  const ti =
+    event.tool_input && typeof event.tool_input === 'object'
+      ? event.tool_input
+      : {};
   const filePath = ti.file_path || ti.path || event.file_path;
   if (filePath) {
     return {
@@ -1300,7 +1485,10 @@ export function normalizeHookEvent(event, projectCwd, harness = 'claude') {
 }
 
 function envProjectDir(fallback) {
-  if (typeof process.env.CURSOR_PROJECT_DIR === 'string' && process.env.CURSOR_PROJECT_DIR) {
+  if (
+    typeof process.env.CURSOR_PROJECT_DIR === 'string' &&
+    process.env.CURSOR_PROJECT_DIR
+  ) {
     return process.env.CURSOR_PROJECT_DIR;
   }
   return fallback;
@@ -1312,14 +1500,27 @@ function envProjectDir(fallback) {
 const UI_CODE_EXTS = new Set(['.jsx', '.tsx', '.vue', '.svelte', '.astro']);
 const STYLE_EXTS = new Set(['.css', '.scss', '.sass', '.less']);
 const CO_SCAN_STYLE_NAMES = [
-  'styles.css', 'styles.scss', 'styles.sass', 'styles.less',
-  'index.css', 'index.scss', 'index.sass', 'index.less',
-  'global.css', 'global.scss', 'global.sass', 'global.less',
-  'globals.css', 'globals.scss', 'globals.sass', 'globals.less',
+  'styles.css',
+  'styles.scss',
+  'styles.sass',
+  'styles.less',
+  'index.css',
+  'index.scss',
+  'index.sass',
+  'index.less',
+  'global.css',
+  'global.scss',
+  'global.sass',
+  'global.less',
+  'globals.css',
+  'globals.scss',
+  'globals.sass',
+  'globals.less',
 ];
 const MAX_SCAN_TARGETS = 6;
 
-const STATIC_STYLE_IMPORT_RE = /import\s+(?:[\w*{}\s,$]+\s+from\s+)?['"]([^'"]+\.(?:css|scss|sass|less))['"]/gi;
+const STATIC_STYLE_IMPORT_RE =
+  /import\s+(?:[\w*{}\s,$]+\s+from\s+)?['"]([^'"]+\.(?:css|scss|sass|less))['"]/gi;
 
 function hasPathTraversal(filePath) {
   return typeof filePath === 'string' && filePath.includes('..');
@@ -1354,15 +1555,20 @@ function canonicalPath(p) {
   const tail = [];
   while (true) {
     try {
-      canonical = tail.length ? path.join(fs.realpathSync(dir), ...tail) : fs.realpathSync(dir);
+      canonical = tail.length
+        ? path.join(fs.realpathSync(dir), ...tail)
+        : fs.realpathSync(dir);
       break;
-    } catch { /* keep climbing */ }
+    } catch {
+      /* keep climbing */
+    }
     const parent = path.dirname(dir);
     if (parent === dir) break;
     tail.unshift(path.basename(dir));
     dir = parent;
   }
-  if (canonicalPathCache.size >= CANONICAL_PATH_CACHE_MAX) canonicalPathCache.clear();
+  if (canonicalPathCache.size >= CANONICAL_PATH_CACHE_MAX)
+    canonicalPathCache.clear();
   canonicalPathCache.set(resolved, canonical);
   return canonical;
 }
@@ -1445,7 +1651,11 @@ export function expandScanTargets(primaryTargets, projectCwd) {
   const baseCwd = projectCwd || process.cwd();
   const add = (p) => {
     if (ordered.length >= MAX_SCAN_TARGETS) return;
-    const abs = hasPathTraversal(p) ? p : (path.isAbsolute(p) ? p : path.resolve(baseCwd, p));
+    const abs = hasPathTraversal(p)
+      ? p
+      : path.isAbsolute(p)
+        ? p
+        : path.resolve(baseCwd, p);
     if (seen.has(abs)) return;
     seen.add(abs);
     ordered.push(abs);
@@ -1462,7 +1672,11 @@ export function expandScanTargets(primaryTargets, projectCwd) {
     if (STYLE_EXTS.has(ext) || !UI_CODE_EXTS.has(ext)) continue;
 
     let content = '';
-    try { content = fs.readFileSync(p, 'utf-8'); } catch { /* unreadable primary */ }
+    try {
+      content = fs.readFileSync(p, 'utf-8');
+    } catch {
+      /* unreadable primary */
+    }
 
     for (const imp of parseStaticStyleImports(content, p, projectCwd)) {
       add(imp);
@@ -1481,24 +1695,33 @@ export function writeAuditLog(env, entry, cwd = process.cwd()) {
   // The event's project root (entry.cwd) when present, else the passed cwd. Both
   // config reads and relative log paths resolve against this, since the hook
   // process cwd can differ from the project being edited.
-  const baseCwd = entry && typeof entry.cwd === 'string' && entry.cwd ? entry.cwd : cwd;
+  const baseCwd =
+    entry && typeof entry.cwd === 'string' && entry.cwd ? entry.cwd : cwd;
   // Env wins; otherwise fall back to the unified config's hook.auditLog path.
   let target = env?.IMPECCABLE_HOOK_LOG;
   if (!target || typeof target !== 'string') {
-    try { target = readConfig(baseCwd).auditLog; } catch { target = null; }
+    try {
+      target = readConfig(baseCwd).auditLog;
+    } catch {
+      target = null;
+    }
   }
   if (!target || typeof target !== 'string') return false;
   try {
     let expanded;
     if (target.startsWith('~/')) {
-      expanded = path.join(process.env.HOME || process.env.USERPROFILE || '.', target.slice(2));
+      expanded = path.join(
+        process.env.HOME || process.env.USERPROFILE || '.',
+        target.slice(2),
+      );
     } else if (path.isAbsolute(target)) {
       expanded = target;
     } else {
       expanded = path.resolve(baseCwd, target);
     }
     fs.mkdirSync(path.dirname(expanded), { recursive: true });
-    const line = JSON.stringify({ ts: new Date().toISOString(), ...entry }) + '\n';
+    const line =
+      JSON.stringify({ ts: new Date().toISOString(), ...entry }) + '\n';
     fs.appendFileSync(expanded, line);
     return true;
   } catch {
@@ -1509,7 +1732,15 @@ export function writeAuditLog(env, entry, cwd = process.cwd()) {
 const DETECTOR_CANDIDATES = [
   path.join(__dirname, 'detector', 'detect-antipatterns.mjs'),
   path.join(__dirname, '..', '..', 'cli', 'engine', 'detect-antipatterns.mjs'),
-  path.join(__dirname, '..', '..', '..', 'cli', 'engine', 'detect-antipatterns.mjs'),
+  path.join(
+    __dirname,
+    '..',
+    '..',
+    '..',
+    'cli',
+    'engine',
+    'detect-antipatterns.mjs',
+  ),
 ];
 
 let detectorCache = null;
@@ -1557,7 +1788,8 @@ export function setDetectorForTesting(impl) {
 // session" so the model knows it's a re-mind, not a new finding.
 // ────────────────────────────────────────────────────────────────────────
 
-const STEER_LINE = 'That does not mean the design is good: keep following the project design system and the impeccable skill guidance.';
+const STEER_LINE =
+  'That does not mean the design is good: keep following the project design system and the impeccable skill guidance.';
 
 export function renderCleanAck(filePath, opts = {}) {
   const cwd = opts.cwd || process.cwd();
@@ -1576,7 +1808,8 @@ export function renderPendingAck(filePath, knownFindings, opts = {}) {
 }
 
 export function shouldEmitAckForFile(filePath, config = null) {
-  if (ACK_EXTS.has(path.extname(String(filePath || '')).toLowerCase())) return true;
+  if (ACK_EXTS.has(path.extname(String(filePath || '')).toLowerCase()))
+    return true;
   // Configured html-engine extensions are declared UI markup, so they get the
   // clean/pending acks; text-engine ones stay quiet like plain .ts/.js.
   const configured = matchConfiguredExtension(filePath, config?.extensions);
@@ -1585,7 +1818,8 @@ export function shouldEmitAckForFile(filePath, config = null) {
 
 export function designSystemOptions(config, detector, projectCwd) {
   if (config?.designSystem?.enabled === false) return {};
-  if (!detector || typeof detector.loadDesignSystemForCwd !== 'function') return {};
+  if (!detector || typeof detector.loadDesignSystemForCwd !== 'function')
+    return {};
   try {
     const designSystem = detector.loadDesignSystemForCwd(projectCwd);
     return designSystem ? { designSystem } : {};
@@ -1633,13 +1867,26 @@ function directiveFooter(display, opts = {}) {
  *
  * Never throws. All errors are converted to `exitCode: 0` + audit entry.
  */
-export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = Date.now, detector } = {}) {
+export async function runHook({
+  stdinJson,
+  env = {},
+  cwd = process.cwd(),
+  now = Date.now,
+  detector,
+} = {}) {
   const audit = { ts: new Date(now()).toISOString(), event: 'PostToolUse' };
-  const result = (extra) => ({ exitCode: 0, stdout: '', audit: { ...audit, ...extra } });
+  const result = (extra) => ({
+    exitCode: 0,
+    stdout: '',
+    audit: { ...audit, ...extra },
+  });
 
   try {
     // Re-entrancy guard.
-    if (depthIsSet(env.IMPECCABLE_HOOK_DEPTH) || depthIsSet(env.CLAUDE_HOOK_DEPTH)) {
+    if (
+      depthIsSet(env.IMPECCABLE_HOOK_DEPTH) ||
+      depthIsSet(env.CLAUDE_HOOK_DEPTH)
+    ) {
       return result({ reentrant: true, durationMs: 0 });
     }
 
@@ -1653,10 +1900,16 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     try {
       event = typeof stdinJson === 'string' ? JSON.parse(stdinJson) : stdinJson;
     } catch {
-      return result({ skipped: 'stdin-malformed', durationMs: Date.now() - started });
+      return result({
+        skipped: 'stdin-malformed',
+        durationMs: Date.now() - started,
+      });
     }
     if (!event || typeof event !== 'object') {
-      return result({ skipped: 'stdin-empty', durationMs: Date.now() - started });
+      return result({
+        skipped: 'stdin-empty',
+        durationMs: Date.now() - started,
+      });
     }
 
     const harness = resolveHarness(env, event);
@@ -1664,7 +1917,10 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     audit.harness = harness;
 
     const sessionCwd = event.cwd || cwd;
-    const primaryFiles = normalizeScanTargets(resolveTargetFiles(event, sessionCwd), sessionCwd);
+    const primaryFiles = normalizeScanTargets(
+      resolveTargetFiles(event, sessionCwd),
+      sessionCwd,
+    );
     const projectCwd = resolveCacheCwd(primaryFiles[0], sessionCwd);
     audit.cwd = projectCwd;
     const primaryFileSet = new Set(primaryFiles);
@@ -1673,25 +1929,38 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     if (event.tool_name) audit.tool = event.tool_name;
 
     if (targetFiles.length === 0) {
-      return result({ skipped: 'no-file-path', durationMs: Date.now() - started });
+      return result({
+        skipped: 'no-file-path',
+        durationMs: Date.now() - started,
+      });
     }
 
     const config = readConfig(projectCwd);
     if (config.enabled === false) {
-      return result({ skipped: 'config-disabled', durationMs: Date.now() - started });
+      return result({
+        skipped: 'config-disabled',
+        durationMs: Date.now() - started,
+      });
     }
 
     const platform = resolveProjectPlatform(projectCwd);
     if (isNativePlatform(platform)) {
-      return result({ skipped: 'native-platform', platform, durationMs: Date.now() - started });
+      return result({
+        skipped: 'native-platform',
+        platform,
+        durationMs: Date.now() - started,
+      });
     }
 
     const cache = readCache(projectCwd);
     const sessionId = event.session_id || 'unknown';
-    const det = detector || await loadDetector();
+    const det = detector || (await loadDetector());
     if (!det || typeof det.detectText !== 'function') {
       // Cache is not mutated yet at this point; nothing to persist.
-      return result({ skipped: 'detector-missing', durationMs: Date.now() - started });
+      return result({
+        skipped: 'detector-missing',
+        durationMs: Date.now() - started,
+      });
     }
     const scanOptions = designSystemOptions(config, det, projectCwd);
     const tiered = perEditTieringActive(config, harness);
@@ -1702,7 +1971,8 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     let suppressionWinner = null;
     let cleanAckDeduped = false;
     let skippedBytes = 0;
-    const quietMode = truthy(env.IMPECCABLE_HOOK_QUIET) || config.quiet === true;
+    const quietMode =
+      truthy(env.IMPECCABLE_HOOK_QUIET) || config.quiet === true;
     let detectorThrewAny = false;
     let lastSkip = 'no-scannable-file';
     let suppressedHit = false;
@@ -1722,7 +1992,10 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
       }
 
       const ext = path.extname(filePath).toLowerCase();
-      const configuredExt = matchConfiguredExtension(filePath, config.extensions);
+      const configuredExt = matchConfiguredExtension(
+        filePath,
+        config.extensions,
+      );
       audit.ext = configuredExt ? configuredExt.ext : ext;
       if (!ALLOWED_EXTS.has(ext) && !configuredExt) {
         lastSkip = 'extension';
@@ -1730,7 +2003,10 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
       }
 
       const relForMatch = relativize(filePath, projectCwd);
-      if (matchesAnyGlob(relForMatch, config.ignoreFiles) || matchesAnyGlob(filePath, config.ignoreFiles)) {
+      if (
+        matchesAnyGlob(relForMatch, config.ignoreFiles) ||
+        matchesAnyGlob(filePath, config.ignoreFiles)
+      ) {
         lastSkip = 'config-ignore-file';
         continue;
       }
@@ -1743,10 +2019,15 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
         continue;
       }
 
-      const maxFileBytes = config.limits?.maxFileBytes ?? DEFAULT_CONFIG.limits.maxFileBytes;
+      const maxFileBytes =
+        config.limits?.maxFileBytes ?? DEFAULT_CONFIG.limits.maxFileBytes;
       if (maxFileBytes > 0) {
         let size = 0;
-        try { size = fs.statSync(filePath).size; } catch { size = 0; }
+        try {
+          size = fs.statSync(filePath).size;
+        } catch {
+          size = 0;
+        }
         if (size > maxFileBytes) {
           skippedBytes = size;
           lastSkip = 'too-large';
@@ -1775,11 +2056,21 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
       let detectorThrew = false;
       const useHtmlEngine = configuredExt
         ? configuredExt.engine === 'html'
-        : (ext === '.html' || ext === '.htm');
+        : ext === '.html' || ext === '.htm';
       if (useHtmlEngine && typeof det.detectHtml === 'function') {
-        try { findings = await det.detectHtml(filePath, scanOptions); } catch { findings = []; detectorThrew = true; }
+        try {
+          findings = await det.detectHtml(filePath, scanOptions);
+        } catch {
+          findings = [];
+          detectorThrew = true;
+        }
       } else {
-        try { findings = await det.detectText(content, filePath, scanOptions); } catch { findings = []; detectorThrew = true; }
+        try {
+          findings = await det.detectText(content, filePath, scanOptions);
+        } catch {
+          findings = [];
+          detectorThrew = true;
+        }
       }
 
       const filtered = filterFindings(findings || [], content, ext, config);
@@ -1820,7 +2111,10 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
 
       if (immediate.length > 0 && !pendingWinner) {
         // Count the live scan, not the session's history.
-        pendingWinner = { filePath, known: immediate.map(f => findingCacheKey(f)) };
+        pendingWinner = {
+          filePath,
+          known: immediate.map((f) => findingCacheKey(f)),
+        };
       } else if (immediate.length === 0 && !cleanWinner) {
         // The clean ack carries no finding, only the standing steer that a
         // silent hook is not a verdict on the design. Repeating it on every
@@ -1851,14 +2145,20 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     // and an already-present `.impeccable/` dir marks a project that opted
     // in. A non-UI edit, or a clean UI edit in a project with no Impeccable
     // footprint, must be a no-op on disk (issues #344, #305).
-    if (freshGroups.length > 0 || deferredTotal > 0
-      || (cacheDirty && fs.existsSync(path.join(projectCwd, '.impeccable')))) {
+    if (
+      freshGroups.length > 0 ||
+      deferredTotal > 0 ||
+      (cacheDirty && fs.existsSync(path.join(projectCwd, '.impeccable')))
+    ) {
       persistCache(projectCwd, cache);
     }
 
     if (freshGroups.length > 0) {
       const firstGroup = freshGroups[0];
-      const text = appendDesignSystemNote(renderGroupedTemplate(freshGroups, config, { cwd: projectCwd }), scanOptions);
+      const text = appendDesignSystemNote(
+        renderGroupedTemplate(freshGroups, config, { cwd: projectCwd }),
+        scanOptions,
+      );
       const allFindings = freshGroups.flatMap((group) => group.findings);
       return {
         exitCode: 0,
@@ -1882,19 +2182,36 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     }
 
     if (detectorThrewAny && !pendingWinner && !cleanWinner) {
-      return result({ emitted: false, error: 'detector-threw', durationMs: Date.now() - started });
+      return result({
+        emitted: false,
+        error: 'detector-threw',
+        durationMs: Date.now() - started,
+      });
     }
 
     if (quietMode) {
-      return result({ emitted: false, quiet: true, durationMs: Date.now() - started });
+      return result({
+        emitted: false,
+        quiet: true,
+        durationMs: Date.now() - started,
+      });
     }
 
     if (pendingWinner && shouldEmitAckForFile(pendingWinner.filePath, config)) {
-      const text = appendDesignSystemNote(renderPendingAck(pendingWinner.filePath, pendingWinner.known, { cwd: projectCwd }), scanOptions);
+      const text = appendDesignSystemNote(
+        renderPendingAck(pendingWinner.filePath, pendingWinner.known, {
+          cwd: projectCwd,
+        }),
+        scanOptions,
+      );
       return {
         exitCode: 0,
         stdout: payload(text, 'PostToolUse', harness),
-        emission: { kind: 'pending', file: pendingWinner.filePath, known: pendingWinner.known },
+        emission: {
+          kind: 'pending',
+          file: pendingWinner.filePath,
+          known: pendingWinner.known,
+        },
         audit: {
           ...audit,
           file: pendingWinner.filePath,
@@ -1908,7 +2225,9 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     }
 
     if (suppressionWinner) {
-      const text = suppressionNotice(relativize(suppressionWinner.filePath, projectCwd));
+      const text = suppressionNotice(
+        relativize(suppressionWinner.filePath, projectCwd),
+      );
       return {
         exitCode: 0,
         stdout: payload(text, 'PostToolUse', harness),
@@ -1923,8 +2242,15 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
       };
     }
 
-    if (cleanWinner && !cleanAckDeduped && shouldEmitAckForFile(cleanWinner.filePath, config)) {
-      const text = appendDesignSystemNote(renderCleanAck(cleanWinner.filePath, { cwd: projectCwd }), scanOptions);
+    if (
+      cleanWinner &&
+      !cleanAckDeduped &&
+      shouldEmitAckForFile(cleanWinner.filePath, config)
+    ) {
+      const text = appendDesignSystemNote(
+        renderCleanAck(cleanWinner.filePath, { cwd: projectCwd }),
+        scanOptions,
+      );
       return {
         exitCode: 0,
         stdout: payload(text, 'PostToolUse', harness),
@@ -1941,21 +2267,37 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     }
 
     if (pendingWinner) {
-      return result({ emitted: false, skipped: 'non-ui-ack', durationMs: Date.now() - started });
+      return result({
+        emitted: false,
+        skipped: 'non-ui-ack',
+        durationMs: Date.now() - started,
+      });
     }
 
     // Distinct from non-ui-ack so the audit log shows noise being suppressed on
     // purpose rather than a file the hook could not classify.
     if (cleanWinner) {
-      return result({ emitted: false, skipped: 'non-ui-ack', durationMs: Date.now() - started });
+      return result({
+        emitted: false,
+        skipped: 'non-ui-ack',
+        durationMs: Date.now() - started,
+      });
     }
 
     if (cleanAckDeduped) {
-      return result({ emitted: false, skipped: 'clean-ack-deduped', durationMs: Date.now() - started });
+      return result({
+        emitted: false,
+        skipped: 'clean-ack-deduped',
+        durationMs: Date.now() - started,
+      });
     }
 
     if (suppressedHit) {
-      return result({ suppressed: true, emitted: false, durationMs: Date.now() - started });
+      return result({
+        suppressed: true,
+        emitted: false,
+        durationMs: Date.now() - started,
+      });
     }
 
     return result({
@@ -1967,7 +2309,10 @@ export async function runHook({ stdinJson, env = {}, cwd = process.cwd(), now = 
     return {
       exitCode: 0,
       stdout: '',
-      audit: { ...audit, error: String(err && err.message ? err.message : err) },
+      audit: {
+        ...audit,
+        error: String(err && err.message ? err.message : err),
+      },
     };
   }
 }
@@ -1987,13 +2332,26 @@ export const STOP_MAX_FILES = 20;
  * files. Output uses the Stop hookSpecificOutput channel: additionalContext
  * is delivered to the model and the conversation continues so it can act.
  */
-export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), now = Date.now, detector } = {}) {
+export async function runStopHook({
+  stdinJson,
+  env = {},
+  cwd = process.cwd(),
+  now = Date.now,
+  detector,
+} = {}) {
   const audit = { ts: new Date(now()).toISOString(), event: 'Stop' };
-  const result = (extra) => ({ exitCode: 0, stdout: '', audit: { ...audit, ...extra } });
+  const result = (extra) => ({
+    exitCode: 0,
+    stdout: '',
+    audit: { ...audit, ...extra },
+  });
 
   try {
     // Re-entrancy guard, same as the per-edit pass.
-    if (depthIsSet(env.IMPECCABLE_HOOK_DEPTH) || depthIsSet(env.CLAUDE_HOOK_DEPTH)) {
+    if (
+      depthIsSet(env.IMPECCABLE_HOOK_DEPTH) ||
+      depthIsSet(env.CLAUDE_HOOK_DEPTH)
+    ) {
       return result({ reentrant: true, durationMs: 0 });
     }
     if (truthy(env.IMPECCABLE_HOOK_DISABLED)) {
@@ -2006,10 +2364,16 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
     try {
       event = typeof stdinJson === 'string' ? JSON.parse(stdinJson) : stdinJson;
     } catch {
-      return result({ skipped: 'stdin-malformed', durationMs: Date.now() - started });
+      return result({
+        skipped: 'stdin-malformed',
+        durationMs: Date.now() - started,
+      });
     }
     if (!event || typeof event !== 'object') {
-      return result({ skipped: 'stdin-empty', durationMs: Date.now() - started });
+      return result({
+        skipped: 'stdin-empty',
+        durationMs: Date.now() - started,
+      });
     }
 
     // Claude Code's Stop-hook contract: `stop_hook_active` is true when this
@@ -2023,7 +2387,10 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
     // guard makes the loop impossible regardless of the finding cache key's
     // line-number sensitivity (out of scope here; see findingCacheKey).
     if (event.stop_hook_active === true) {
-      return result({ skipped: 'stop-hook-active', durationMs: Date.now() - started });
+      return result({
+        skipped: 'stop-hook-active',
+        durationMs: Date.now() - started,
+      });
     }
 
     const harness = resolveHarness(env, event);
@@ -2040,23 +2407,36 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
 
     const config = readConfig(projectCwd);
     if (config.enabled === false) {
-      return result({ skipped: 'config-disabled', durationMs: Date.now() - started });
+      return result({
+        skipped: 'config-disabled',
+        durationMs: Date.now() - started,
+      });
     }
 
     const cache = readCache(projectCwd);
     const touched = Object.keys(cache.sessions?.[sessionId]?.files || {});
     if (touched.length === 0) {
-      return result({ skipped: 'no-touched-files', durationMs: Date.now() - started });
+      return result({
+        skipped: 'no-touched-files',
+        durationMs: Date.now() - started,
+      });
     }
 
     const platform = resolveProjectPlatform(projectCwd);
     if (isNativePlatform(platform)) {
-      return result({ skipped: 'native-platform', platform, durationMs: Date.now() - started });
+      return result({
+        skipped: 'native-platform',
+        platform,
+        durationMs: Date.now() - started,
+      });
     }
 
-    const det = detector || await loadDetector();
+    const det = detector || (await loadDetector());
     if (!det || typeof det.detectText !== 'function') {
-      return result({ skipped: 'detector-missing', durationMs: Date.now() - started });
+      return result({
+        skipped: 'detector-missing',
+        durationMs: Date.now() - started,
+      });
     }
     const scanOptions = designSystemOptions(config, det, projectCwd);
 
@@ -2067,10 +2447,17 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
       if (hasPathTraversal(filePath) || SENSITIVE_PATH.test(filePath)) continue;
       if (GENERATED_PATH.test(filePath)) continue;
       const ext = path.extname(filePath).toLowerCase();
-      const configuredExt = matchConfiguredExtension(filePath, config.extensions);
+      const configuredExt = matchConfiguredExtension(
+        filePath,
+        config.extensions,
+      );
       if (!ALLOWED_EXTS.has(ext) && !configuredExt) continue;
       const relForMatch = relativize(filePath, projectCwd);
-      if (matchesAnyGlob(relForMatch, config.ignoreFiles) || matchesAnyGlob(filePath, config.ignoreFiles)) continue;
+      if (
+        matchesAnyGlob(relForMatch, config.ignoreFiles) ||
+        matchesAnyGlob(filePath, config.ignoreFiles)
+      )
+        continue;
       if (!fs.existsSync(filePath)) continue;
       // Caches written before this gate existed can still hold out-of-project
       // paths, so the Stop pass re-checks containment rather than trusting
@@ -2079,17 +2466,29 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
 
       scanned += 1;
       let content = '';
-      try { content = fs.readFileSync(filePath, 'utf-8'); } catch { continue; }
+      try {
+        content = fs.readFileSync(filePath, 'utf-8');
+      } catch {
+        continue;
+      }
 
       let findings;
       const useHtmlEngine = configuredExt
         ? configuredExt.engine === 'html'
-        : (ext === '.html' || ext === '.htm');
+        : ext === '.html' || ext === '.htm';
 
       if (useHtmlEngine && typeof det.detectHtml === 'function') {
-        try { findings = await det.detectHtml(filePath, scanOptions); } catch { findings = []; }
+        try {
+          findings = await det.detectHtml(filePath, scanOptions);
+        } catch {
+          findings = [];
+        }
       } else {
-        try { findings = await det.detectText(content, filePath, scanOptions); } catch { findings = []; }
+        try {
+          findings = await det.detectText(content, filePath, scanOptions);
+        } catch {
+          findings = [];
+        }
       }
 
       // Full rule set: no tier split here. Config/inline ignores still apply,
@@ -2105,14 +2504,21 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
     audit.scannedFiles = scanned;
 
     if (freshGroups.length === 0) {
-      return result({ emitted: false, skipped: 'stop-clean', durationMs: Date.now() - started });
+      return result({
+        emitted: false,
+        skipped: 'stop-clean',
+        durationMs: Date.now() - started,
+      });
     }
 
     // Fresh findings earn the cache write so the next Stop fire is silent
     // unless new issues appear.
     persistCache(projectCwd, cache);
 
-    const text = appendDesignSystemNote(renderGroupedTemplate(freshGroups, config, { cwd: projectCwd }), scanOptions);
+    const text = appendDesignSystemNote(
+      renderGroupedTemplate(freshGroups, config, { cwd: projectCwd }),
+      scanOptions,
+    );
     return {
       exitCode: 0,
       stdout: payload(text, 'Stop', harness),
@@ -2124,7 +2530,10 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
         ...audit,
         emitted: true,
         freshFiles: freshGroups.length,
-        freshFindings: freshGroups.reduce((sum, group) => sum + group.findings.length, 0),
+        freshFindings: freshGroups.reduce(
+          (sum, group) => sum + group.findings.length,
+          0,
+        ),
         chars: text.length,
         durationMs: Date.now() - started,
       },
@@ -2133,7 +2542,10 @@ export async function runStopHook({ stdinJson, env = {}, cwd = process.cwd(), no
     return {
       exitCode: 0,
       stdout: '',
-      audit: { ...audit, error: String(err && err.message ? err.message : err) },
+      audit: {
+        ...audit,
+        error: String(err && err.message ? err.message : err),
+      },
     };
   }
 }

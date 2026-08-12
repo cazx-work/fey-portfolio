@@ -6,22 +6,22 @@
 
 ## Feature disposition
 
-| Source content | Disposition | Where it appears |
-|---|---|---|
-| AES70 SDK Development | Feature prominently | System Architecture → Device and Protocol Platform |
-| Configuration Recall System | Feature prominently | Signal-Path and Configuration Domain |
-| Grid Dynamic Module Layout System | Feature prominently | Signal-Path and Configuration Domain |
-| Matrix Conversion Engine | Feature prominently | Signal-Path and Configuration Domain |
-| Device Lifecycle Management | Feature prominently | System Architecture → Ownership and State |
-| State Retention Architecture | Merge | System Architecture → Ownership and State |
-| Repository Ownership Architecture | Merge | System Architecture → Ownership and State |
-| Application Testing Architecture | Feature prominently | Quality and Developer Experience |
-| BDD Integration Testing Framework | Feature prominently | Quality and Developer Experience |
-| Rive Animation Performance Optimization | Summarize with evidence | Performance |
-| Module Ganging System | Focused subsection | Signal-Path and Configuration Domain |
-| Linux Test Environment Automation | Short supporting story | Quality and Developer Experience |
-| Structured KeyService Architecture | Merge | Quality and Developer Experience |
-| Codebase Architecture Modernization | Summarize as foundation | System Architecture and Performance |
+| Source content                          | Disposition             | Where it appears                                   |
+| --------------------------------------- | ----------------------- | -------------------------------------------------- |
+| AES70 SDK Development                   | Feature prominently     | System Architecture → Device and Protocol Platform |
+| Configuration Recall System             | Feature prominently     | Signal-Path and Configuration Domain               |
+| Grid Dynamic Module Layout System       | Feature prominently     | Signal-Path and Configuration Domain               |
+| Matrix Conversion Engine                | Feature prominently     | Signal-Path and Configuration Domain               |
+| Device Lifecycle Management             | Feature prominently     | System Architecture → Ownership and State          |
+| State Retention Architecture            | Merge                   | System Architecture → Ownership and State          |
+| Repository Ownership Architecture       | Merge                   | System Architecture → Ownership and State          |
+| Application Testing Architecture        | Feature prominently     | Quality and Developer Experience                   |
+| BDD Integration Testing Framework       | Feature prominently     | Quality and Developer Experience                   |
+| Rive Animation Performance Optimization | Summarize with evidence | Performance                                        |
+| Module Ganging System                   | Focused subsection      | Signal-Path and Configuration Domain               |
+| Linux Test Environment Automation       | Short supporting story  | Quality and Developer Experience                   |
+| Structured KeyService Architecture      | Merge                   | Quality and Developer Experience                   |
+| Codebase Architecture Modernization     | Summarize as foundation | System Architecture and Performance                |
 
 ## Strongest engineering evidence
 

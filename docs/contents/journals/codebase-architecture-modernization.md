@@ -1,19 +1,19 @@
 # Navigation
 
 Challenges
- └─ Codebase Architecture Modernization
+└─ Codebase Architecture Modernization
 
 Architecture
- ├─ Feature Boundaries
- ├─ State Ownership
- ├─ Domain Separation
- └─ Infrastructure Isolation
+├─ Feature Boundaries
+├─ State Ownership
+├─ Domain Separation
+└─ Infrastructure Isolation
 
 Contributions
- ├─ Widget Organization
- ├─ Business Logic Separation
- ├─ Reusable Components
- └─ Maintainability
+├─ Widget Organization
+├─ Business Logic Separation
+├─ Reusable Components
+└─ Maintainability
 
 # Portfolio Card
 

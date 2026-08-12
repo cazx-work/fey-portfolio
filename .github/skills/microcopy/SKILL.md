@@ -1,6 +1,6 @@
 ---
 name: microcopy
-description: "Use when writing or revising UI microcopy, button labels, navigation text, empty states, validation messages, errors, loading text, or portfolio calls to action."
+description: 'Use when writing or revising UI microcopy, button labels, navigation text, empty states, validation messages, errors, loading text, or portfolio calls to action.'
 ---
 
 # Microcopy

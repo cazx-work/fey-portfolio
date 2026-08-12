@@ -1,17 +1,17 @@
 ---
 type: professional-project
 slug: kyocera-device-manager
-title: Kyocera Device Manager
+title: Device Manager
 project: Kyocera Document Solutions Philippines
-visibility: private
-status: draft
+visibility: public
+status: published
 featured: false
 tags: AngularJS, Angular 2, C#, ASP.NET Web API, SQL Server, Device Management, Enterprise Systems
-homepageTitle: Kyocera Device Manager
+homepageTitle: Device Manager
 homepageSummary: An enterprise device-management platform for monitoring, configuring, and maintaining distributed printer and MFP fleets.
 ---
 
-# Kyocera Device Manager
+# Device Manager
 
 ## Executive Content
 

@@ -4,8 +4,8 @@ import { globalIgnores } from 'eslint/config';
 const compat = new FlatCompat({ baseDirectory: import.meta.dirname });
 
 const eslintConfig = [
-	globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
-	...compat.extends('next/core-web-vitals'),
+  globalIgnores(['.next/**', 'out/**', 'build/**', 'next-env.d.ts']),
+  ...compat.extends('next/core-web-vitals'),
 ];
 
 export default eslintConfig;

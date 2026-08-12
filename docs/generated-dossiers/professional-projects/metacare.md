@@ -1,17 +1,17 @@
 ---
 type: professional-project
 slug: metacare
-title: MetaCare — Web3-Enabled Health & Wellness Superapp
+title: MetaCare
 project: Xurpas Inc.
-visibility: private
-status: draft
+visibility: public
+status: published
 featured: false
 tags: Flutter, Firebase, Xendit, REST APIs, HealthTech, Marketplace, Mobile Engineering
-homepageTitle: MetaCare — Web3-Enabled Health & Wellness Superapp
+homepageTitle: MetaCare
 homepageSummary: A Flutter health and wellness marketplace bringing products, services, benefits, and appointments into one experience for independent workers and entrepreneurs.
 ---
 
-# MetaCare — Web3-Enabled Health & Wellness Superapp
+# MetaCare
 
 ## Executive Content
 

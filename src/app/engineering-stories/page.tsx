@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { InlineIcon } from '@/components/inline-icon';
 import { Card } from '@/components/card';
 import { repository } from '@/lib/portfolio-repository';
 
@@ -20,7 +21,10 @@ export default function Stories() {
             surface.
           </p>
         </div>
-        <div className="capabilities-hero-note" aria-label="How to use this page">
+        <div
+          className="capabilities-hero-note"
+          aria-label="How to use this page"
+        >
           <span className="font-mono text-xs uppercase tracking-[.18em] text-[var(--accent)]">
             A practical lens
           </span>
@@ -37,7 +41,10 @@ export default function Stories() {
             <p className="font-mono text-xs uppercase tracking-[.2em] text-[var(--muted)]">
               Selected engineering investigations
             </p>
-            <h2 id="story-list-title" className="mt-2 text-2xl font-semibold tracking-tight md:text-3xl">
+            <h2
+              id="story-list-title"
+              className="mt-2 text-2xl font-semibold tracking-tight md:text-3xl"
+            >
               The work behind the work
             </h2>
           </div>
@@ -58,15 +65,20 @@ export default function Stories() {
             />
           ))}
         </div>
-
       </section>
 
-      <section className="capabilities-cta mt-16 md:mt-24" aria-labelledby="stories-cta-title">
+      <section
+        className="capabilities-cta mt-16 md:mt-24"
+        aria-labelledby="stories-cta-title"
+      >
         <div>
           <p className="font-mono text-xs uppercase tracking-[.2em] text-[var(--accent)]">
             Continue the investigation
           </p>
-          <h2 id="stories-cta-title" className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl">
+          <h2
+            id="stories-cta-title"
+            className="mt-3 text-2xl font-semibold tracking-tight md:text-3xl"
+          >
             Want the broader system context?
           </h2>
           <p className="mt-3 max-w-2xl text-[var(--muted)]">
@@ -76,9 +88,9 @@ export default function Stories() {
         </div>
         <Link
           href="/projects/sepia-client?from=stories"
-          className="shrink-0 rounded-full bg-[var(--accent)] px-5 py-3 font-semibold text-[#082522] transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+          className="shrink-0 rounded-full bg-[var(--accent)] px-5 py-3 font-semibold text-[var(--on-accent)] transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
         >
-          Explore SEPIA <span aria-hidden="true">↗</span>
+          Explore SEPIA <InlineIcon name="external" />
         </Link>
       </section>
     </div>

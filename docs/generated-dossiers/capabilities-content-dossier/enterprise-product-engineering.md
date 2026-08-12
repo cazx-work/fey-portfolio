@@ -172,13 +172,13 @@ The source material shows these questions being handled through lifecycle coordi
 
 Testing follows the same boundaries as the design:
 
-| Layer | Question | Safe evidence pattern |
-|---|---|---|
-| Domain | Are validation, value semantics, parsing, and transformations correct? | Focused deterministic tests |
-| Application | Do intents produce the right state transitions and side effects? | Controlled streams, fakes, and transition assertions |
-| Infrastructure | Does an adapter map requests, responses, persistence, and fallback behavior correctly? | Contract tests and deterministic substitutes |
-| Presentation | Does the user-facing contract reflect meaningful state? | Semantic widget or API behavior tests |
-| Workflow | Does the complete asynchronous scenario remain repeatable? | Selected BDD or integration scenarios with bounded waits and cleanup |
+| Layer          | Question                                                                               | Safe evidence pattern                                                |
+| -------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| Domain         | Are validation, value semantics, parsing, and transformations correct?                 | Focused deterministic tests                                          |
+| Application    | Do intents produce the right state transitions and side effects?                       | Controlled streams, fakes, and transition assertions                 |
+| Infrastructure | Does an adapter map requests, responses, persistence, and fallback behavior correctly? | Contract tests and deterministic substitutes                         |
+| Presentation   | Does the user-facing contract reflect meaningful state?                                | Semantic widget or API behavior tests                                |
+| Workflow       | Does the complete asynchronous scenario remain repeatable?                             | Selected BDD or integration scenarios with bounded waits and cleanup |
 
 The related testing evidence supports layered unit, application, infrastructure, widget, and BDD coverage, with test intent separated so fast feedback does not depend on every external system. This is stronger than claiming a coverage percentage: it shows which risk each test is intended to localize. For public documentation, a redacted test excerpt or conceptual state timeline is safer than production code or an unreviewed repository path.
 

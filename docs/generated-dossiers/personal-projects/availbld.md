@@ -1,17 +1,17 @@
 ---
 type: professional-project
 slug: availbld
-title: Availbld
+title: AVAILBLD
 project: Experience Digital
 visibility: public
 status: published
 featured: false
 tags: Flutter, WebSockets, Redis, Geospatial Systems, Real-Time Systems
-homepageTitle: Availbld
+homepageTitle: AVAILBLD
 homepageSummary: A real-time community platform for forming temporary, location-aware groups around events and local moments.
 ---
 
-# Availbld
+# AVAILBLD
 
 ## Executive Content
 

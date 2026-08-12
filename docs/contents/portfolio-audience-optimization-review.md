@@ -642,21 +642,21 @@ Add collaboration context, decision authority, review responsibilities, and evid
 
 # 2. Better title map
 
-| Current title | Recruiter-friendly title | Technical subtitle |
-|---|---|---|
-| Overview | The Product and the Engineering Challenge | Hardware-connected audio control platform |
-| Engineering Highlights | What I Changed | Architecture, reliability, testing, and performance outcomes |
-| Ownership and State | Keeping Application State Consistent Across Device Changes | Repository-owned state and online/offline parity |
-| Device Lifecycle Management | Keeping the Application Reliable When Devices Disconnect | Discovery, reconnection, and resource ownership |
-| AES70 SDK and Protocol Abstraction | Building a Hardware Communication Platform | Typed AES70/OCA SDK and protocol boundary |
-| Grid Dynamic Module Layout | Designing a Visual Editor for Complex Hardware Signal Paths | Constraint-aware matrix layout |
-| Matrix Conversion Engine | Translating Visual Routing into Safe Hardware Operations | Deterministic path-to-matrix conversion |
-| Configuration Recall and Conflict Resolution | Restoring User Configurations Safely When Hardware Changes | Identity matching and severity-aware resolution |
-| Module Ganging | Synchronizing Controls Across Multiple Devices | Absolute and relative propagation |
-| Testing and Developer Experience | Making Complex Workflows Safer to Change | Layered testing and developer tooling |
-| Performance Engineering | Keeping Interactive Hardware Controls Responsive at Scale | Rive state and rebuild optimization |
-| Contributions and Ownership | My Role and Engineering Responsibility | Architecture, testing, performance, and enablement |
-| Lessons and Tradeoffs | What I Learned and What I Would Improve | Design tradeoffs and next steps |
+| Current title                                | Recruiter-friendly title                                    | Technical subtitle                                           |
+| -------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| Overview                                     | The Product and the Engineering Challenge                   | Hardware-connected audio control platform                    |
+| Engineering Highlights                       | What I Changed                                              | Architecture, reliability, testing, and performance outcomes |
+| Ownership and State                          | Keeping Application State Consistent Across Device Changes  | Repository-owned state and online/offline parity             |
+| Device Lifecycle Management                  | Keeping the Application Reliable When Devices Disconnect    | Discovery, reconnection, and resource ownership              |
+| AES70 SDK and Protocol Abstraction           | Building a Hardware Communication Platform                  | Typed AES70/OCA SDK and protocol boundary                    |
+| Grid Dynamic Module Layout                   | Designing a Visual Editor for Complex Hardware Signal Paths | Constraint-aware matrix layout                               |
+| Matrix Conversion Engine                     | Translating Visual Routing into Safe Hardware Operations    | Deterministic path-to-matrix conversion                      |
+| Configuration Recall and Conflict Resolution | Restoring User Configurations Safely When Hardware Changes  | Identity matching and severity-aware resolution              |
+| Module Ganging                               | Synchronizing Controls Across Multiple Devices              | Absolute and relative propagation                            |
+| Testing and Developer Experience             | Making Complex Workflows Safer to Change                    | Layered testing and developer tooling                        |
+| Performance Engineering                      | Keeping Interactive Hardware Controls Responsive at Scale   | Rive state and rebuild optimization                          |
+| Contributions and Ownership                  | My Role and Engineering Responsibility                      | Architecture, testing, performance, and enablement           |
+| Lessons and Tradeoffs                        | What I Learned and What I Would Improve                     | Design tradeoffs and next steps                              |
 
 ---
 
@@ -886,13 +886,13 @@ Add these only where evidence is available:
 
 ## Ratings
 
-| Category | Rating | Assessment |
-|---|---:|---|
-| Recruiter friendliness | 6/10 | Strong material, but too much domain terminology appears before the value is explained. |
-| Technical depth | 9/10 | Distinctive architecture, protocol, state, routing, testing, and lifecycle content. |
-| Storytelling | 6/10 | The portfolio explains what was built better than why it mattered. |
+| Category                  | Rating | Assessment                                                                                                 |
+| ------------------------- | -----: | ---------------------------------------------------------------------------------------------------------- |
+| Recruiter friendliness    |   6/10 | Strong material, but too much domain terminology appears before the value is explained.                    |
+| Technical depth           |   9/10 | Distinctive architecture, protocol, state, routing, testing, and lifecycle content.                        |
+| Storytelling              |   6/10 | The portfolio explains what was built better than why it mattered.                                         |
 | Senior engineering signal | 8.5/10 | Clear evidence of ownership, abstraction, reliability thinking, test architecture, and tradeoff awareness. |
-| Portfolio effectiveness | 7/10 | Strong foundation that needs progressive disclosure, clearer role attribution, and outcome-led titles. |
+| Portfolio effectiveness   |   7/10 | Strong foundation that needs progressive disclosure, clearer role attribution, and outcome-led titles.     |
 
 ## Highest-priority actions
 

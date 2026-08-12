@@ -1,6 +1,6 @@
 ---
 name: portfolio-ux-accessibility-review
-description: "Use when auditing or improving this portfolio’s UX, accessibility, responsive behavior, hiring-focused information architecture, navigation, case-study readability, calls to action, keyboard support, focus states, contrast, dialogs, disclosures, or reduced-motion behavior."
+description: 'Use when auditing or improving this portfolio’s UX, accessibility, responsive behavior, hiring-focused information architecture, navigation, case-study readability, calls to action, keyboard support, focus states, contrast, dialogs, disclosures, or reduced-motion behavior.'
 ---
 
 # Portfolio UX and accessibility review

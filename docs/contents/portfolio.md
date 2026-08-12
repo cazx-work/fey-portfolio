@@ -27,15 +27,15 @@ The central engineering challenge was not building isolated screens. It was crea
 
 ## Engineering Highlights
 
-| Area | Contribution | Engineering signal |
-|---|---|---|
-| Protocol engineering | Designed a typed AES70 SDK | Converted binary communication into maintainable application APIs |
-| State architecture | Established repository-owned state and lifecycle boundaries | Separated durable user intent from volatile connectivity |
-| Signal-path modeling | Built Grid and matrix conversion boundaries | Translated visual routing into validated hardware operations |
-| Reliability | Designed configuration conflict resolution and recovery | Prevented unsafe restoration when hardware topology changed |
-| Testing | Created layered testing and reusable BDD infrastructure | Made complex asynchronous workflows executable and repeatable |
-| Performance | Localized Rive state and narrowed rebuild scopes | Preserved responsiveness across multiple animated panels |
-| Developer experience | Automated a Linux hardware-free test environment | Reduced setup friction and stale-process failures |
+| Area                 | Contribution                                                | Engineering signal                                                |
+| -------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| Protocol engineering | Designed a typed AES70 SDK                                  | Converted binary communication into maintainable application APIs |
+| State architecture   | Established repository-owned state and lifecycle boundaries | Separated durable user intent from volatile connectivity          |
+| Signal-path modeling | Built Grid and matrix conversion boundaries                 | Translated visual routing into validated hardware operations      |
+| Reliability          | Designed configuration conflict resolution and recovery     | Prevented unsafe restoration when hardware topology changed       |
+| Testing              | Created layered testing and reusable BDD infrastructure     | Made complex asynchronous workflows executable and repeatable     |
+| Performance          | Localized Rive state and narrowed rebuild scopes            | Preserved responsiveness across multiple animated panels          |
+| Developer experience | Automated a Linux hardware-free test environment            | Reduced setup friction and stale-process failures                 |
 
 ---
 

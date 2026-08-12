@@ -54,7 +54,12 @@ export function detectTanStackStartProject(cwd = process.cwd()) {
   return { rootRoute, componentFile, componentImport, ext };
 }
 
-export function applyTanStackLiveAdapter({ cwd = process.cwd(), port, token, project = detectTanStackStartProject(cwd) } = {}) {
+export function applyTanStackLiveAdapter({
+  cwd = process.cwd(),
+  port,
+  token,
+  project = detectTanStackStartProject(cwd),
+} = {}) {
   if (!project) return { error: 'tanstack_not_detected' };
   if (!Number.isFinite(Number(port))) {
     throw new Error('TanStack Start live adapter requires a numeric port');
@@ -64,7 +69,10 @@ export function applyTanStackLiveAdapter({ cwd = process.cwd(), port, token, pro
   const componentAbs = path.join(cwd, project.componentFile);
   const componentBody = buildTanStackLiveRootComponent(Number(port), token);
   const componentExisted = fs.existsSync(componentAbs);
-  if (componentExisted && !isManagedComponent(fs.readFileSync(componentAbs, 'utf-8'))) {
+  if (
+    componentExisted &&
+    !isManagedComponent(fs.readFileSync(componentAbs, 'utf-8'))
+  ) {
     // A non-Impeccable file already sits at our managed path — refuse to clobber.
     return {
       file: project.componentFile,
@@ -91,7 +99,10 @@ export function applyTanStackLiveAdapter({ cwd = process.cwd(), port, token, pro
   };
 }
 
-export function removeTanStackLiveAdapter({ cwd = process.cwd(), project = detectTanStackStartProject(cwd) } = {}) {
+export function removeTanStackLiveAdapter({
+  cwd = process.cwd(),
+  project = detectTanStackStartProject(cwd),
+} = {}) {
   if (!project) return { error: 'tanstack_not_detected' };
   let removed = false;
 
@@ -130,14 +141,17 @@ export function patchTanStackRoot(content, componentImport) {
 
   if (!out.includes(TANSTACK_MARKER_OPEN)) {
     const block =
-      `${TANSTACK_MARKER_OPEN}\n`
-      + `        <ImpeccableLiveRoot />\n`
-      + `        ${TANSTACK_MARKER_CLOSE}\n        `;
+      `${TANSTACK_MARKER_OPEN}\n` +
+      `        <ImpeccableLiveRoot />\n` +
+      `        ${TANSTACK_MARKER_CLOSE}\n        `;
     // Anchor before <Scripts …/> (the stable TanStack Start document marker);
     // fall back to before </body>.
     const scriptsMatch = out.match(/<Scripts\b/);
     if (scriptsMatch) {
-      out = out.slice(0, scriptsMatch.index) + block + out.slice(scriptsMatch.index);
+      out =
+        out.slice(0, scriptsMatch.index) +
+        block +
+        out.slice(scriptsMatch.index);
     } else {
       const bodyClose = out.lastIndexOf('</body>');
       if (bodyClose !== -1) {
@@ -156,10 +170,10 @@ export function unpatchTanStackRoot(content) {
   // leading indent before the open marker intact hands it back to the anchor
   // (e.g. `<Scripts />`) so the file round-trips byte-for-byte.
   const blockRe = new RegExp(
-    escapeRegExp(TANSTACK_MARKER_OPEN)
-    + '\\s*<ImpeccableLiveRoot\\s*/>\\s*'
-    + escapeRegExp(TANSTACK_MARKER_CLOSE)
-    + '\\r?\\n?[ \\t]*',
+    escapeRegExp(TANSTACK_MARKER_OPEN) +
+      '\\s*<ImpeccableLiveRoot\\s*/>\\s*' +
+      escapeRegExp(TANSTACK_MARKER_CLOSE) +
+      '\\r?\\n?[ \\t]*',
     'g',
   );
   out = out.replace(blockRe, '');
@@ -242,10 +256,12 @@ function packageHasTanStackStart(cwd) {
 }
 
 function relativeImportSpecifier(fromFile, toFile) {
-  const rel = path.posix.relative(
-    path.posix.dirname(fromFile.split(path.sep).join('/')),
-    toFile.split(path.sep).join('/'),
-  ).replace(/\.(tsx|ts|jsx|js)$/, '');
+  const rel = path.posix
+    .relative(
+      path.posix.dirname(fromFile.split(path.sep).join('/')),
+      toFile.split(path.sep).join('/'),
+    )
+    .replace(/\.(tsx|ts|jsx|js)$/, '');
   return rel.startsWith('.') ? rel : `./${rel}`;
 }
 
@@ -259,7 +275,9 @@ function insertAfterLastImport(content, importStatement) {
   if (lastEnd === -1) {
     return `${importStatement}\n${content}`;
   }
-  return content.slice(0, lastEnd) + importStatement + '\n' + content.slice(lastEnd);
+  return (
+    content.slice(0, lastEnd) + importStatement + '\n' + content.slice(lastEnd)
+  );
 }
 
 function pruneEmptyDir(dir, stopDir) {

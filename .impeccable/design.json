@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-11T00:00:00.000Z",
+  "title": "Design System: Felix Edrian Ybañez Engineering Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "background": {
+        "role": "neutral",
+        "displayName": "Deep Navy",
+        "canonical": "#0f172a",
+        "tonalRamp": [
+          "#050910",
+          "#0a1020",
+          "#0f172a",
+          "#172238",
+          "#25324a",
+          "#475569",
+          "#94a3b8",
+          "#f1f5f9"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Slate Surface",
+        "canonical": "#1e293b",
+        "tonalRamp": [
+          "#0b1220",
+          "#111827",
+          "#1e293b",
+          "#29384d",
+          "#3b4b61",
+          "#64748b",
+          "#a8b5c5",
+          "#f1f5f9"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Near-White Ink",
+        "canonical": "#f1f5f9",
+        "tonalRamp": [
+          "#0f172a",
+          "#1e293b",
+          "#334155",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#e2e8f0",
+          "#f1f5f9"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Cool Muted Text",
+        "canonical": "#b7c4d4",
+        "tonalRamp": [
+          "#172238",
+          "#25324a",
+          "#334155",
+          "#64748b",
+          "#94a3b8",
+          "#b7c4d4",
+          "#d5dde7",
+          "#f1f5f9"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Slate Rule",
+        "canonical": "#334155",
+        "tonalRamp": [
+          "#0f172a",
+          "#172238",
+          "#334155",
+          "#475569",
+          "#64748b",
+          "#94a3b8",
+          "#cbd5e1",
+          "#f1f5f9"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal Cyan",
+        "canonical": "#38bdf8",
+        "tonalRamp": [
+          "#062235",
+          "#073b58",
+          "#075985",
+          "#0284c7",
+          "#0ea5e9",
+          "#38bdf8",
+          "#7dd3fc",
+          "#e0f2fe"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "Deep Accent Surface",
+        "canonical": "#12334b",
+        "tonalRamp": [
+          "#061923",
+          "#0b2738",
+          "#12334b",
+          "#164e6b",
+          "#1d6b8d",
+          "#3b9bc1",
+          "#8bd5f3",
+          "#d9f3ff"
+        ]
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "On-Accent Ink",
+        "canonical": "#082522",
+        "tonalRamp": [
+          "#020908",
+          "#082522",
+          "#123b35",
+          "#1f524a",
+          "#39766b",
+          "#6ba49a",
+          "#a8d0c8",
+          "#e5f5f1"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Compact System Display",
+        "purpose": "Homepage, profile, route, and case-study introductions."
+      },
+      "body": {
+        "displayName": "Readable System Sans",
+        "purpose": "Summaries, evidence, captions, and long-form reading."
+      },
+      "label": {
+        "displayName": "Engineering Metadata Mono",
+        "purpose": "Short labels, indexes, categories, and boundary annotations."
+      }
+    },
+    "shadows": [
+      {
+        "name": "interactive-lift",
+        "value": "0 18px 45px -28px rgba(56, 189, 248, 0.7)",
+        "purpose": "Subtle hover lift for linked portfolio cards."
+      },
+      {
+        "name": "ambient-surface",
+        "value": "0 1rem 2.5rem rgba(2, 8, 23, .18)",
+        "purpose": "Quiet separation for selected surface treatments."
+      },
+      {
+        "name": "deep-media",
+        "value": "0 24px 44px color-mix(in srgb, #050910 56%, transparent)",
+        "purpose": "Depth for large media and detail surfaces."
+      }
+    ],
+    "motion": [
+      {
+        "name": "state-transition",
+        "value": "color .2s ease, border-color .2s ease, transform .2s ease",
+        "purpose": "Short transitions for interactive states."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce)",
+        "purpose": "Disable non-essential movement and smooth scrolling while preserving state and focus."
+      }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "30rem" },
+      { "name": "mobile", "value": "48rem" },
+      { "name": "wide", "value": "64rem" },
+      { "name": "expanded", "value": "75rem" },
+      { "name": "large", "value": "90rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-confidence action for case studies, contact, and hiring paths.",
+      "html": "<button class=\"ds-btn-primary\">View selected projects <span aria-hidden=\"true\">↘</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; min-height: 3rem; gap: .5rem; padding: .75rem 1.5rem; background: var(--accent); color: var(--on-accent); border: 0; border-radius: 999px; font: 600 .875rem/1.4 Arial, Helvetica, sans-serif; transition: background-color .2s ease, transform .2s ease; } .ds-btn-primary:hover { transform: translateY(-1px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Quiet alternative action that keeps the primary action visually distinct.",
+      "html": "<button class=\"ds-btn-secondary\">Open my profile <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; min-height: 3rem; gap: .5rem; padding: .75rem 1.25rem; background: transparent; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; font: 500 .875rem/1.4 Arial, Helvetica, sans-serif; transition: color .2s ease, border-color .2s ease; } .ds-btn-secondary:hover { color: var(--accent); border-color: var(--accent); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }"
+    },
+    {
+      "name": "Portfolio Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Linked evidence container for projects, capabilities, and stories.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-label\">01 / story</span><h3>Device lifecycle and state ownership</h3><p>Make ownership and recovery visible across the system.</p><span class=\"ds-chip\">Recovery</span></a>",
+      "css": ".ds-card { display: block; padding: 1.5rem; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 1rem; text-decoration: none; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; } .ds-card:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 18px 45px -28px rgba(56, 189, 248, .7); } .ds-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; } .ds-card-label { display: block; margin-bottom: 1.5rem; color: var(--accent); font: .75rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase; } .ds-card h3 { margin: 0; font: 600 1.5rem/1.1 Arial, Helvetica, sans-serif; letter-spacing: -.02em; } .ds-card p { color: var(--muted); line-height: 1.75; }"
+    },
+    {
+      "name": "Evidence Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Compact tag for a verified technology, boundary, or evidence category.",
+      "html": "<span class=\"ds-chip\">Flutter</span>",
+      "css": ".ds-chip { display: inline-flex; padding: .25rem .75rem; background: var(--accent-soft); color: var(--ink); border-radius: 999px; font: .75rem/1.4 Inter, ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Sticky, compact route navigation with a distinct hiring action.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary navigation\"><a href=\"#\" aria-current=\"page\">Projects</a><a href=\"#\">Profile</a><a class=\"ds-nav-cta\" href=\"#\">Hire me</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; background: color-mix(in srgb, var(--surface) 95%, transparent); border-bottom: 1px solid var(--line); font: .875rem/1.4 Arial, Helvetica, sans-serif; } .ds-nav a { color: var(--muted); text-decoration: none; transition: color .2s ease; } .ds-nav a:hover, .ds-nav a[aria-current=\"page\"] { color: var(--ink); } .ds-nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; } .ds-nav-cta { padding: .5rem 1rem; color: var(--accent) !important; border: 1px solid var(--accent); border-radius: 999px; font-weight: 600; }"
+    },
+    {
+      "name": "System Boundary Flow",
+      "kind": "custom",
+      "refersTo": "system-boundary-diagram",
+      "description": "Conceptual homepage diagram that makes the portfolio thesis visible.",
+      "html": "<ol class=\"ds-flow\" aria-label=\"A conceptual path from user intent to connected hardware\"><li><span>01</span><strong>User intent + interface</strong></li><li><span>02</span><strong>Domain rules + durable state</strong></li><li><span>03</span><strong>Typed integration boundary</strong></li><li><span>04</span><strong>Connected device behavior</strong></li></ol>",
+      "css": ".ds-flow { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; } .ds-flow li { display: grid; grid-template-columns: 2rem 1fr; gap: .75rem; align-items: center; padding-bottom: .75rem; border-bottom: 1px solid var(--line); } .ds-flow span { color: var(--accent); font: .75rem/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; } .ds-flow strong { color: var(--ink); font: 500 1rem/1.4 Inter, ui-sans-serif, system-ui, sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Technical Field Guide",
+    "overview": "The portfolio is a dark, documentation-inspired field guide for evaluating systems-oriented engineering work. It treats the interface as a reading instrument: visitors get a concise orientation, then progressively deeper project, capability, story, and collaboration evidence. The visual language is calm and infrastructural rather than promotional.\n\nThe system uses cool navy surfaces, near-white reading text, cyan as a deliberately scarce signal color, thin rules, compact metadata, and diagrams that make boundaries and handoffs legible. Rounded containers and selective shadows provide grouping without turning every section into a dashboard. The voice remains precise, warm, and evidence-led; visual treatment must never compensate for missing proof or introduce unsupported claims.",
+    "keyCharacteristics": [
+      "Dark navy field with quiet surface layering",
+      "One cyan signal accent for actions, labels, focus, and evidence markers",
+      "Documentation-style rules, indexes, diagrams, and progressive disclosure",
+      "Strong typographic hierarchy with restrained system sans and monospace metadata",
+      "Public-safe, hiring-focused content presented before technical depth"
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Use cyan to identify an action, active state, boundary, or evidence marker. Do not turn every container into an accent object.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Measure Rule",
+        "body": "Long-form prose stays near 65–70 characters per line where possible; labels may be compact, but paragraphs must remain comfortable to scan.",
+        "section": "typography"
+      },
+      {
+        "name": "The Layered Surface Rule",
+        "body": "Borders clarify grouping first; shadow should reinforce an existing hierarchy, not create one from nothing.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do lead with engineering problems, boundaries, decisions, and verified evidence.",
+      "Do reuse the semantic tokens in src/app/globals.css instead of introducing arbitrary colors.",
+      "Do use monospace for short metadata, indexes, labels, and measurement-like information.",
+      "Do preserve visible focus, semantic landmarks, meaningful image alternatives, keyboard access, and reduced-motion behavior.",
+      "Do vary density between diagrams, prose, media, lists, and quiet spacing while keeping the same field-guide grammar.",
+      "Do keep public-safe uncertainty visible rather than filling gaps with invented metrics or chronology."
+    ],
+    "donts": [
+      "Don't add generic gradients, neon glows, glassmorphism, fake telemetry, or terminal-command chrome.",
+      "Don't turn every section into a repeated icon-plus-heading card grid.",
+      "Don't use cyan as decoration on every border or heading; its scarcity gives it meaning.",
+      "Don't use monospace for ordinary long-form prose or add unsupported technical claims.",
+      "Don't introduce employers, clients, dates, metrics, links, testimonials, or confidential details that are not approved in the content sources.",
+      "Don't hide essential comprehension behind motion, dialogs, or client-only behavior."
+    ]
+  }
+}

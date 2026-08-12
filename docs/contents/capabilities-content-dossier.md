@@ -82,15 +82,15 @@ Project-specific experience can be presented for React, TypeScript, NestJS, Post
 
 ## Capability comparison model
 
-| Capability | Core boundary | Engineering signal | Safe evidence |
-|---|---|---|---|
-| Native integration | Product ↔ device systems | Typed abstraction and lifecycle ownership | Architecture diagram, redacted API shape |
-| Cross-platform architecture | Feature ↔ platform | Explicit domain and repository contracts | State flow, platform comparison |
-| Resilience | User intent ↔ runtime reality | Conflict-aware recovery | Recovery walkthrough |
-| Visual systems | Gesture ↔ deterministic operation | Domain modeling and validation | Conceptual routing diagram |
-| Testing | Behavior ↔ repeatable evidence | Layered seams and fakes | Test pyramid, BDD excerpt |
-| Modernization | Existing code ↔ future change | Responsibility ownership | Before/after boundary map |
-| Interaction systems | Live state ↔ rendering | Localized updates and cleanup | Redacted interaction recording |
+| Capability                  | Core boundary                     | Engineering signal                        | Safe evidence                            |
+| --------------------------- | --------------------------------- | ----------------------------------------- | ---------------------------------------- |
+| Native integration          | Product ↔ device systems          | Typed abstraction and lifecycle ownership | Architecture diagram, redacted API shape |
+| Cross-platform architecture | Feature ↔ platform                | Explicit domain and repository contracts  | State flow, platform comparison          |
+| Resilience                  | User intent ↔ runtime reality     | Conflict-aware recovery                   | Recovery walkthrough                     |
+| Visual systems              | Gesture ↔ deterministic operation | Domain modeling and validation            | Conceptual routing diagram               |
+| Testing                     | Behavior ↔ repeatable evidence    | Layered seams and fakes                   | Test pyramid, BDD excerpt                |
+| Modernization               | Existing code ↔ future change     | Responsibility ownership                  | Before/after boundary map                |
+| Interaction systems         | Live state ↔ rendering            | Localized updates and cleanup             | Redacted interaction recording           |
 
 ## How to demonstrate value
 

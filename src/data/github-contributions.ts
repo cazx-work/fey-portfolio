@@ -18,11 +18,16 @@ export const githubUsername = 'felixkarnodev';
 type ExportYear = {
   contributionCalendar: {
     totalContributions: number;
-    weeks: { contributionDays: { date: string; contributionCount: number }[] }[];
+    weeks: {
+      contributionDays: { date: string; contributionCount: number }[];
+    }[];
   };
 };
 
-const exportedYears = contributionExport.data.user as Record<`y${ContributionYear}`, ExportYear>;
+const exportedYears = contributionExport.data.user as Record<
+  `y${ContributionYear}`,
+  ExportYear
+>;
 
 function contributionLevel(count: number): ContributionDay['level'] {
   if (count === 0) return 0;
@@ -34,16 +39,21 @@ function contributionLevel(count: number): ContributionDay['level'] {
 
 function readYear(year: ContributionYear): ContributionYearData {
   const calendar = exportedYears[`y${year}`].contributionCalendar;
-  const days = calendar.weeks.flatMap((week) => week.contributionDays).map((day) => ({
-    date: day.date,
-    count: day.contributionCount,
-    level: contributionLevel(day.contributionCount),
-  }));
+  const days = calendar.weeks
+    .flatMap((week) => week.contributionDays)
+    .map((day) => ({
+      date: day.date,
+      count: day.contributionCount,
+      level: contributionLevel(day.contributionCount),
+    }));
 
   return { total: calendar.totalContributions, days };
 }
 
-export const githubContributions: Record<ContributionYear, ContributionYearData> = {
+export const githubContributions: Record<
+  ContributionYear,
+  ContributionYearData
+> = {
   2024: readYear(2024),
   2025: readYear(2025),
   2026: readYear(2026),

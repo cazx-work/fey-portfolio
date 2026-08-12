@@ -306,19 +306,19 @@ Move a condensed “My role” statement to the first screen and keep the full t
 
 # 3. Engineering manager review
 
-| Section | Ownership | Decision making | Maturity | Business impact | Feedback |
-|---|---|---|---|---|---|
-| Opening and challenge | Clear but broad | Implied | Strong | Moderate | Add scope and make personal ownership more concrete. |
-| Device reliability/state | Strong | Strong | Strong | Strong | One of the best sections; show failure and recovery behavior. |
-| Hardware communication platform | Strong | Strong | Strong | Strong | Explain what was designed, implemented, integrated, and maintained. |
-| Visual signal-path editor | Strong | Strong | Strong | Strong | Make constraints and user-facing prevention more visible. |
-| Matrix conversion | Strong | Strong | Strong | Moderate | Business value is hidden; connect validation to safe device operation. |
-| Configuration recovery | Strong | Strong | Very strong | Very strong | Best combination of user risk and engineering judgment. |
-| Control synchronization | Moderate/strong | Strong | Strong | Moderate | Add ownership scope and a concrete user workflow. |
-| Testing/developer enablement | Strong | Strong | Very strong | Strong | Demonstrates leverage; add one regression or productivity example. |
-| Performance | Moderate | Strong | Moderate/strong | Moderate | Needs verified measurements and a clearer bottleneck narrative. |
-| Responsibility table | Strong | Moderate | Strong | Strong | Distinguish owned, co-owned, and team-level outcomes. |
-| Tradeoffs | Strong | Strong | Very strong | Moderate | Keep concise and connect each tradeoff to a decision. |
+| Section                         | Ownership       | Decision making | Maturity        | Business impact | Feedback                                                               |
+| ------------------------------- | --------------- | --------------- | --------------- | --------------- | ---------------------------------------------------------------------- |
+| Opening and challenge           | Clear but broad | Implied         | Strong          | Moderate        | Add scope and make personal ownership more concrete.                   |
+| Device reliability/state        | Strong          | Strong          | Strong          | Strong          | One of the best sections; show failure and recovery behavior.          |
+| Hardware communication platform | Strong          | Strong          | Strong          | Strong          | Explain what was designed, implemented, integrated, and maintained.    |
+| Visual signal-path editor       | Strong          | Strong          | Strong          | Strong          | Make constraints and user-facing prevention more visible.              |
+| Matrix conversion               | Strong          | Strong          | Strong          | Moderate        | Business value is hidden; connect validation to safe device operation. |
+| Configuration recovery          | Strong          | Strong          | Very strong     | Very strong     | Best combination of user risk and engineering judgment.                |
+| Control synchronization         | Moderate/strong | Strong          | Strong          | Moderate        | Add ownership scope and a concrete user workflow.                      |
+| Testing/developer enablement    | Strong          | Strong          | Very strong     | Strong          | Demonstrates leverage; add one regression or productivity example.     |
+| Performance                     | Moderate        | Strong          | Moderate/strong | Moderate        | Needs verified measurements and a clearer bottleneck narrative.        |
+| Responsibility table            | Strong          | Moderate        | Strong          | Strong          | Distinguish owned, co-owned, and team-level outcomes.                  |
+| Tradeoffs                       | Strong          | Strong          | Very strong     | Moderate        | Keep concise and connect each tradeoff to a decision.                  |
 
 ### Engineering manager priorities
 
@@ -538,19 +538,19 @@ Examples of alternatives rejected, review process, adoption, and maintenance aft
 
 ## Story structure scorecard
 
-| Section | Challenge | Difficulty | Decision | Tradeoff | Outcome | Assessment |
-|---|---|---|---|---|---|---|
-| Opening | Yes | Yes | Implied | No | Broad | Strengthen role and outcome evidence. |
-| Device reliability/state | Yes | Yes | Yes | Yes | Yes | Complete and strong. |
-| Hardware communication | Yes | Yes | Yes | Yes | Yes | Complete; add one concrete example. |
-| Visual signal-path editor | Yes | Yes | Yes | Yes | Yes | Complete; add visual proof. |
-| Matrix conversion | Yes | Yes | Yes | Partial | Partial | Add worked example and measurable/observable safety outcome. |
-| Configuration recovery | Yes | Yes | Yes | Yes | Yes | Strongest narrative. |
-| Control synchronization | Yes | Yes | Yes | Partial | Yes | Add tradeoff and edge-case outcome. |
-| Testing/developer enablement | Yes | Yes | Yes | Partial | Yes | Add one regression or team-leverage example. |
-| Performance | Yes | Yes | Yes | Yes | Partial | Add profiling evidence before making it a flagship story. |
-| Responsibility | No | No | No | No | Broad | Keep as framing, not a case study section. |
-| Tradeoffs | N/A | N/A | Yes | Yes | Partial | Tie each lesson to a specific story. |
+| Section                      | Challenge | Difficulty | Decision | Tradeoff | Outcome | Assessment                                                   |
+| ---------------------------- | --------- | ---------- | -------- | -------- | ------- | ------------------------------------------------------------ |
+| Opening                      | Yes       | Yes        | Implied  | No       | Broad   | Strengthen role and outcome evidence.                        |
+| Device reliability/state     | Yes       | Yes        | Yes      | Yes      | Yes     | Complete and strong.                                         |
+| Hardware communication       | Yes       | Yes        | Yes      | Yes      | Yes     | Complete; add one concrete example.                          |
+| Visual signal-path editor    | Yes       | Yes        | Yes      | Yes      | Yes     | Complete; add visual proof.                                  |
+| Matrix conversion            | Yes       | Yes        | Yes      | Partial  | Partial | Add worked example and measurable/observable safety outcome. |
+| Configuration recovery       | Yes       | Yes        | Yes      | Yes      | Yes     | Strongest narrative.                                         |
+| Control synchronization      | Yes       | Yes        | Yes      | Partial  | Yes     | Add tradeoff and edge-case outcome.                          |
+| Testing/developer enablement | Yes       | Yes        | Yes      | Partial  | Yes     | Add one regression or team-leverage example.                 |
+| Performance                  | Yes       | Yes        | Yes      | Yes      | Partial | Add profiling evidence before making it a flagship story.    |
+| Responsibility               | No        | No         | No       | No       | Broad   | Keep as framing, not a case study section.                   |
+| Tradeoffs                    | N/A       | N/A        | Yes      | Yes      | Partial | Tie each lesson to a specific story.                         |
 
 ## Sections that explain “what” better than “why”
 
@@ -974,14 +974,14 @@ Designing reliable software around unreliable hardware.
 
 # 10. Final verdict
 
-| Category | Score | Assessment |
-|---|---:|---|
-| Recruiter Friendliness | 8/10 | Clear opening and outcome language; still too much technical density in the middle. |
-| Technical Depth | 9/10 | Strong architecture and domain material; add concrete invariants and evidence for deep reviewers. |
-| Storytelling | 8/10 | Most sections follow problem → decision → outcome; matrix, testing, and performance need sharper proof. |
-| Architecture Signal | 9/10 | Excellent evidence of boundaries, ownership, state separation, and protocol abstraction. |
-| Senior Engineering Signal | 9/10 | Strong cross-cutting ownership and tradeoff awareness; clarify collaboration and adoption. |
-| Visual Presentation Potential | 9/10 | Excellent potential for routing, recovery, lifecycle, and test-workflow visuals. |
+| Category                      | Score | Assessment                                                                                              |
+| ----------------------------- | ----: | ------------------------------------------------------------------------------------------------------- |
+| Recruiter Friendliness        |  8/10 | Clear opening and outcome language; still too much technical density in the middle.                     |
+| Technical Depth               |  9/10 | Strong architecture and domain material; add concrete invariants and evidence for deep reviewers.       |
+| Storytelling                  |  8/10 | Most sections follow problem → decision → outcome; matrix, testing, and performance need sharper proof. |
+| Architecture Signal           |  9/10 | Excellent evidence of boundaries, ownership, state separation, and protocol abstraction.                |
+| Senior Engineering Signal     |  9/10 | Strong cross-cutting ownership and tradeoff awareness; clarify collaboration and adoption.              |
+| Visual Presentation Potential |  9/10 | Excellent potential for routing, recovery, lifecycle, and test-workflow visuals.                        |
 
 ## Biggest strength
 

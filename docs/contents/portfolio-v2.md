@@ -545,15 +545,15 @@ The final portfolio should attach profiling traces, frame timing, rebuild counts
 
 # 10. My engineering responsibility
 
-| Area | Responsibility | Resulting value |
-|---|---|---|
-| Architecture | Defined feature, state, lifecycle, and protocol boundaries | Made ownership and change impact easier to reason about |
-| Protocol integration | Designed typed communication and domain mappings | Kept product features independent of binary device details |
-| Signal-path systems | Modeled layout constraints and matrix conversion | Made complex routing deterministic and safer to apply |
-| Reliability | Designed conflict resolution and reconnect behavior | Preserved user intent through changing hardware conditions |
-| Testing | Built layered and reusable workflow verification | Improved regression confidence and failure localization |
-| Performance | Localized animation state and interaction coordination | Reduced broad UI work and protected responsiveness |
-| Developer enablement | Created repeatable hardware-free environment workflows | Reduced dependence on scarce physical test hardware |
+| Area                 | Responsibility                                             | Resulting value                                            |
+| -------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Architecture         | Defined feature, state, lifecycle, and protocol boundaries | Made ownership and change impact easier to reason about    |
+| Protocol integration | Designed typed communication and domain mappings           | Kept product features independent of binary device details |
+| Signal-path systems  | Modeled layout constraints and matrix conversion           | Made complex routing deterministic and safer to apply      |
+| Reliability          | Designed conflict resolution and reconnect behavior        | Preserved user intent through changing hardware conditions |
+| Testing              | Built layered and reusable workflow verification           | Improved regression confidence and failure localization    |
+| Performance          | Localized animation state and interaction coordination     | Reduced broad UI work and protected responsiveness         |
+| Developer enablement | Created repeatable hardware-free environment workflows     | Reduced dependence on scarce physical test hardware        |
 
 Where work was collaborative, this portfolio distinguishes architecture owned or co-owned from broader team outcomes. Evidence links, tests, and recordings should be attached to individual claims in the final UI.
 

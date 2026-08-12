@@ -1,42 +1,42 @@
 # Navigation
 
 Portfolio Card
- └─ AES70 SDK Development
+└─ AES70 SDK Development
 
 Content
- ├─ Summary
- ├─ Problem
- ├─ Solution
- └─ Outcome
+├─ Summary
+├─ Problem
+├─ Solution
+└─ Outcome
 
 Key Challenges
- ├─ Protocol Abstraction
- ├─ Object Model Design
- ├─ Message and Response Handling
- └─ Type-Safe Device Controls
+├─ Protocol Abstraction
+├─ Object Model Design
+├─ Message and Response Handling
+└─ Type-Safe Device Controls
 
 Architecture
- ├─ Layered Boundaries
- ├─ Transport Ownership
- ├─ Command Flow
- └─ Domain Mapping
+├─ Layered Boundaries
+├─ Transport Ownership
+├─ Command Flow
+└─ Domain Mapping
 
 Contributions
- ├─ SDK Architecture
- ├─ Protocol Modeling
- ├─ Device Abstractions
- └─ Testing Strategy
+├─ SDK Architecture
+├─ Protocol Modeling
+├─ Device Abstractions
+└─ Testing Strategy
 
 Interview
- ├─ Difficulty
- ├─ Design Rationale
- ├─ Tradeoffs
- └─ Improvements
+├─ Difficulty
+├─ Design Rationale
+├─ Tradeoffs
+└─ Improvements
 
 Media
- ├─ Architecture Diagram
- ├─ Command Lifecycle
- └─ Before/After API Comparison
+├─ Architecture Diagram
+├─ Command Lifecycle
+└─ Before/After API Comparison
 
 # Portfolio Card
 

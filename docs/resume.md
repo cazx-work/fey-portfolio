@@ -1,7 +1,5 @@
 # FELIX EDRIAN YBAÑEZ
 
-
-
 **SOFTWARE ENGINEER**
 
 Cebu, Philippines | +63 955-8175-624 | yfelixedrian@gmail.com | [linkedin.com/in/ybanezfe](https://linkedin.com/in/ybanezfe)
@@ -10,77 +8,51 @@ Cebu, Philippines | +63 955-8175-624 | yfelixedrian@gmail.com | [linkedin.com/in
 
 ## PROFESSIONAL SUMMARY
 
-
-
 Software Engineer with 7+ years of experience building production applications across mobile, web, and desktop platforms. Specialized in Flutter with Dart FFI for native system integration. Experienced in modernizing legacy systems and developing cross-platform applications for enterprise and professional audio solutions.
 
 ---
 
 ## TECHNICAL SKILLS
 
+- **Languages:** Dart, JavaScript, TypeScript, C++, C#
 
+- **Frameworks:** Flutter, React, Node.js, NestJS
 
-* **Languages:** Dart, JavaScript, TypeScript, C++, C#
+- **Native Integration:** Dart FFI, Dante Audio Networking, AES70 (OCA Protocol)
 
+- **Backend & APIs:** REST APIs, GraphQL, Firebase
 
-* **Frameworks:** Flutter, React, Node.js, NestJS
+- **State Management:** BLOC, Provider, Riverpod
 
+- **Databases:** SQLite, PostgreSQL, Firestore
 
-* **Native Integration:** Dart FFI, Dante Audio Networking, AES70 (OCA Protocol)
+- **Development & DevOps:** Git, GitHub, Docker, GitHub Actions, CI/CD, VS Code
 
-
-* **Backend & APIs:** REST APIs, GraphQL, Firebase
-
-
-* **State Management:** BLOC, Provider, Riverpod
-
-
-* **Databases:** SQLite, PostgreSQL, Firestore
-
-
-* **Development & DevOps:** Git, GitHub, Docker, GitHub Actions, CI/CD, VS Code
-
-
-* **Platforms:** Android, iOS, Web, Windows, macOS, Linux
-
-
+- **Platforms:** Android, iOS, Web, Windows, macOS, Linux
 
 ---
 
 ## CORE COMPETENCIES
 
+- Structured Problem Solving
 
+- AI-Assisted Development
 
-* Structured Problem Solving
+- Cross-functional Collaboration
 
+- System Integration
 
-* AI-Assisted Development
+- Software Design
 
+- Continuous Improvement
 
-* Cross-functional Collaboration
+- Quality-focused Engineering
 
-
-* System Integration
-
-
-* Software Design
-
-
-* Continuous Improvement
-
-
-* Quality-focused Engineering
-
-
-* Ownership & Accountability
-
-
+- Ownership & Accountability
 
 ---
 
 ## EDUCATION
-
-
 
 **Bachelor of Science in Computer Engineering** (2019)
 
@@ -90,101 +62,68 @@ Negros Oriental State University
 
 ## WORK EXPERIENCE
 
-
-
 ### Software Engineer — Karno Sound
 
+_Remote (London, UK)_ | **Jan 2024 – Jul 2026**
 
+_Developing SEPIA, a professional audio control platform for digitally managed studio hardware._
 
-*Remote (London, UK)* | **Jan 2024 – Jul 2026**
+- Developed Flutter applications with Dart FFI to integrate native C++ audio libraries.
 
-*Developing SEPIA, a professional audio control platform for digitally managed studio hardware.*
+- Integrated Dante APIs and AES70 to enable audio routing, device discovery, and remote device control.
 
-* Developed Flutter applications with Dart FFI to integrate native C++ audio libraries.
+- Refactored legacy modules into a modular BLOC architecture for improved maintainability.
 
+- Enhanced GitHub Actions CI/CD workflows for automated testing and deployment.
 
-* Integrated Dante APIs and AES70 to enable audio routing, device discovery, and remote device control.
-
-
-* Refactored legacy modules into a modular BLOC architecture for improved maintainability.
-
-
-* Enhanced GitHub Actions CI/CD workflows for automated testing and deployment.
-
-
-* Collaborated with frontend, native, and firmware engineers to deliver integrated software solutions.
-
-
+- Collaborated with frontend, native, and firmware engineers to deliver integrated software solutions.
 
 ### Software Engineer — Experience Digital
 
+_Remote (Sydney, AU)_ | **Mar 2023 – Nov 2023**
 
+_Developed enterprise business and event management applications._
 
-*Remote (Sydney, AU)* | **Mar 2023 – Nov 2023**
+- Developed Flutter features for a production event management application.
 
-*Developed enterprise business and event management applications.*
+- Migrated legacy platform modules to React, NestJS, and TypeScript.
 
-* Developed Flutter features for a production event management application.
+- Designed PostgreSQL database schemas and implemented GraphQL integrations.
 
-
-* Migrated legacy platform modules to React, NestJS, and TypeScript.
-
-
-* Designed PostgreSQL database schemas and implemented GraphQL integrations.
-
-
-* Utilized Riverpod, Redux, Docker, and CI/CD throughout the development workflow.
-
-
+- Utilized Riverpod, Redux, Docker, and CI/CD throughout the development workflow.
 
 ### Flutter Developer — Xurpas Inc.
 
+_Remote (Makati, PH)_ | **Aug 2022 – Feb 2023**
 
+_Contributed to the development of MetaCare, a healthcare mobile application._
 
-*Remote (Makati, PH)* | **Aug 2022 – Feb 2023**
+- Developed responsive Flutter user interfaces from Figma designs.
 
-*Contributed to the development of MetaCare, a healthcare mobile application.*
+- Built reusable Flutter widgets and shared UI components for consistent application design.
 
-* Developed responsive Flutter user interfaces from Figma designs.
-
-
-* Built reusable Flutter widgets and shared UI components for consistent application design.
-
-
-* Implemented BLOC architecture to improve state management and code organization.
-
-
+- Implemented BLOC architecture to improve state management and code organization.
 
 ### Software Engineer — Kyocera Document Solutions Philippines
 
+_Hybrid (Cebu, PH)_ | **Jul 2021 – Aug 2022**
 
+_Developed enterprise software supporting printer management, device communication, and business operations._
 
-*Hybrid (Cebu, PH)* | **Jul 2021 – Aug 2022**
+- Developed C# backend services for enterprise device communication.
 
-*Developed enterprise software supporting printer management, device communication, and business operations.*
+- Maintained AngularJS web applications supporting printer management systems.
 
-* Developed C# backend services for enterprise device communication.
-
-
-* Maintained AngularJS web applications supporting printer management systems.
-
-
-* Developed and maintained SQL Server databases for business applications.
-
-
+- Developed and maintained SQL Server databases for business applications.
 
 ### Software Engineer — Bluebeans Systems
 
+_On-site (Dumaguete, PH)_ | **Jun 2018 – Jun 2021**
 
+_Built business process automation and document management solutions for enterprise clients._
 
-*On-site (Dumaguete, PH)* | **Jun 2018 – Jun 2021**
+- Developed the QPro queue management system for customer service operations.
 
-*Built business process automation and document management solutions for enterprise clients.*
+- Built document archiving applications using C# WinForms and Flutter.
 
-* Developed the QPro queue management system for customer service operations.
-
-
-* Built document archiving applications using C# WinForms and Flutter.
-
-
-* Developed MySQL backend integrations for business management applications.
+- Developed MySQL backend integrations for business management applications.

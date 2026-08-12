@@ -1,6 +1,6 @@
 ---
 name: shadcn-ui
-description: "Use when designing or implementing accessible React UI with Radix primitives, shadcn/ui patterns, Lucide icons, Tailwind CSS, dialogs, menus, disclosures, tabs, or form controls."
+description: 'Use when designing or implementing accessible React UI with Radix primitives, shadcn/ui patterns, Lucide icons, Tailwind CSS, dialogs, menus, disclosures, tabs, or form controls.'
 ---
 
 # Accessible component patterns

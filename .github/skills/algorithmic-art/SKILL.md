@@ -1,6 +1,6 @@
 ---
 name: algorithmic-art
-description: "Use when creating dynamic SVG or Canvas graphics, generative diagrams, signal-flow visuals, procedural backgrounds, or data-informed illustrations for this portfolio."
+description: 'Use when creating dynamic SVG or Canvas graphics, generative diagrams, signal-flow visuals, procedural backgrounds, or data-informed illustrations for this portfolio.'
 ---
 
 # Algorithmic art

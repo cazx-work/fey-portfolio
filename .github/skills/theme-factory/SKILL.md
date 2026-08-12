@@ -1,6 +1,6 @@
 ---
 name: theme-factory
-description: "Use when creating or revising dark and light visual themes, CSS variables, Tailwind CSS v4 color tokens, contrast rules, or component state colors for this portfolio."
+description: 'Use when creating or revising dark and light visual themes, CSS variables, Tailwind CSS v4 color tokens, contrast rules, or component state colors for this portfolio.'
 ---
 
 # Theme Factory

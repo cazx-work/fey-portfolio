@@ -29,11 +29,11 @@ Where work was collaborative, this case study distinguishes my contribution from
 
 ### Three outcomes
 
-| Outcome | What changed |
-|---|---|
-| **Safe recovery** | Saved configurations remained separate from resolved runtime state, so changing hardware could be handled without silently overwriting user intent. |
-| **Clear boundaries** | UI features could work with domain-facing APIs instead of duplicating protocol, lifecycle, and resource-management logic. |
-| **Safer change** | Layered tests, reusable integration workflows, and hardware-free test doubles made asynchronous behavior easier to verify repeatedly. |
+| Outcome              | What changed                                                                                                                                        |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Safe recovery**    | Saved configurations remained separate from resolved runtime state, so changing hardware could be handled without silently overwriting user intent. |
+| **Clear boundaries** | UI features could work with domain-facing APIs instead of duplicating protocol, lifecycle, and resource-management logic.                           |
+| **Safer change**     | Layered tests, reusable integration workflows, and hardware-free test doubles made asynchronous behavior easier to verify repeatedly.               |
 
 ### Technical scope
 
@@ -400,14 +400,14 @@ Before/after profiling trace, representative workload recording, rebuild visuali
 
 The strongest design choice was separating responsibilities that change for different reasons:
 
-| Boundary | Owns | Protects |
-|---|---|---|
-| Feature and domain layer | User intent, invariants, transformations | Product behavior and testable rules |
-| Repository | Durable feature state and streams | Consistent state access |
-| Lifecycle coordinator | Discovery, connection, recovery, disposal | Resource and concurrency safety |
-| Protocol platform | Encoding, correlation, capability mapping | Hardware communication consistency |
-| UI state layer | Presentation state and interaction | View-specific behavior |
-| Test platform | Fakes, scenarios, semantic identity, environment lifecycle | Repeatable verification |
+| Boundary                 | Owns                                                       | Protects                            |
+| ------------------------ | ---------------------------------------------------------- | ----------------------------------- |
+| Feature and domain layer | User intent, invariants, transformations                   | Product behavior and testable rules |
+| Repository               | Durable feature state and streams                          | Consistent state access             |
+| Lifecycle coordinator    | Discovery, connection, recovery, disposal                  | Resource and concurrency safety     |
+| Protocol platform        | Encoding, correlation, capability mapping                  | Hardware communication consistency  |
+| UI state layer           | Presentation state and interaction                         | View-specific behavior              |
+| Test platform            | Fakes, scenarios, semantic identity, environment lifecycle | Repeatable verification             |
 
 These boundaries are not free. They add models, coordination, and contracts. They are valuable when they make ownership explicit, protect an invariant, or prevent unsafe behavior from spreading.
 
@@ -417,14 +417,14 @@ These boundaries are not free. They add models, coordination, and contracts. The
 
 Each flagship story should show one primary artifact and one supporting artifact. The final site should caption every artifact with the behavior the visitor should notice.
 
-| Story | Primary artifact | Supporting artifact |
-|---|---|---|
-| Safe configuration recovery | Save → topology change → conflict review → recovery recording | Snapshot/resolved-state diagram |
-| Reliable device state | Disconnect → rediscover → reconnect recording | Lifecycle and ownership flow |
-| Communication platform | Intent → command → response → domain result trace | Protocol boundary diagram |
-| Safe hardware routing | Visual path → matrix update recording | Validation or topology diagram |
-| Safer workflows | Focused BDD execution | Hardware-free environment lifecycle |
-| Responsive controls | Representative interaction/profiling capture | Update-scope or rebuild diagram |
+| Story                       | Primary artifact                                              | Supporting artifact                 |
+| --------------------------- | ------------------------------------------------------------- | ----------------------------------- |
+| Safe configuration recovery | Save → topology change → conflict review → recovery recording | Snapshot/resolved-state diagram     |
+| Reliable device state       | Disconnect → rediscover → reconnect recording                 | Lifecycle and ownership flow        |
+| Communication platform      | Intent → command → response → domain result trace             | Protocol boundary diagram           |
+| Safe hardware routing       | Visual path → matrix update recording                         | Validation or topology diagram      |
+| Safer workflows             | Focused BDD execution                                         | Hardware-free environment lifecycle |
+| Responsive controls         | Representative interaction/profiling capture                  | Update-scope or rebuild diagram     |
 
 No evidence panel should expose proprietary source code, internal APIs, infrastructure details, or confidential business logic. Show decisions, boundaries, generalized flows, and verified outcomes.
 
@@ -434,14 +434,14 @@ No evidence panel should expose proprietary source code, internal APIs, infrastr
 
 ## Responsibility summary
 
-| Area | Owned or co-owned decision | Value |
-|---|---|---|
-| Architecture | Defined feature, state, lifecycle, and protocol boundaries | Reduced cross-feature coupling and clarified change impact |
-| Protocol integration | Shaped typed communication and domain mappings | Kept product behavior independent of binary details |
-| Signal-path systems | Modeled layout constraints and matrix conversion | Made routing deterministic and safer to apply |
-| Reliability | Designed recovery and reconnect behavior | Preserved user intent through changing hardware |
-| Testing | Built layered and reusable workflow verification | Improved failure localization and repeatability |
-| Developer enablement | Created hardware-free environment workflows | Reduced dependence on scarce physical hardware |
+| Area                 | Owned or co-owned decision                                 | Value                                                      |
+| -------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
+| Architecture         | Defined feature, state, lifecycle, and protocol boundaries | Reduced cross-feature coupling and clarified change impact |
+| Protocol integration | Shaped typed communication and domain mappings             | Kept product behavior independent of binary details        |
+| Signal-path systems  | Modeled layout constraints and matrix conversion           | Made routing deterministic and safer to apply              |
+| Reliability          | Designed recovery and reconnect behavior                   | Preserved user intent through changing hardware            |
+| Testing              | Built layered and reusable workflow verification           | Improved failure localization and repeatability            |
+| Developer enablement | Created hardware-free environment workflows                | Reduced dependence on scarce physical hardware             |
 
 ## Deliberate tradeoffs
 

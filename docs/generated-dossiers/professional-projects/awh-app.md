@@ -3,8 +3,8 @@ type: professional-project
 slug: awh-app
 title: AWH Warehouse Operations Platform
 project: Experience Digital
-visibility: private
-status: draft
+visibility: public
+status: published
 featured: false
 tags: TypeScript, React, GraphQL, Prisma, PostgreSQL, Warehouse Operations
 homepageTitle: AWH Warehouse Operations Platform

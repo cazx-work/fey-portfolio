@@ -1,6 +1,6 @@
 ---
 name: rive-animation
-description: "Use when adding Rive assets, animated UI transitions, interactive state machines, loading states, hover feedback, or motion systems that must support prefers-reduced-motion."
+description: 'Use when adding Rive assets, animated UI transitions, interactive state machines, loading states, hover feedback, or motion systems that must support prefers-reduced-motion.'
 ---
 
 # Rive and motion

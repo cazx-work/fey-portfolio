@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { InlineIcon } from '@/components/inline-icon';
 
 type BackButtonProps = {
   href: string;
@@ -23,7 +24,7 @@ export function BackButton({ href, label }: BackButtonProps) {
       }}
       aria-label={label}
     >
-      <span aria-hidden="true">←</span>
+      <InlineIcon name="arrow-left" />
       {label}
     </Link>
   );

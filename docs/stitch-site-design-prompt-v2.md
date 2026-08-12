@@ -161,13 +161,13 @@ Create an editorial reading experience containing:
 - Conceptual architecture overview
 - Technical table of contents
 - Sections for:
-    - Hardware communication boundaries
-    - Device lifecycle and state ownership
-    - Configuration recovery
-    - Visual signal paths and safe routing
-    - Testing and hardware-free development
-    - Interaction and animation state
-    - Decisions, trade-offs, and lessons
+  - Hardware communication boundaries
+  - Device lifecycle and state ownership
+  - Configuration recovery
+  - Visual signal paths and safe routing
+  - Testing and hardware-free development
+  - Interaction and animation state
+  - Decisions, trade-offs, and lessons
 - Evidence slots labeled as **planned**, **needs approval**, or **not publicly available**; do not pretend evidence exists
 - Interview prompts for engineering discussions
 - Related stories and capabilities

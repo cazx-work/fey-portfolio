@@ -27,7 +27,15 @@ import { getCritiqueDir } from './lib/impeccable-paths.mjs';
 /** Is there code here at all, or just context files / an empty repo? */
 function hasCode(cwd) {
   if (fs.existsSync(path.join(cwd, 'package.json'))) return true;
-  for (const d of ['src', 'app', 'pages', 'site', 'public', 'components', 'lib']) {
+  for (const d of [
+    'src',
+    'app',
+    'pages',
+    'site',
+    'public',
+    'components',
+    'lib',
+  ]) {
     if (fs.existsSync(path.join(cwd, d))) return true;
   }
   return false;
@@ -42,7 +50,10 @@ function latestCritique(cwd) {
   try {
     const dir = getCritiqueDir(cwd);
     if (!fs.existsSync(dir)) return null;
-    const files = fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort();
+    const files = fs
+      .readdirSync(dir)
+      .filter((f) => f.endsWith('.md'))
+      .sort();
     if (!files.length) return null;
     const newest = files[files.length - 1];
     const text = fs.readFileSync(path.join(dir, newest), 'utf-8');
@@ -83,7 +94,13 @@ function gitSignals(cwd) {
     }
   };
   if (run(['rev-parse', '--is-inside-work-tree']) !== 'true') {
-    return { isRepo: false, branch: null, base: null, changedFiles: [], changedCount: 0 };
+    return {
+      isRepo: false,
+      branch: null,
+      base: null,
+      changedFiles: [],
+      changedCount: 0,
+    };
   }
   const branch = run(['rev-parse', '--abbrev-ref', 'HEAD']);
   // The merge target is detected, not assumed. A hardcoded main/master list
@@ -138,11 +155,13 @@ function gitSignals(cwd) {
     // directly; the remote need not be in `git remote` output (tests and
     // partial clones fabricate refs/remotes/origin/* without a remote).
     const ref = run(['symbolic-ref', '--short', `refs/remotes/${r}/HEAD`]);
-    if (ref && ref.startsWith(`${r}/`)) remoteHeads.push({ name: ref.slice(r.length + 1), rev: ref });
+    if (ref && ref.startsWith(`${r}/`))
+      remoteHeads.push({ name: ref.slice(r.length + 1), rev: ref });
   }
-  const onIntegrationBranch = branch === 'HEAD'
-    || conventional.includes(branch)
-    || remoteHeads.some((head) => head.name === branch);
+  const onIntegrationBranch =
+    branch === 'HEAD' ||
+    conventional.includes(branch) ||
+    remoteHeads.some((head) => head.name === branch);
   let base = null;
   let baseRev = null;
   if (!onIntegrationBranch) {
@@ -152,7 +171,10 @@ function gitSignals(cwd) {
     // makes the name-level dedup below safe: a develop or main that exists
     // only as upstream/<name> still resolves even though origin's candidate
     // claimed the name first.
-    const remoteOrder = ['origin', ...remotes.filter((name) => name !== 'origin')];
+    const remoteOrder = [
+      'origin',
+      ...remotes.filter((name) => name !== 'origin'),
+    ];
     const revsFor = (name) => [name, ...remoteOrder.map((r) => `${r}/${name}`)];
     const candidates = [];
     const seen = new Set();
@@ -174,12 +196,18 @@ function gitSignals(cwd) {
     // candidate too when the remote default IS develop: it sits before the
     // remote-default entries in the order, so it must lead with their rev
     // itself or a stale local develop would win.
-    const advertisedRevs = (name) => remoteHeads.filter((head) => head.name === name).map((head) => head.rev);
-    addCandidate('develop', [...new Set([...advertisedRevs('develop'), ...revsFor('develop')])]);
-    for (const head of remoteHeads) addCandidate(head.name, [...new Set([head.rev, ...revsFor(head.name)])]);
+    const advertisedRevs = (name) =>
+      remoteHeads.filter((head) => head.name === name).map((head) => head.rev);
+    addCandidate('develop', [
+      ...new Set([...advertisedRevs('develop'), ...revsFor('develop')]),
+    ]);
+    for (const head of remoteHeads)
+      addCandidate(head.name, [...new Set([head.rev, ...revsFor(head.name)])]);
     for (const name of ['main', 'master']) addCandidate(name, revsFor(name));
     for (const c of candidates) {
-      const rev = c.revs.find((r) => run(['rev-parse', '--verify', '--quiet', r]) !== null);
+      const rev = c.revs.find(
+        (r) => run(['rev-parse', '--verify', '--quiet', r]) !== null,
+      );
       if (rev) {
         base = c.name;
         baseRev = rev;
@@ -188,21 +216,29 @@ function gitSignals(cwd) {
     }
   }
   const diffBase = base && branch && branch !== base ? base : null;
-  const fromDiff = diffBase ? run(['diff', '--name-only', `${baseRev}...HEAD`]) : null;
+  const fromDiff = diffBase
+    ? run(['diff', '--name-only', `${baseRev}...HEAD`])
+    : null;
   // porcelain lines are `XY PATH`: a 2-char status + a space, then the path.
   // Don't trim the combined output — an unstaged-modified line starts with a
   // leading space (` M path`), and a global trim would eat the first line's
   // status column and shift the slice. Renames render as `old -> new`.
-  const fromStatus = run(['-c', 'core.quotepath=false', 'status', '--porcelain'], { trim: false });
+  const fromStatus = run(
+    ['-c', 'core.quotepath=false', 'status', '--porcelain'],
+    { trim: false },
+  );
   let changed = [];
   if (fromDiff) {
     changed = fromDiff.split('\n').filter(Boolean);
   } else if (fromStatus) {
-    changed = fromStatus.split(/\r?\n/).filter(Boolean).map((l) => {
-      const p = l.slice(3);
-      const arrow = p.indexOf(' -> ');
-      return arrow === -1 ? p : p.slice(arrow + 4);
-    });
+    changed = fromStatus
+      .split(/\r?\n/)
+      .filter(Boolean)
+      .map((l) => {
+        const p = l.slice(3);
+        const arrow = p.indexOf(' -> ');
+        return arrow === -1 ? p : p.slice(arrow + 4);
+      });
   }
   return {
     isRepo: true,
@@ -222,7 +258,11 @@ function probePort(port, timeout = 250) {
     const finish = (ok) => {
       if (settled) return;
       settled = true;
-      try { sock.destroy(); } catch { /* ignore */ }
+      try {
+        sock.destroy();
+      } catch {
+        /* ignore */
+      }
       resolve(ok);
     };
     sock.setTimeout(timeout);
@@ -246,8 +286,17 @@ async function devServerSignals() {
 
 // Extensions the detector scans (mirrors the engine's walkDir set + HTML).
 const SCANNABLE_EXT = new Set([
-  '.html', '.htm', '.css', '.scss',
-  '.jsx', '.tsx', '.js', '.ts', '.vue', '.svelte', '.astro',
+  '.html',
+  '.htm',
+  '.css',
+  '.scss',
+  '.jsx',
+  '.tsx',
+  '.js',
+  '.ts',
+  '.vue',
+  '.svelte',
+  '.astro',
 ]);
 // Where UI source typically lives. The detector walks these and skips
 // node_modules / dist / build and all hidden dirs automatically.
@@ -262,8 +311,14 @@ function isVendoredPath(rel) {
   const dirSegments = rel.split(/[\\/]/).slice(0, -1);
   return dirSegments.some(
     (seg) =>
-      (seg.startsWith('.') && seg !== '.vitepress' && seg !== '.vuepress' && seg !== '.storybook') ||
-      seg === 'node_modules' || seg === 'dist' || seg === 'build' || seg === '__pycache__',
+      (seg.startsWith('.') &&
+        seg !== '.vitepress' &&
+        seg !== '.vuepress' &&
+        seg !== '.storybook') ||
+      seg === 'node_modules' ||
+      seg === 'dist' ||
+      seg === 'build' ||
+      seg === '__pycache__',
   );
 }
 
@@ -283,14 +338,16 @@ function scanTargets(cwd, git) {
       .filter((f) => SCANNABLE_EXT.has(path.extname(f).toLowerCase()))
       .filter((f) => !isVendoredPath(f))
       .filter((f) => fs.existsSync(path.join(cwd, f)));
-    if (changed.length) return { targets: changed.slice(0, 50), via: 'git-changes' };
+    if (changed.length)
+      return { targets: changed.slice(0, 50), via: 'git-changes' };
   }
   // 2. Otherwise scan the local source dirs that exist.
   const dirs = SOURCE_DIRS.filter((d) => fs.existsSync(path.join(cwd, d)));
   if (dirs.length) return { targets: dirs, via: 'source-dir' };
   // 3. A root HTML entry, or the project root as a last resort when there's
   //    code but no conventional source dir (walkDir still skips heavy dirs).
-  if (fs.existsSync(path.join(cwd, 'index.html'))) return { targets: ['index.html'], via: 'html' };
+  if (fs.existsSync(path.join(cwd, 'index.html')))
+    return { targets: ['index.html'], via: 'html' };
   if (hasCode(cwd)) return { targets: ['.'], via: 'root' };
   return { targets: [], via: null };
 }
@@ -323,7 +380,9 @@ function invokedAsScript() {
   const arg = process.argv[1];
   if (!arg) return false;
   try {
-    return fs.realpathSync(arg) === fs.realpathSync(fileURLToPath(import.meta.url));
+    return (
+      fs.realpathSync(arg) === fs.realpathSync(fileURLToPath(import.meta.url))
+    );
   } catch {
     return false;
   }

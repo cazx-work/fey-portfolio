@@ -5,16 +5,16 @@ import { SiteShell } from '@/components/site-shell';
 export const metadata: Metadata = {
   metadataBase: new URL('https://felixybanez.dev'),
   title: {
-    default: 'Felix Edrian Ybañez — Senior Cross-Platform Systems Engineer',
+    default: 'Felix Edrian Ybañez — Full-Stack & Systems Engineer',
     template: '%s — Felix Edrian Ybañez',
   },
-    description:
-      'A systems-oriented engineering portfolio about Flutter products, hardware communication, architecture, state recovery, and quality engineering.',
+  description:
+    'Full-Stack & Systems Engineer building dependable software across web, mobile, backend, native integrations, and connected systems.',
   openGraph: {
     type: 'website',
-    title: 'Felix Edrian Ybañez — Senior Cross-Platform Systems Engineer',
+    title: 'Felix Edrian Ybañez — Full-Stack & Systems Engineer',
     description:
-      'Flutter systems, hardware integration, and enterprise software architecture.',
+      'Dependable software across web, mobile, backend, native integrations, and connected systems—with strongest public proof in cross-platform architecture and hardware boundaries.',
   },
 };
 
