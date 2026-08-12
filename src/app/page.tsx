@@ -240,7 +240,7 @@ export default function Home() {
               className="about-lens-list mt-7 grid gap-3 sm:grid-cols-2"
               aria-label="Engineering principles"
             >
-              <li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
+              <li className="about-lens-card rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
                 <strong className="block text-[var(--accent)]">
                   01 / Make ownership explicit
                 </strong>
@@ -249,7 +249,7 @@ export default function Home() {
                   lifecycle, and cleanup path.
                 </span>
               </li>
-              <li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
+              <li className="about-lens-card rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
                 <strong className="block text-[var(--accent)]">
                   02 / Preserve user intent
                 </strong>
@@ -258,7 +258,7 @@ export default function Home() {
                   runtime state and external feedback.
                 </span>
               </li>
-              <li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
+              <li className="about-lens-card rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
                 <strong className="block text-[var(--accent)]">
                   03 / Design for the unhappy path
                 </strong>
@@ -267,7 +267,7 @@ export default function Home() {
                   of the product—not edge cases.
                 </span>
               </li>
-              <li className="rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
+              <li className="about-lens-card rounded-xl border border-[var(--line)] bg-[var(--bg)] p-4 text-sm">
                 <strong className="block text-[var(--accent)]">
                   04 / Keep complexity changeable
                 </strong>
