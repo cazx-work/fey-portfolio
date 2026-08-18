@@ -428,28 +428,27 @@ export default function Home() {
       </section>
       <section
         className="mx-auto max-w-6xl px-5 pb-24"
-        aria-labelledby="hire-heading"
+        aria-labelledby="resume-heading"
       >
-        <div className="home-hire-card rounded-2xl border border-[var(--accent)] bg-[var(--accent-soft)] p-8 md:p-12">
+        <div className="home-resume-card rounded-2xl border border-[var(--accent)] bg-[var(--accent-soft)] p-8 md:p-12">
           <p className="font-mono text-xs uppercase tracking-[.2em] text-[var(--accent)]">
-            06 / hiring
+            06 / resume
           </p>
           <h2
-            id="hire-heading"
+            id="resume-heading"
             className="mt-5 max-w-2xl text-3xl font-semibold leading-tight md:text-4xl"
           >
-            Hiring for senior Flutter, cross-platform, or systems-oriented
-            engineering work?
+            Explore the experience behind the engineering work.
           </h2>
           <p className="mt-4 max-w-2xl leading-7 text-[var(--muted)]">
-            Let’s discuss the role, the product, and the engineering problems
-            the team is solving.
+            Review the technologies, roles, and systems work that shape this
+            portfolio.
           </p>
           <Link
-            href="/contact"
+            href="/resume"
             className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--on-accent)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
           >
-            Discuss a role <InlineIcon name="external" />
+            View resume <InlineIcon name="external" />
           </Link>
         </div>
       </section>

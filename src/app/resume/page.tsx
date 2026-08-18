@@ -234,17 +234,6 @@ export default function Resume() {
             Negros Oriental State University · 2019
           </p>
 
-          <div className="resume-section-heading resume-contact-heading">
-            <span className="resume-section-number">06</span>
-            <h2>Contact</h2>
-          </div>
-          <p className="resume-contact-links">
-            <a href="tel:+639558175624">+63 955-8175-624</a>
-            <a href="mailto:yfelixedrian@gmail.com">yfelixedrian@gmail.com</a>
-            <a href="https://linkedin.com/in/ybanezfe">
-              linkedin.com/in/ybanezfe
-            </a>
-          </p>
         </aside>
       </div>
     </div>

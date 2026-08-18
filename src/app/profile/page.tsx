@@ -169,7 +169,7 @@ export default function Profile() {
             <div className="profile-signal__content">
               <div className="profile-signal__details">
                 <p className="font-mono text-xs uppercase tracking-[.16em] text-[var(--accent)]">
-                  Hiring snapshot
+                  Resume snapshot
                 </p>
                 <div className="profile-signal__role">
                   Full-stack software engineering

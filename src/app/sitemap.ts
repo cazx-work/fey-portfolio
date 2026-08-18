@@ -16,7 +16,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'engineering-stories',
     'resume',
     'testimonials',
-    'contact',
   ]
     .map((path) => ({ url: `${base}/${path}` }))
     .concat(

@@ -28,9 +28,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div
-      className={`min-h-screen ${pathname === '/contact' ? 'contact-layout' : ''}`}
-    >
+    <div className="min-h-screen">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[var(--surface)] focus:px-4 focus:py-3 focus:text-sm focus:text-[var(--ink)]"
@@ -111,12 +109,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               Stories
             </Link>
             <Link
-              href="/contact"
+              href="/resume"
               className="rounded-full border border-[var(--accent)] bg-transparent px-4 py-2 font-semibold text-[var(--accent)] transition-colors hover:border-[var(--ink)] hover:text-[var(--ink)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-              aria-current={isActive('/contact') ? 'page' : undefined}
+              aria-current={isActive('/resume') ? 'page' : undefined}
               onClick={closeMenu}
             >
-              Hire me
+              Resume
             </Link>
           </nav>
         </div>
