@@ -7,6 +7,15 @@ test('homepage exposes the portfolio thesis', async ({ page }) => {
     }),
   ).toBeVisible();
 });
+
+test('homepage starts at the top after reload', async ({ page }) => {
+  await page.goto('/');
+  await page.evaluate(() => window.scrollTo(0, 600));
+  await page.reload();
+
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+
 test('project route renders Sepia', async ({ page }) => {
   await page.goto('/projects/sepia-client');
   await expect(

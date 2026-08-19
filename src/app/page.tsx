@@ -7,6 +7,7 @@ import { repository } from '@/lib/portfolio-repository';
 import { TeammateFeedback } from '@/components/teammate-feedback';
 import { testimonials } from '@/data/testimonials';
 import { InlineIcon } from '@/components/inline-icon';
+import { HomeScrollReset } from '@/components/home-scroll-reset';
 
 const ExternalIcon = () => <InlineIcon name="external" />;
 
@@ -58,6 +59,7 @@ export default function Home() {
 
   return (
     <>
+      <HomeScrollReset />
       <section className="home-hero" aria-labelledby="hero-heading">
         <div className="hero-grid mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 px-5 pb-24 pt-12 lg:grid-cols-12 md:pb-28 md:pt-16">
           <div className="lg:col-span-7">
